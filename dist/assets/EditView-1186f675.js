@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as s,a as _}from"./index-4eebc443.js";const c={},n={class:"edit"},o=_("h1",null,"This is an edit and add page",-1),a=[o];function d(i,r){return t(),s("div",n,a)}const f=e(c,[["render",d]]);export{f as default};
