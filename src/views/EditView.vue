@@ -8,16 +8,16 @@
           <button class="btn_cancel">Abbruch</button>
         </div>
         <label for="f_name">Name</label>
-			  <input type="text" id="id_name" name="idn_name" placeholder="Name">
+			  <input class="user-input" type="text" id="id_name" name="idn_name" placeholder="Name">
         <label for="f_date">Datum</label>
-			  <input type="datetime-local" id="id_date" name="idn_date" placeholder="Datum">
+			  <input class="user-input" type="datetime-local" id="id_date" name="idn_date" placeholder="Datum">
         <br>
         <label for="f_time">Zeitaufwand</label>
-			  <input type="number" id="id_time" name="idn_time" placeholder="Zeitaufwand" min="0">
+			  <input class="user-input" type="number" id="id_time" name="idn_time" placeholder="Zeitaufwand" min="0">
 			  <label for="f_text">Beschreibung</label>
-			  <input type="text" id="id_text" name="idn_text" placeholder="Beschreibung">
+			  <input class="user-input" type="text" id="id_text" name="idn_text" placeholder="Beschreibung">
         <label for="f_tags">Tags</label>
-			  <input type="text" id="id_tags" name="idn_tags" placeholder="Tags">
+			  <input class="user-input" type="text" id="id_tags" name="idn_tags" placeholder="Tags">
       </form>
     </div>
   </div>
@@ -32,33 +32,68 @@
   }
 }
 
-input {
+.user-input{
   width: 100%;
+  height: 55px;
   padding: 12px 20px;
+  margin-bottom: 30px;
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  /* 
+  color: #fff;
+  text-align: center;
+  border: 1px solid #ccc;
+  
+  */
+  font-size: 18px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   box-sizing: border-box;
+
+  
+  transition: 0.5s;
+  transition-property: border-left, border-right, box-shadow;
 }
 
+.user-input:hover, .user-input:focus, .user-input:active{
+  border-left: solid 8px #4285F4;
+  border-right: solid 8px #4285F4;
+  box-shadow: 0 0 100px rgba(66, 133, 244, 0.9);
+}
+
+
+
 .edit_btn button {
-  background-color: #4CAF50;
-  width: 45%;
+  outline: none;
   border: none;
-  color: white;
-  padding: 15px 32px;
-  border-radius: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  width: 40%;
+  height: 55px;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: 0.5s;
+  transition-property: border-left, border-right, box-shadow;
+  padding: 15px 32px;
+  margin: 4px 2px;
+  
+}
+
+.btn_save {
+  background-color: #4CAF50;
+}
+
+.btn_cancel {
+  background-color: #d05050;
 }
 
 .edit_btn button:hover {
-  background-color: #45a000;
+  border-left: solid 8px rgba(255, 255, 255, 0.5);
+  border-right: solid 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 100px rgba(66, 133, 244, 0.8);
 }
 
 </style>
