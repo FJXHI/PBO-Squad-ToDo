@@ -29,6 +29,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+    background-color: black;
   }
 }
 
@@ -39,9 +40,11 @@
   margin-bottom: 30px;
   outline: none;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: #1C1C1E;
+  color: #808080;
   /* 
   color: #fff;
+  background: rgba(255, 255, 255, 0.2);
   text-align: center;
   border: 1px solid #ccc;
   
