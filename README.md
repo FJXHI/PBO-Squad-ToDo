@@ -1,5 +1,57 @@
 # PBO-Squad-ToDo
 
+ToDo Manager mit VUE
+
+# Anleitung für Projekt:
+
+```sh
+git clone https://github.com/FJXHI/PBO-Squad-ToDo.git
+```
+
+Git Ordner umbennen
+
+Node Installieren (https://nodejs.org/en)
+
+VUE Downloaden
+```sh
+npm create vue@latest
+```
+
+
+VUE Projekt erstellen
+
+```sh
+✔ Project name: … <PBO-Squad-ToDo>
+✔ Add TypeScript? … Yes
+✔ Add JSX Support? … No
+✔ Add Vue Router for Single Page Application development? … Yes
+✔ Add Pinia for state management? … Yes
+✔ Add Vitest for Unit testing? … Yes
+✔ Add an End-to-End Testing Solution? … No
+✔ Add ESLint for code quality? … Yes
+✔ Add Prettier for code formatting? … Yes
+```
+
+```sh
+npm install
+```
+
+Daten aus Git Ordner in den PBO-Squad-ToDo verschieben (Doppelte Dateien ersetzen).
+
+"Format" nicht notwendig
+```sh
+npm run format
+```
+
+VUE Umgebung starten
+```sh
+npm run dev
+```
+
+
+
+# VUE
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
