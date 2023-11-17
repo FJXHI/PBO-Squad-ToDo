@@ -1,11 +1,19 @@
+<script setup lang="ts">
+import ComButton from '../components/ComButton.vue'
+</script>
+
 <template>
   <div class="edit">
     <div class="edit-field">
       <h1>Edit</h1>
+      
       <form>
         <div class="edit_btn">
           <button class="btn_save">Speichern</button>
           <button class="btn_cancel">Abbruch</button>
+          
+
+
         </div>
         <label for="f_name">Name</label>
 			  <input class="user-input" type="text" id="id_name" name="idn_name" placeholder="Name">
@@ -29,7 +37,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-color: black;
+    /*background-color: black;*/
   }
 }
 

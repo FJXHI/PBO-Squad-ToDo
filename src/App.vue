@@ -1,26 +1,33 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import ComButton from './components/ComButton.vue'
 </script>
 
 <template>
   <header>
+    
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <ComButton  msg="Hello"/>
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/edit">Edit</RouterLink>
-        <RouterLink to="/more">More</RouterLink>
+        <RouterLink to="/">Home</RouterLink><!--Logo Haus?-->
+        <RouterLink to="/edit">Edit</RouterLink><!--+-->
+        <RouterLink to="/more">More</RouterLink><!--Logo 3 Streifen?-->
+      </nav>
+      <nav>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/settings">Settings</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
+  <footer>
+    <!--Menü-Leiste-->
+  </footer>
 </template>
 
 <style scoped>
