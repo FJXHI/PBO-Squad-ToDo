@@ -16,7 +16,6 @@ cd PBO-Squad-ToDo
 npm install
 ```
 
-Daten aus Git Ordner in den PBO-Squad-ToDo verschieben (Doppelte Dateien ersetzen).
 
 "Format" nicht notwendig
 ```sh
