@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main # Trigger on changes to the main branch
-      - docs # Trigger on changes to the docs branch
+      - documentation # Trigger on changes to the docs branch
 
 jobs:
   deploy-docs:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: 'docs' # Check out the docs branch
+          ref: 'documentation' # Check out the docs branch
 
       - name: Set up Node.js
         uses: actions/setup-node@v1
