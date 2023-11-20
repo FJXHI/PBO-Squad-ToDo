@@ -2,7 +2,7 @@
 
 ToDo Manager mit VUE
 
-# Anleitung für Projekt:
+# How to install:
 
 ```sh
 git clone https://github.com/FJXHI/PBO-Squad-ToDo.git
@@ -17,16 +17,16 @@ npm install
 ```
 
 
-"Format" nicht notwendig
+"Format" is not needed
 ```sh
 npm run format
 ```
 
-VUE Umgebung starten
+start vue locally
 ```sh
 npm run dev
 ```
-Alternativ VUE Umgebung starten für Mobilgeräte
+Or open it up in your local network
 ```sh
 npm run dev -- --host
 ```
