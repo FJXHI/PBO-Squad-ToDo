@@ -6,37 +6,37 @@ import ComButton from './components/ComButton.vue'
 
 <template>
   <header>
-    
+
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
     <div class="wrapper">
       <!--<HelloWorld msg="You did it!" />-->
-      
+      <!--search bar here-->
       <nav>
-        <RouterLink to="/">Home</RouterLink><!--Logo Haus?-->
-        <RouterLink to="/edit">Edit</RouterLink><!--+-->
-        <RouterLink to="/more">More</RouterLink><!--Logo 3 Streifen?-->
-      </nav>
-      <nav>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/settings">Settings</RouterLink>
+        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
+        <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
+        <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       </nav>
     </div>
   </header>
-  <RouterView />
+  <main>
+    <RouterView />
+    <!--edit options ...-->
+  </main>
   <footer>
     <div class="menu">
+      <!--nav bar-->
       <nav>
-        <RouterLink to="/">Home</RouterLink><!--Logo Haus?-->
-        <RouterLink to="/edit">Edit</RouterLink><!--+-->
-        <RouterLink to="/more">More</RouterLink><!--Logo 3 Streifen?-->
+        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
+        <!-- <RouterLink to="/edit">Edit</RouterLink>
+        <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       </nav>
     </div>
     <!--Menü-Leiste-->
   </footer>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -111,4 +111,4 @@ nav a:first-of-type {
     margin-top: 2rem;
   }
 }
-</style>
+</style> -->
