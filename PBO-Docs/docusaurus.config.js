@@ -65,7 +65,7 @@ const config = {
       },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'PBO-ToDo',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -75,10 +75,15 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Dokumentation',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://fjxhi.github.io/PBO-Squad-ToDo/',
+            position: 'left',
+            label: 'Todo-App',
+          },
+          {
+            href: 'https://github.com/FJXHI/PBO-Squad-ToDo',
             label: 'GitHub',
             position: 'right',
           },
@@ -97,7 +102,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} PBO-Squad-ToDo, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

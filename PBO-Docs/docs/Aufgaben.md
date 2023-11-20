@@ -1,11 +1,12 @@
 ---
 sidebar_position: 2
+slug: /
 ---
 
 # Konventionen
 
  - "The..." für alle Komponenten, die nur 1 Mal vorkommt
- - <div> nicht unbedingt nutzen, lieber spezifischere Tags
+ - `<div>` nicht unbedingt nutzen, lieber spezifischere Tags
  - Sprache für Code, Kommentare und Git in Englisch
  - Pro Aufgabe eine etxra-Branch
  - Issue zu Branch assignen bei Bearbeitung
