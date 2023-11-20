@@ -17,11 +17,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x' # Specify the Node.js version
+          node-version: '18.x' # Specify the Node.js version
 
       - name: Build Docusaurus Docs
         run: |
-          cd path/to/docusaurus  # Navigate to the Docusaurus directory
+          cd PBO-Docs  # Navigate to the Docusaurus directory
           npm install
           npm run build
 
@@ -29,7 +29,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./path/to/docusaurus/build # The build output directory
+          publish_dir: PBO-Docs/build # The build output directory
           destination_dir: docs # Deploy under the /docs folder on gh-pages
           
   deploy-vue-app:
