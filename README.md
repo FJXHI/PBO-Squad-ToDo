@@ -2,35 +2,48 @@
 
 ToDo Manager mit VUE
 
-# How to install:
+# Instructions for the project:
+
+## Installation
+
+Clone the repository and install the dependencies using:
 
 ```sh
 git clone https://github.com/FJXHI/PBO-Squad-ToDo.git
-```
-
-```sh
 cd PBO-Squad-ToDo
-```
-
-```sh
 npm install
 ```
 
 
-"Format" is not needed
+Format is not necessary, but recommended:
 ```sh
 npm run format
 ```
 
-start vue locally
+Start the development server locally:
 ```sh
 npm run dev
 ```
-Or open it up in your local network
+Or open the server to the local network:
 ```sh
 npm run dev -- --host
 ```
 
+## Documentation
+
+Documentation is written using Docosaurus. 
+Head to `PBO-Docs\docs` to find the documentation files. Add your own markdown files there and start writing. They will apperat in the sidebar automatically.
+See [Docusaurus Styling and Layout](https://docusaurus.io/docs/styling-layout) for more information.
+
+```sh
+cd PBO-Docs
+npm install
+```
+
+To start the documentation server locally:
+```sh
+npm start --dev
+```
 
 
 # VUE
