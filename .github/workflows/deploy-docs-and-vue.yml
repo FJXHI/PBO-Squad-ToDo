@@ -1,10 +1,10 @@
-name: (outdated) Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main # Trigger on changes to the main branch
-      - documentation # Trigger on changes to the docs branch
+   branches:
+    - main # Trigger on changes to the main branch
+    - documentation # Trigger on changes to the docs branch
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
           ref: 'documentation' # Check out the docs branch
 
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: '18.x' # Specify the Node.js version
 
@@ -37,7 +37,7 @@ jobs:
           destination_dir: docs # Deploy under the /docs folder on gh-pages
 
   deploy-vue-app:
-    needs: deploy-docs # Ensure this runs after the docs deployment
+    #needs: deploy-docs # Ensure this runs after the docs deployment #wait for deploy-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
           ref: 'main' # Check out the main branch
 
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: '18.x'
 
