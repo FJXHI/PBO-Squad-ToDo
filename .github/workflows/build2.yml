@@ -1,40 +1,40 @@
 name: Build Test
 
 on:
+  #push:
+   # branches:
+    #  - main # Trigger on changes to the main branch
+     # - documentation # Trigger on changes to the docs branch
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  deploy-docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
         with:
-          node-version: 18
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload dist repository
-          path: './dist'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          ref: 'documentation' # Check out the docs branch
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x' # Specify the Node.js version
+
+      - name: Build Docusaurus Docs
+        run: |
+          cd PBO-Docs  # Navigate to the Docusaurus directory
+          npm install
+          npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: PBO-Docs/build # The build output directory
+          destination_dir: docs # Deploy under the /docs folder on gh-pages
 
   deploy-vue-app:
     runs-on: ubuntu-latest
@@ -46,11 +46,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '18.x'
 
       - name: Build Vue App
         run: |
-          # cd path/to/vue-app  # Navigate to the Vue app directory
           npm install
           npm run build
 
@@ -59,3 +58,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist # The build output directory
+          keep_files: true
