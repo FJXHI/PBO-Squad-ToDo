@@ -6,6 +6,9 @@ on:
       - main # Trigger on changes to the main branch
       - documentation # Trigger on changes to the docs branch
 
+permissions:
+  contents: write
+
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
@@ -31,14 +34,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: PBO-Docs/build # The build output directory
           destination_dir: docs # Deploy under the /docs folder on gh-pages
-          
+
   deploy-vue-app:
-    needs: deploy-docs  # Ensure this runs after the docs deployment
+    needs: deploy-docs # Ensure this runs after the docs deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: 'main'  # Check out the main branch
+          ref: 'main' # Check out the main branch
 
       - name: Set up Node.js
         uses: actions/setup-node@v1
@@ -55,4 +58,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./path/to/vue-app/dist  # The build output directory
+          publish_dir: ./path/to/vue-app/dist # The build output directory
