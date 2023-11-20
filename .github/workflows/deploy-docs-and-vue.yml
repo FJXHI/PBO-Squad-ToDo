@@ -2,9 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-   branches:
-    - main # Trigger on changes to the main branch
-    - documentation # Trigger on changes to the docs branch
+    branches:
+      - main # Trigger on changes to the main branch
+      - documentation # Trigger on changes to the docs branch
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
           destination_dir: docs # Deploy under the /docs folder on gh-pages
 
   deploy-vue-app:
-    #needs: deploy-docs # Ensure this runs after the docs deployment #wait for deploy-docs
+    needs: deploy-docs # Ensure this runs after the docs deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
