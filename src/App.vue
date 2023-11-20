@@ -7,12 +7,11 @@ import ComButton from './components/ComButton.vue'
 <template>
   <header>
     
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <ComButton  msg="Hello"/>
-
+      <!--<HelloWorld msg="You did it!" />-->
+      
       <nav>
         <RouterLink to="/">Home</RouterLink><!--Logo Haus?-->
         <RouterLink to="/edit">Edit</RouterLink><!--+-->
@@ -26,6 +25,13 @@ import ComButton from './components/ComButton.vue'
   </header>
   <RouterView />
   <footer>
+    <div class="menu">
+      <nav>
+        <RouterLink to="/">Home</RouterLink><!--Logo Haus?-->
+        <RouterLink to="/edit">Edit</RouterLink><!--+-->
+        <RouterLink to="/more">More</RouterLink><!--Logo 3 Streifen?-->
+      </nav>
+    </div>
     <!--Menü-Leiste-->
   </footer>
 </template>
@@ -83,13 +89,26 @@ nav a:first-of-type {
     flex-wrap: wrap;
   }
 
-  nav {
+  header nav {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
 
     padding: 1rem 0;
     margin-top: 1rem;
+  }
+
+  .menu {
+    display: center;
+  }
+  
+
+  .menu nav {
+    background-color: black;
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 2rem;
   }
 }
 </style>
