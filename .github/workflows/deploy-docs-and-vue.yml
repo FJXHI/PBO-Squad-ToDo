@@ -35,6 +35,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: PBO-Docs/build # The build output directory
           destination_dir: docs # Deploy under the /docs folder on gh-pages
+          force_orphan: true
 
   deploy-vue-app:
     needs: deploy-docs # Ensure this runs after the docs deployment
