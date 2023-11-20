@@ -26,6 +26,10 @@ VUE Umgebung starten
 ```sh
 npm run dev
 ```
+Alternativ VUE Umgebung starten für Mobilgeräte
+```sh
+npm run dev -- --host
+```
 
 
 
