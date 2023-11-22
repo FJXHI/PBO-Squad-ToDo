@@ -2,36 +2,38 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ComButton from './components/ComButton.vue'
+import SearchBar from './components/SearchBar.vue'
 </script>
 
 <template>
   <header>
 
-    <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+    <SearchBar />
 
-    <div class="wrapper">
+    <!-- <div class="wrapper"> -->
       <!--<HelloWorld msg="You did it!" />-->
       <!--search bar here-->
-      <nav>
+      <!-- <nav> -->
         <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
         <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
         <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      </nav>
-    </div>
+      <!-- </nav> -->
+    <!-- </div> -->
   </header>
   <main>
-    <RouterView />
+    <!-- <RouterView /> -->
     <!--edit options ...-->
   </main>
   <footer>
-    <div class="menu">
+    <!-- <div class="menu"> -->
       <!--nav bar-->
-      <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
-        <!-- <RouterLink to="/edit">Edit</RouterLink>
-        <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
+      <!-- <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/edit">Edit</RouterLink>
+        <RouterLink to="/more">More</RouterLink>
       </nav>
-    </div>
+    </div> -->
     <!--Menü-Leiste-->
   </footer>
 </template>
