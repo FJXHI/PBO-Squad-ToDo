@@ -43,7 +43,6 @@ export default {
 .nav_btn {
   display: flex;
   justify-content: space-around;
-  /* width: 100%; */
   background-color: #1C1C1E;
 }
 

@@ -115,12 +115,8 @@ nav a:first-of-type {
 } */
 
 footer {
-  width: 100%;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: fixed; /* Keeps it in place */
+  bottom: 0; /* Stick it to the bottom */
+  width: 100%; /* Full width */
 }
 </style>
