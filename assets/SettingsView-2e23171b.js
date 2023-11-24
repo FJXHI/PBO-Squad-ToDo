@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as t,b as n}from"./index-1502523b.js";const _={},c={class:"settings"},o=n("h1",null,"This is an settings page",-1),i=[o];function a(r,d){return s(),t("div",c,i)}const f=e(_,[["render",a]]);export{f as default};
