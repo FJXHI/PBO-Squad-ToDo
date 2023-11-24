@@ -1,13 +1,13 @@
 <script setup lang="ts">
-    import TodoEntry from '@/classes/TodoEntry';
-    import type { PropType } from 'vue';
+import TodoEntry from '@/classes/TodoEntry';
+import type { PropType } from 'vue';
 
-    defineProps({
-        entry: {
-            type: Object as PropType<TodoEntry>,
-            required: true
-        }
-    });
+defineProps({
+    entry: {
+        type: Object as PropType<TodoEntry>,
+        required: true
+    }
+});
 
 </script>
 
@@ -19,6 +19,4 @@
     </section>
 </template>
   
-<style scoped>
-  
-</style>
+<style scoped></style>

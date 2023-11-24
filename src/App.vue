@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ComButton from './components/ComButton.vue'
 import TodoEntry from './classes/TodoEntry';
+import TodoEntryVue from './components/TodoEntry.vue';
 import {ref} from "vue"
 
 let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, undefined, undefined);
@@ -15,7 +16,7 @@ let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, 
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
     <div class="wrapper">
-      <!--<HelloWorld msg="You did it!" />-->
+      <HelloWorld msg="You did it!" />
       <!--search bar here-->
       <nav>
         <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
@@ -25,7 +26,7 @@ let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, 
     </div>
   </header>
   <main>
-    <TodoEntry :entry="e" />
+    <TodoEntryVue :entry="e" />
 
     <RouterView />
     <!--edit options ...-->
