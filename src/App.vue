@@ -2,6 +2,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ComButton from './components/ComButton.vue'
+import TodoEntry from './classes/TodoEntry';
+import {ref} from "vue"
+
+let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, undefined, undefined);
+
 </script>
 
 <template>
@@ -20,6 +25,8 @@ import ComButton from './components/ComButton.vue'
     </div>
   </header>
   <main>
+    <TodoEntry :entry="e" />
+
     <RouterView />
     <!--edit options ...-->
   </main>
@@ -27,7 +34,7 @@ import ComButton from './components/ComButton.vue'
     <div class="menu">
       <!--nav bar-->
       <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
+        <RouterLink to="/">Home</RouterLink>Logo Haus?
         <!-- <RouterLink to="/edit">Edit</RouterLink>
         <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       </nav>

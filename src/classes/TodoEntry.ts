@@ -1,5 +1,5 @@
 export default class TodoEntry {
-    name: string = "ToDo Entry";
+    title: string = "ToDo Entry";
     deadline?: Date = undefined;
     
     // used to store time information only from milliseconds to hours
@@ -18,8 +18,8 @@ export default class TodoEntry {
 
     priority: number = 0
 
-    public constructor(name: string, description: string, color: Array<number>, deadline?: Date, expenditure?: Date, flatPriority?: number){
-        this.name = name;
+    /*public*/ constructor(title: string, description: string, color: Array<number>, flatPriority?: number, deadline?: Date, expenditure?: Date){
+        this.title = title;
         this.deadline = deadline;
         this.expenditure = expenditure;
         this.description = description;
@@ -31,5 +31,4 @@ export default class TodoEntry {
         if (flatPriority != undefined)
             this.flatPriority = flatPriority ;
     }
-
 }
