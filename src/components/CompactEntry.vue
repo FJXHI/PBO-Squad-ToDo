@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import TodoEntry from '@/classes/TodoEntry';
 import type { assert } from '@vue/compiler-core';
-import type { PropType } from 'vue';
+import type { PropType, ComponentPublicInstance } from 'vue';
+import {ref, computed, reactive} from 'vue';
 
 const props = defineProps({
     entry: {
@@ -10,14 +11,20 @@ const props = defineProps({
     }
 });
 
+const entryBox = ref(null);
+let isExpanded = ref(false);
+
 let entry: TodoEntry = props.entry;
 let backgoundColor = entry.getCSSColorString();
 
+function changeExpand(){
+    isExpanded.value = !(isExpanded.value);
+};
 </script>
 
 <template>
-    <article class="rounded-box stretch-horizontally compact-height" :style="'--element-color: ' + backgoundColor">
-        <div class="center-vertically">
+    <article ref="entryBox" :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
+        <div>
             <h1 class="entry-title">{{ entry?.title }}</h1>
             <section class="info-box-1d">
                 <template v-if="entry.deadline != undefined">
@@ -27,6 +34,9 @@ let backgoundColor = entry.getCSSColorString();
                     <span class="entry-text"><img :src="'/timespan_symbol.png'" /> {{ entry?.expenditure.toString() }}</span>
                 </template>
             </section>
+            <template v-if="isExpanded">
+                <p class="entry-text">{{ entry.description }}</p>
+            </template>
         </div>
     </article>
 </template>
@@ -72,6 +82,10 @@ let backgoundColor = entry.getCSSColorString();
 .compact-height {
     /* height in [10, 20] */
     height: 16vh;
+}
+
+.detail-height {
+    min-height: 16vh;
 }
 
 .center-vertically {
