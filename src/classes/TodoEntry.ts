@@ -1,9 +1,11 @@
+import type Expenditure from "./Expenditure";
+
 export default class TodoEntry {
     title: string = "ToDo Entry";
     deadline?: Date = undefined;
     
     // used to store time information only from milliseconds to hours
-    expenditure?: Date = undefined;
+    expenditure?: Expenditure = undefined;
 
     description: string = "";
 
@@ -18,7 +20,7 @@ export default class TodoEntry {
 
     priority: number = 0
 
-    /*public*/ constructor(title: string, description: string, color: Array<number>, flatPriority?: number, deadline?: Date, expenditure?: Date){
+    /*public*/ constructor(title: string, description: string, color: Array<number>, flatPriority?: number, deadline?: Date, expenditure?: Expenditure){
         this.title = title;
         this.deadline = deadline;
         this.expenditure = expenditure;
@@ -30,5 +32,10 @@ export default class TodoEntry {
 
         if (flatPriority != undefined)
             this.flatPriority = flatPriority ;
+    }
+
+    // might have to be adjusted to look at tags
+    public getCSSColorString() : string{
+        return "rgba(" + this.color[0] + "," + this.color[1] + "," +this.color[2] + "," + this.color[3] + ")";
     }
 }

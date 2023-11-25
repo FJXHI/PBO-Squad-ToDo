@@ -2,11 +2,17 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ComButton from './components/ComButton.vue'
-import TodoEntry from './classes/TodoEntry';
-import TodoEntryVue from './components/TodoEntry.vue';
-import {ref} from "vue"
+import TodoEntry from './classes/TodoEntry'
+import Expenditure from './classes/Expenditure'
+import {TimeUnit} from "./classes/TimeUnit"
+import CompactEntry from './components/CompactEntry.vue';
 
-let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, undefined, undefined);
+let entryList: TodoEntry[] = [];
+entryList.push(new TodoEntry("Test Entry 1", "Test 1 Description", [255, 59, 48, 255], undefined, new Date("2024-01-07"), new Expenditure(5, TimeUnit.Hour)));
+entryList.push(new TodoEntry("Test Entry 2", "Test 2 Description", [50, 173, 230, 255], undefined, undefined, new Expenditure(30, TimeUnit.Minute)));
+entryList.push(new TodoEntry("Test Entry 3", "Test 3 Description", [162, 132, 94, 255], undefined, new Date("2027-09-29"), undefined));
+entryList.push(new TodoEntry("Test Entry 4", "Test 4 Description", [52, 199, 89, 255], undefined, undefined, undefined));
+entryList.push(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0, 255], undefined, undefined, undefined));
 
 </script>
 
@@ -15,8 +21,8 @@ let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, 
 
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div>
+      <!-- <HelloWorld msg="You did it!" /> -->
       <!--search bar here-->
       <nav>
         <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
@@ -25,17 +31,21 @@ let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, 
       </nav>
     </div>
   </header>
-  <main>
-    <TodoEntryVue :entry="e" />
+  <main class="full-width">
+      <div v-for="entry in entryList">
+        <CompactEntry :entry="entry"></CompactEntry>
+      </div>
 
-    <RouterView />
+    <!-- <TodoEntryVue :entry="e" /> -->
+
+    <!-- <RouterView /> -->
     <!--edit options ...-->
   </main>
   <footer>
     <div class="menu">
       <!--nav bar-->
       <nav>
-        <RouterLink to="/">Home</RouterLink>Logo Haus?
+        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
         <!-- <RouterLink to="/edit">Edit</RouterLink>
         <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       </nav>
@@ -44,8 +54,14 @@ let e = new TodoEntry("Test Entry", "Test Description", [255, 0, 0], undefined, 
   </footer>
 </template>
 
-<!-- <style scoped>
-header {
+<style scoped>
+.full-width {
+    position: absolute;
+    left: 0px;
+    right: 0px
+}
+
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -118,5 +134,5 @@ nav a:first-of-type {
     text-align: center;
     margin-top: 2rem;
   }
-}
-</style> -->
+} */
+</style> 
