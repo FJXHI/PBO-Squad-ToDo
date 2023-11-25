@@ -24,7 +24,15 @@ function changeExpand(){
 
 <template>
     <article ref="entryBox" :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
+        <!-- <div class="center-vertically"> -->
         <div>
+            <template v-if="isExpanded">
+                <nav class="info-box-1d">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                </nav>
+            </template>
             <h1 class="entry-title">{{ entry?.title }}</h1>
             <section class="info-box-1d">
                 <template v-if="entry.deadline != undefined">
@@ -55,7 +63,7 @@ function changeExpand(){
 
     
 }
-.info-box-1d span {
+.info-box-1d span, button {
     flex: 0 0 33.333333%;
 }
 
