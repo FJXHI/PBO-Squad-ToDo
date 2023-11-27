@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 import CompactEntry from '../components/CompactEntry.vue'
 import Expenditure from '../classes/Expenditure'
 import { useToDoEntryStore } from '@/stores/entry_store'
@@ -54,8 +53,10 @@ store.addEntry({
 
 <template>
   <main>
+
     <div v-for="entry in store.entries.slice(0, 5)">
       <CompactEntry :entry="entry" :style="'margin-bottom: 5px'"></CompactEntry>
+
     </div>
   </main>
 </template>
