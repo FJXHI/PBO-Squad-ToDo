@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TodoEntry from '@/classes/TodoEntry';
 import type { ToDoEntry } from '@/stores/entry_store';
 import type { assert } from '@vue/compiler-core';
 import type { PropType, ComponentPublicInstance } from 'vue';
