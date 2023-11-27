@@ -1,0 +1,1 @@
+import{_ as s,o as t,c as _,p as o,b as c,e as a}from"./index-2aff290b.js";const n={},i=e=>(o("data-v-4a2beb34"),e=e(),c(),e),d={class:"settings"},p=i(()=>a("h1",null,"This is an settings page",-1)),r=[p];function l(e,h){return t(),_("div",d,r)}const u=s(n,[["render",l],["__scopeId","data-v-4a2beb34"]]);export{u as default};
