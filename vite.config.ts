@@ -9,15 +9,12 @@ export default defineConfig({
   base: '/PBO-Squad-ToDo/',
   plugins: [
     vue(),
-    // VitePWA({
-    //   injectRegister: 'auto'
-    // }),
     VitePWA({
       includeAssets: ['favicon.ico', 'logo-512x512.png', 'logo.svg'],
       manifest: {
-        name: 'My Awesome App',
-        short_name: 'MyApp',
-        description: 'My Awesome App description',
+        name: 'PBO-ToDo',
+        short_name: 'PBO-ToDo',
+        description: 'ToDo App made by humans with love to web development',
         theme_color: '#000',
         icons: [
           {
