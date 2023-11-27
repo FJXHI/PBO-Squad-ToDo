@@ -23,7 +23,7 @@ function changeExpand(){
 </script>
 
 <template>
-    <article ref="entryBox" :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
+    <article ref="entryBox" :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
         <!-- <div class="center-vertically"> -->
         <div>
             <h1 class="entry-title">{{ entry?.title }}</h1>
@@ -71,8 +71,7 @@ function changeExpand(){
     font-size: 16pt;
 }
 
-.rounded-box {
-    border-radius: 15px; 
+.entry-box {
     background-color: var(--element-color);
 
     padding: 10px;
