@@ -25,13 +25,13 @@ export default {
     <div class="nav-field">
         <span class="nav_btn">
             <NavigationButton class="btn_home" @click=homeClicked btnType="@/assets/home_icon.png"> 
-                <img alt="" class="icon" src="@/assets/home_icon.png"/>
+                <img alt="" class="icon" src="@/assets/density_small_icon.png"/>
             </NavigationButton>      
             <NavigationButton class="btn_add" @click=homeAdd btnType="@/assets/add_icon.png">
                 <img alt="" class="icon" src="@/assets/add_icon.png"/>
             </NavigationButton>
             <NavigationButton class="btn_overview" @click=menuClicked btnType="@/assets/menu_icon.png">
-                <img alt="" class="icon" src="@/assets/menu_icon.png"/>
+                <img alt="" class="icon" src="@/assets/grid_view_icon.png"/>
             </NavigationButton>
         </span>
     </div>
@@ -43,7 +43,6 @@ export default {
 .nav_btn {
   display: flex;
   justify-content: space-around;
-  /* width: 100%; */
   background-color: #1C1C1E;
 }
 
