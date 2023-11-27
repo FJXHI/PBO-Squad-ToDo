@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import ComButton from './components/ComButton.vue'
+import NavigationBar from './components/NavigationBar.vue';
+import HomeView from './views/HomeView.vue'
 import SearchBar from './components/SearchBar.vue'
+
 </script>
 
 <template>
@@ -11,7 +12,9 @@ import SearchBar from './components/SearchBar.vue'
     <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
     <SearchBar />
 
-    <!-- <div class="wrapper"> -->
+    <div>
+      <!-- <HelloWorld msg="You did it!" /> -->
+      <!-- <div class="wrapper"> -->
       <!--<HelloWorld msg="You did it!" />-->
       <!--search bar here-->
       <!-- <nav> -->
@@ -19,27 +22,33 @@ import SearchBar from './components/SearchBar.vue'
         <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
         <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       <!-- </nav> -->
-    <!-- </div> -->
+    </div>
   </header>
-  <main>
+  <main class="full-width">
+    <RouterView />
+
     <!-- <RouterView /> -->
     <!--edit options ...-->
   </main>
   <footer>
-    <!-- <div class="menu"> -->
-      <!--nav bar-->
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/edit">Edit</RouterLink>
-        <RouterLink to="/more">More</RouterLink>
-      </nav>
-    </div> -->
-    <!--Menü-Leiste-->
+    <nav>
+      <NavigationBar />
+    </nav>
   </footer>
 </template>
 
-<!-- <style scoped>
-header {
+<style scoped>
+.full-width {
+    position: absolute;
+    left: 0px;
+    right: 0px
+}
+
+body {
+  margin: 0;
+  background: #eee;
+}
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -103,7 +112,6 @@ nav a:first-of-type {
   .menu {
     display: center;
   }
-  
 
   .menu nav {
     background-color: black;
@@ -112,5 +120,11 @@ nav a:first-of-type {
     text-align: center;
     margin-top: 2rem;
   }
+} */
+
+footer {
+  position: fixed; /* Keeps it in place */
+  bottom: 0; /* Stick it to the bottom */
+  width: 100%; /* Full width */
 }
-</style> -->
+</style>
