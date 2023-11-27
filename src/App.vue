@@ -23,7 +23,6 @@ import HomeView from './views/HomeView.vue'
     </div>
   </header>
   <main class="full-width">
-    <p>Hello</p>
     <RouterView />
 
     <!-- <RouterView /> -->
