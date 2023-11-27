@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue';
+import HomeView from './views/HomeView.vue'
+
 </script>
 
 <template>
@@ -7,7 +10,9 @@ import NavigationBar from './components/NavigationBar.vue';
 
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
-    <!-- <div class="wrapper"> -->
+    <div>
+      <!-- <HelloWorld msg="You did it!" /> -->
+      <!-- <div class="wrapper"> -->
       <!--<HelloWorld msg="You did it!" />-->
       <!--search bar here-->
       <!-- <nav> -->
@@ -15,27 +20,29 @@ import NavigationBar from './components/NavigationBar.vue';
         <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
         <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       <!-- </nav> -->
-    <!-- </div> -->
+    </div>
   </header>
-  <main>
+  <main class="full-width">
+
     <RouterView />
+
+    <!-- <RouterView /> -->
     <!--edit options ...-->
   </main>
   <footer>
-    <!-- <div class="menu"> -->
-      <!--nav bar-->
-      <!-- <nav> -->
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
-        <!-- <RouterLink to="/edit">Edit</RouterLink>
-        <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      <!-- </nav> -->
-    <!-- </div> -->
-    <!--Menü-Leiste-->
-  <NavigationBar />
+    <nav>
+      <NavigationBar />
+    </nav>
   </footer>
 </template>
 
 <style scoped>
+.full-width {
+    position: absolute;
+    left: 0px;
+    right: 0px
+}
+
 body {
   margin: 0;
   background: #eee;
