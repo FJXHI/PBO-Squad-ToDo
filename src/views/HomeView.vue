@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 import CompactEntry from '../components/CompactEntry.vue'
 import TodoEntry from '../classes/TodoEntry'
 import Expenditure from '../classes/Expenditure'
@@ -15,6 +14,7 @@ entryList.push(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0,
 
 <template>
   <main>
+    
     <div v-for="entry in entryList">
       <CompactEntry :entry="entry"></CompactEntry>
     </div>
