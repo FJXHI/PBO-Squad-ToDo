@@ -64,7 +64,7 @@ function changeExpand(){
     
 }
 .info-box-1d span, button {
-    flex: 0 0 33.333333%;
+    flex: 0 0 50%;
 }
 
 .entry-text {
