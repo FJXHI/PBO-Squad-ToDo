@@ -23,7 +23,7 @@ export default {
 <template>
 <div class="nav">
     <div class="nav-field">
-        <span class="nav_btn">
+        <span class="nav_btn"><!-- .svg file ready, but the icon's are to big -->
             <NavigationButton class="btn_home" @click=homeClicked btnType="@/assets/home_icon.png"> 
                 <img alt="" class="icon" src="@/assets/icon_density_small.png"/>
             </NavigationButton>      
@@ -53,7 +53,7 @@ export default {
   height: 55px;
   color: #fff;
   background-color: #1C1C1E;
-  font-size: 18px;
+  font-size: 8px;
   letter-spacing: 1px;
   border-radius: 5px;
   cursor: pointer;
