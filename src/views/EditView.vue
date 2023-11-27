@@ -69,7 +69,7 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
 @media (min-width: 1024px) {
   .edit {
     min-height: 100vh;
