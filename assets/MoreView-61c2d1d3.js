@@ -1,0 +1,1 @@
+import{_ as o,o as s,c as _,p as c,g as t,b as a}from"./index-d6ac2c52.js";const d={},n=e=>(c("data-v-d0776b03"),e=e(),t(),e),r={class:"more"},p=n(()=>a("h1",null,"This is an more page",-1)),i=[p];function l(e,h){return s(),_("div",r,i)}const f=o(d,[["render",l],["__scopeId","data-v-d0776b03"]]);export{f as default};
