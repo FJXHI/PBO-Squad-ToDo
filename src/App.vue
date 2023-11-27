@@ -2,13 +2,15 @@
 import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue';
 import HomeView from './views/HomeView.vue'
+import SearchBar from './components/SearchBar.vue'
 
 </script>
 
 <template>
   <header>
 
-    <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+    <SearchBar />
 
     <!-- <div> -->
       <!-- <HelloWorld msg="You did it!" /> -->
@@ -111,7 +113,7 @@ nav a:first-of-type {
   .menu {
     display: center;
   }
-  
+
   .menu nav {
     background-color: black;
     width: 100%;
