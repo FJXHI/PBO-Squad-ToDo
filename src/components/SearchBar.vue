@@ -3,6 +3,7 @@ export default {
   methods: {
     settingsClick() {
       console.log("Settings button clicked");
+      this.$router.push('/settings');
     }
   },
 }
