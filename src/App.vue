@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import ComButton from './components/ComButton.vue'
 import TodoEntry from './classes/TodoEntry'
 import Expenditure from './classes/Expenditure'
 import {TimeUnit} from "./classes/TimeUnit"
 import CompactEntry from './components/CompactEntry.vue';
+import NavigationBar from './components/NavigationBar.vue';
 
 let entryList: TodoEntry[] = [];
 entryList.push(new TodoEntry("Test Entry 1", "Test 1 Description", [255, 59, 48, 255], undefined, new Date("2024-01-07"), new Expenditure(5, TimeUnit.Hour)));
@@ -23,12 +23,14 @@ entryList.push(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0,
 
     <div>
       <!-- <HelloWorld msg="You did it!" /> -->
+      <!-- <div class="wrapper"> -->
+      <!--<HelloWorld msg="You did it!" />-->
       <!--search bar here-->
-      <nav>
+      <!-- <nav> -->
         <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
         <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
         <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      </nav>
+      <!-- </nav> -->
     </div>
   </header>
   <main class="full-width">
@@ -42,15 +44,16 @@ entryList.push(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0,
     <!--edit options ...-->
   </main>
   <footer>
-    <div class="menu">
+    <!-- <div class="menu"> -->
       <!--nav bar-->
-      <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
+        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
         <!-- <RouterLink to="/edit">Edit</RouterLink>
         <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      </nav>
-    </div>
+    <!-- </div> -->
     <!--Menü-Leiste-->
+    <nav>
+      <NavigationBar />
+    </nav>
   </footer>
 </template>
 
@@ -61,6 +64,10 @@ entryList.push(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0,
     right: 0px
 }
 
+body {
+  margin: 0;
+  background: #eee;
+}
 /* header {
   line-height: 1.5;
   max-height: 100vh;
@@ -126,7 +133,6 @@ nav a:first-of-type {
     display: center;
   }
   
-
   .menu nav {
     background-color: black;
     width: 100%;
@@ -135,4 +141,10 @@ nav a:first-of-type {
     margin-top: 2rem;
   }
 } */
-</style> 
+
+footer {
+  position: fixed; /* Keeps it in place */
+  bottom: 0; /* Stick it to the bottom */
+  width: 100%; /* Full width */
+}
+</style>
