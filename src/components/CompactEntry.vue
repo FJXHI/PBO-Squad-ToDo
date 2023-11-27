@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import TodoEntry from '@/classes/TodoEntry';
+import type { ToDoEntry } from '@/stores/entry_store';
 import type { assert } from '@vue/compiler-core';
 import type { PropType, ComponentPublicInstance } from 'vue';
 import {ref, computed, reactive} from 'vue';
 
 const props = defineProps({
     entry: {
-        type: Object as PropType<TodoEntry>,
+        type: Object as PropType<ToDoEntry>,
         required: true
     }
 });
@@ -14,8 +15,8 @@ const props = defineProps({
 const entryBox = ref(null);
 let isExpanded = ref(false);
 
-let entry: TodoEntry = props.entry;
-let backgoundColor = entry.getCSSColorString();
+let entry: ToDoEntry = props.entry;
+let backgoundColor = "rgba(" + entry.color.r.toString() + "," + entry.color.g.toString() + "," + entry.color.b.toString() + "," + (entry.color.a ? entry.color.a : 255) + ")";
 
 function changeExpand(){
     isExpanded.value = !(isExpanded.value);
@@ -26,16 +27,16 @@ function changeExpand(){
     <article ref="entryBox" :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
         <!-- <div class="center-vertically"> -->
         <div>
-            <h1 class="entry-title">{{ entry?.title }}</h1>
+            <h1 class="entry-title">{{ entry?.title ? entry?.title : "" }}</h1>
             <section class="info-box-1d">
                 <template v-if="entry.deadline != undefined">
                     <span class="entry-text"><img :src="'/deadline_symbol.png'" /> {{ entry?.deadline.toLocaleDateString() }}</span>
                 </template>
                 <template v-if="entry.expenditure != undefined">
-                    <span class="entry-text"><img :src="'/timespan_symbol.png'" /> {{ entry?.expenditure.toString() }}</span>
+                    <span class="entry-text"><img :src="'/timespan_symbol.png'" /> {{ entry.expenditure.time + " " + entry.expenditure.unit }}</span>
                 </template>
             </section>
-            <template v-if="isExpanded">
+            <template v-if="isExpanded && entry.description != undefined">
                 <p class="entry-text">{{ entry.description }}</p>
             </template>
             <span v-if="isExpanded">
