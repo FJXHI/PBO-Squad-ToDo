@@ -32,11 +32,11 @@ function changeExpand() {
             <h1 class="entry-title">{{ entry?.title }}</h1>
             <section class="info-box-1d">
                 <template v-if="entry.deadline != undefined">
-                    <span class="entry-text"><img :src="'/deadline_symbol.png'" /> {{ entry?.deadline.toLocaleDateString()
+                    <span class="entry-text"><img src="@/assets/icon_deadline.png" /> {{ entry?.deadline.toLocaleDateString()
                     }}</span>
                 </template>
                 <template v-if="entry.expenditure != undefined">
-                    <span class="entry-text"><img :src="'/timespan_symbol.png'" /> {{ entry?.expenditure.toString()
+                    <span class="entry-text"><img src="@/assets/icon_timespan.png" /> {{ entry?.expenditure.toString()
                     }}</span>
                 </template>
             </section>
