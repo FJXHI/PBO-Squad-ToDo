@@ -10,17 +10,17 @@ import HomeView from './views/HomeView.vue'
 
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
 
-    <div>
+    <!-- <div> -->
       <!-- <HelloWorld msg="You did it!" /> -->
       <!-- <div class="wrapper"> -->
       <!--<HelloWorld msg="You did it!" />-->
       <!--search bar here-->
       <!-- <nav> -->
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
-        <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
-        <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
+      <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
+      <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
+      <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
       <!-- </nav> -->
-    </div>
+    <!-- </div> -->
   </header>
   <main class="full-width">
     <RouterView />
@@ -37,15 +37,16 @@ import HomeView from './views/HomeView.vue'
 
 <style scoped>
 .full-width {
-    position: absolute;
-    left: 0px;
-    right: 0px
+  position: absolute;
+  left: 0px;
+  right: 0px
 }
 
 body {
   margin: 0;
   background: #eee;
 }
+
 /* header {
   line-height: 1.5;
   max-height: 100vh;
@@ -121,8 +122,10 @@ nav a:first-of-type {
 } */
 
 footer {
-  position: fixed; /* Keeps it in place */
-  bottom: 0; /* Stick it to the bottom */
-  width: 100%; /* Full width */
-}
-</style>
+  position: fixed;
+  /* Keeps it in place */
+  bottom: 0;
+  /* Stick it to the bottom */
+  width: 100%;
+  /* Full width */
+}</style>
