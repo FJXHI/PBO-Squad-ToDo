@@ -68,8 +68,8 @@ export default {
   </div>
 </template>
 
-<style>
-/*
+
+<style scoped>
 @media (min-width: 1024px) {
   .edit {
     min-height: 100vh;
