@@ -13,12 +13,15 @@ store.addEntry(new TodoEntry("Test Entry 2", "Test 2 Description", [50, 173, 230
 store.addEntry(new TodoEntry("Test Entry 3", "Test 3 Description", [162, 132, 94, 255], undefined, new Date("2027-09-29"), undefined));
 store.addEntry(new TodoEntry("Test Entry 4", "Test 4 Description", [52, 199, 89, 255], undefined, undefined, undefined));
 store.addEntry(new TodoEntry("Test Entry 5", "Test 5 Description", [255, 204, 0, 255], undefined, undefined, undefined));
+store.addEntry(new TodoEntry("Test Entry 6", "Test 6 Description", [255, 59, 48, 255], undefined, undefined, undefined));
+store.addEntry(new TodoEntry("Test Entry 7", "Test 7 Description", [50, 173, 230, 255], undefined, undefined, undefined));
+store.addEntry(new TodoEntry("Test Entry 8", "Test 8 Description", [162, 132, 94, 255], undefined, undefined, undefined));
 </script>
 
 <template>
   <main>
-    <div v-for="entry in store.entries">
-      <CompactEntry :entry="entry"></CompactEntry>
+    <div v-for="entry in store.entries.slice(0, 5)">
+      <CompactEntry :entry="entry" :style="'margin-bottom: 5px'"></CompactEntry>
     </div>
   </main>
 </template>
