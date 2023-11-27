@@ -1,37 +1,36 @@
 <script lang="ts">
 export default {
-    data() {
-      return {
-        inputSearch: ''
-      }
-    },
-    methods: {
-    clearInput() {
-      this.inputSearch = '';
+  methods: {
+    settingsClick() {
+      console.log("Settings button clicked");
     }
   },
-};
+}
 </script>
 
 <template>
-  <div class="search">
-    <img src="@/assets/search_icon.png" class="search-icon">
-		<input class="search-input" type="text" v-model="inputSearch" placeholder="Search">
+  <div class="topbar">
+    <div class="search">
+      <img src="@/assets/search_icon.png" class="search-icon">
+		  <input class="search-input" type="text" placeholder="Search">
+    </div>
+    <button @click=settingsClick>
+      <img src="@/assets/settings_icon.png" class="settings-icon">
+    </button>
   </div>
 </template>
 
 <style scoped>
 .search-input {
-  height: 100%;
-  width: 90%;
   outline: none;
   border: none;
-  background: #1C1C1E;
+  background: none;
   color: #808080;
   font-size: 20px;
   display: inline-block;
   box-sizing: border-box;
   padding: 5px;
+  width: 80%;
 }
 
 .search-icon {
@@ -41,14 +40,28 @@ export default {
 .search {
   height: 50px;
   width: 90%;
-  overflow: hidden;
   display: flex;
-  justify-content: space-around;
   background-color: #1C1C1E;
   border-radius: 10px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-evenly;
   position: fixed;
   top: 0;
-  margin: 1em;
+  padding: 1em;
+  height: 50px;
+  width: 100%;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #1C1C1E;
+  border-radius: 10px;
+  background: none;
 }
 
 </style>
