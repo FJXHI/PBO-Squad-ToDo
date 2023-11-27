@@ -131,6 +131,7 @@ export default {
       outline: none;
       border: none;
       border-radius: 5px;
+      margin-top: 32px;
     }
 
     .btn_save {

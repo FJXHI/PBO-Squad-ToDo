@@ -1,34 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue';
-import HomeView from './views/HomeView.vue'
 import SearchBar from './components/SearchBar.vue'
 
 </script>
 
 <template>
   <header>
-
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
     <SearchBar />
-
-    <!-- <div> -->
-      <!-- <HelloWorld msg="You did it!" /> -->
-      <!-- <div class="wrapper"> -->
-      <!--<HelloWorld msg="You did it!" />-->
-      <!--search bar here-->
       <!-- <nav> -->
-      <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
-      <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
-      <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
+      <!-- <RouterLink to="/settings">Settings</RouterLink>-->
       <!-- </nav> -->
-    <!-- </div> -->
   </header>
   <main class="full-width">
     <RouterView />
-
-    <!-- <RouterView /> -->
-    <!--edit options ...-->
   </main>
   <footer>
     <nav>
@@ -38,22 +23,16 @@ import SearchBar from './components/SearchBar.vue'
 </template>
 
 <style scoped>
-.full-width {
+
+main {
   position: absolute;
+  margin-top: 38px;
   left: 0px;
-  right: 0px
+  right: 0px;
 }
 
-body {
-  margin: 0;
-  background: #eee;
-}
 
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
+/*
 .logo {
   display: block;
   margin: 0 auto 2rem;
