@@ -12,11 +12,11 @@ export default {
 <template>
   <div class="topbar">
     <div class="search">
-      <img src="@/assets/icon_search.png" class="search-icon">
+      <img src="@/assets/icon_search.svg" class="search-icon">
 		  <input class="search-input" type="text" placeholder="Search">
     </div>
     <button @click=settingsClick>
-      <img src="@/assets/icon_settings.png" class="settings-icon">
+      <img src="@/assets/icon_settings.svg" class="settings-icon">
     </button>
   </div>
 </template>
