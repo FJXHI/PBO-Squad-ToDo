@@ -18,7 +18,7 @@ import NavigationBar from './components/NavigationBar.vue';
     <!-- </div> -->
   </header>
   <main>
-    <!-- <RouterView /> -->
+    <RouterView />
     <!--edit options ...-->
   </main>
   <footer>
