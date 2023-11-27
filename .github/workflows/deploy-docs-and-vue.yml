@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main # Trigger on changes to the main branch
-      - documentation # Trigger on changes to the docs branch
   workflow_dispatch:
 
 permissions:
