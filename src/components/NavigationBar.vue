@@ -11,10 +11,10 @@ export default {
     },
     homeAdd() {
         console.log("addClicked");
+        this.$router.push('/edit');
     },
     menuClicked() {
         console.log("menuClicked");
-      this.$router.push('/edit');
     }
   },
 };
