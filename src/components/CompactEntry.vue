@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { ToDoEntry } from '@/stores/entry_store';
+
+import type TodoEntry from '@/classes/TodoEntry';
 import type { assert } from '@vue/compiler-core';
 import type { PropType, ComponentPublicInstance } from 'vue';
 import { ref, computed, reactive } from 'vue';
 
 const props = defineProps({
     entry: {
-        type: Object as PropType<ToDoEntry>,
+        type: Object as PropType<TodoEntry>,
         required: true
     }
 });
@@ -14,8 +15,8 @@ const props = defineProps({
 const entryBox = ref(null);
 let isExpanded = ref(false);
 
-let entry: ToDoEntry = props.entry;
-let backgoundColor = "rgba(" + entry.color.r.toString() + "," + entry.color.g.toString() + "," + entry.color.b.toString() + "," + (entry.color.a ? entry.color.a : 255) + ")";
+let entry: TodoEntry = props.entry;
+let backgoundColor = entry.getCSSColorString();
 
 function changeExpand() {
     isExpanded.value = !(isExpanded.value);
@@ -23,26 +24,23 @@ function changeExpand() {
 </script>
 
 <template>
-    <article ref="entryBox" :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
-
-    <!-- <article ref="entryBox"
+    <article ref="entryBox"
         :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
         :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
--->
         <!-- <div class="center-vertically"> -->
         <div>
-            <h1 class="entry-title">{{ entry?.title ? entry?.title : "" }}</h1>
+            <h1 class="entry-title">{{ entry?.title }}</h1>
             <section class="info-box-1d">
                 <template v-if="entry.deadline != undefined">
                     <span class="entry-text"><img src="@/assets/icon_deadline.png" /> {{ entry?.deadline.toLocaleDateString()
                     }}</span>
                 </template>
                 <template v-if="entry.expenditure != undefined">
-                    <span class="entry-text"><img src="@/assets/icon_timespan.png" /> {{ entry.expenditure.time + " " + entry.expenditure.unit }}</span>
-
+                    <span class="entry-text"><img src="@/assets/icon_timespan.png" /> {{ entry?.expenditure.toString()
+                    }}</span>
                 </template>
             </section>
-            <template v-if="isExpanded && entry.description != undefined">
+            <template v-if="isExpanded">
                 <p class="entry-text">{{ entry.description }}</p>
             </template>
             <span v-if="isExpanded">
@@ -69,17 +67,17 @@ function changeExpand() {
     padding-left: 0;
 }
 
-.info-box-1d span, button {
-    flex: 0 0 50%;
-
+.info-box-1d span,
+button {
+    flex: 0 0 33.333333%;
+}
 
 .entry-text {
     font-size: 16pt;
 }
 
-.entry-box {
-    /*border-radius: 15px;*/
-
+.rounded-box {
+    border-radius: 15px;
     background-color: var(--element-color);
 
     padding: 10px;
