@@ -53,10 +53,10 @@ export default {
           <editButton class="btn_cancel" @click=cancelEdit>Cancel</editButton>          
           <editButton class="btn_save" @click=saveEdit>Save</editButton>
         </span>
-        <label for="id_name">Name</label>
-			  <input class="user-input" type="text" v-model="inputName" placeholder="Name" required>
-        <label for="f_date">Deadline Date & Time</label>
-			  <input class="user-input" type="datetime-local" v-model="inputDate" placeholder="Date">
+        <label for="id_name">Title</label>
+			  <input class="user-input" type="text" v-model="inputName" placeholder="Title" required>
+        <label for="f_date">Deadline</label>
+			  <input class="user-input" type="date" v-model="inputDate" placeholder="Date">
         <label for="f_time">Time expenditure</label>
 			  <input class="user-input" type="number" v-model="inputTime" placeholder="Time expenditure" min="0">
 			  <label for="f_text">Description</label>
@@ -100,12 +100,6 @@ label {
   box-sizing: border-box;  
   transition: 0.5s;
   transition-property: border-left, border-right, box-shadow;
-}
-
-.user-input:hover, .user-input:focus, .user-input:active{
-  border-left: solid 8px #4285F4;
-  border-right: solid 8px #4285F4;
-  box-shadow: 0 0 100px rgba(66, 133, 244, 0.9);
 }
 
 .edit_btn {
