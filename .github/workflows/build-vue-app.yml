@@ -13,8 +13,16 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x' 
+        node-version: '18.x' 
         cache: 'npm'
     - run: npm ci  # Clean install
-    - run: npm run build  # Build the project
+
+    - name: Lint the project
+      run: npm run lint
+
+    - name: Format the project
+      run: npm run format
+
+    - name: Build the project
+      run: npm run build
     # - run: npm test  # Uncomment to run tests, if we have any
