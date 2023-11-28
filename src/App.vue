@@ -1,47 +1,38 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import ComButton from './components/ComButton.vue'
+import NavigationBar from './components/NavigationBar.vue';
+import SearchBar from './components/SearchBar.vue'
+
 </script>
 
 <template>
   <header>
-
-    <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
-
-    <div class="wrapper">
-      <!--<HelloWorld msg="You did it!" />-->
-      <!--search bar here-->
-      <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus? -->
-        <!-- <RouterLink to="/edit">Edit</RouterLink>+ -->
-        <!-- <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      </nav>
-    </div>
+    <SearchBar />
+      <!-- <nav> -->
+      <!-- <RouterLink to="/settings">Settings</RouterLink>-->
+      <!-- </nav> -->
   </header>
-  <main>
+  <main class="full-width">
     <RouterView />
-    <!--edit options ...-->
   </main>
   <footer>
-    <div class="menu">
-      <!--nav bar-->
-      <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>Logo Haus?-->
-        <!-- <RouterLink to="/edit">Edit</RouterLink>
-        <RouterLink to="/more">More</RouterLink>Logo 3 Streifen? -->
-      </nav>
-    </div>
-    <!--Menü-Leiste-->
+    <nav>
+      <NavigationBar />
+    </nav>
   </footer>
 </template>
 
-<!-- <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style scoped>
+
+main {
+  position: absolute;
+  margin-top: 38px;
+  left: 0px;
+  right: 0px;
 }
 
+
+/*
 .logo {
   display: block;
   margin: 0 auto 2rem;
@@ -101,7 +92,6 @@ nav a:first-of-type {
   .menu {
     display: center;
   }
-  
 
   .menu nav {
     background-color: black;
@@ -110,5 +100,13 @@ nav a:first-of-type {
     text-align: center;
     margin-top: 2rem;
   }
-}
-</style> -->
+} */
+
+footer {
+  position: fixed;
+  /* Keeps it in place */
+  bottom: 0;
+  /* Stick it to the bottom */
+  width: 100%;
+  /* Full width */
+}</style>

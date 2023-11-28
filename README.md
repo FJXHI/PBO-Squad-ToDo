@@ -1,6 +1,10 @@
+![Deploy To Github pages](https://github.com/FJXHI/PBO-Squad-ToDo/actions/workflows/deploy-docs-and-vue.yml/badge.svg)
+
 # PBO-Squad-ToDo
 
-ToDo Manager mit VUE
+ToDo Manager build with VUE
+
+https://fjxhi.github.io/PBO-Squad-ToDo/
 
 # Instructions for the project:
 
