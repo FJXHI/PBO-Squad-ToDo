@@ -71,7 +71,7 @@ function changeExpand() {
 
 .info-box-1d span, button {
     flex: 0 0 50%;
-
+}
 
 .entry-text {
     font-size: 16pt;
