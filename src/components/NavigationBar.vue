@@ -50,7 +50,7 @@ export default {
   outline: none;
   border: none;
   width: 40%;
-  height: 55px;
+  height: 8vh;
   color: #fff;
   background-color: #1C1C1E;
   font-size: 8px;

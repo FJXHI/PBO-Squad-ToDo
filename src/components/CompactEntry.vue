@@ -24,11 +24,6 @@ function changeExpand() {
 
 <template>
     <article ref="entryBox" :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
-
-    <!-- <article ref="entryBox"
-        :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
-        :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
--->
         <!-- <div class="center-vertically"> -->
         <div>
             <h1 class="entry-title">{{ entry?.title ? entry?.title : "" }}</h1>
@@ -78,7 +73,7 @@ function changeExpand() {
 }
 
 .entry-box {
-    /*border-radius: 15px;*/
+    /* border-radius: 5px; */
 
     background-color: var(--element-color);
 
