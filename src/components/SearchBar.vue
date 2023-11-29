@@ -1,67 +1,63 @@
 <script lang="ts">
 export default {
-    methods: {
-        settingsClick() {
-            console.log("Settings button clicked");
-            this.$router.push('/settings');
-        }
-    },
+  methods: {
+    settingsClick() {
+      console.log('Settings button clicked')
+      this.$router.push('/settings')
+    }
+  }
 }
 </script>
 
 <template>
-    <div class="topbar">
-        <div class="search">
-            <img src="@/assets/icon_search.svg" class="search-icon">
-            <input class="search-input" type="text" placeholder="Search">
-        </div>
-        <button @click=settingsClick>
-            <img src="@/assets/icon_settings.svg" class="settings-icon">
-        </button>
+  <div class="topbar">
+    <div class="search">
+      <img src="@/assets/icon_search.svg" class="search-icon" />
+      <input class="search-input" type="text" placeholder="Search" />
     </div>
+    <button @click="settingsClick" class="button">
+      <img src="@/assets/icon_settings.svg" style="width: 100%; height: 100%" />
+    </button>
+  </div>
 </template>
 
 <style scoped>
 .search-input {
-    outline: none;
-    border: none;
-    background: none;
-    color: #808080;
-    font-size: 20px;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 5px;
-    width: 80%;
+  background: none;
+  outline: none;
+  border: none;
+
+  color: hsl(0, 0%, 50%);
+  font-size: 16pt;
 }
 
 .search-icon {
-    padding: 10px;
+  padding: 1vh;
 }
 
 .search {
-    height: 50px;
-    width: 90%;
-    display: flex;
-    background-color: #1C1C1E;
-    border-radius: 10px;
+  display: flex;
+  width: 0;
+  flex-grow: 1;
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  margin-right: 1vh;
 }
 
 .topbar {
-    display: flex;
-    justify-content: space-evenly;
-    position: fixed;
-    top: 0;
-    padding: 1em;
-    height: 50px;
-    width: 100%;
+  display: flex;
+  height: 8vh;
+  width: 100%;
+  padding: 1vh;
 }
 
 button {
-    width: 50px;
-    height: 50px;
-    border: none;
-    background-color: #1C1C1E;
-    border-radius: 10px;
-    background: none;
+  background: none;
+  outline: none;
+  border: none;
+
+  height: 6vh;
+  width: 6vh;
+  padding: 0;
 }
 </style>
