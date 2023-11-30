@@ -1,6 +1,6 @@
 <template>
   <div class="more">
-    <h1>This is an more page</h1>
+    <h1>This is more page</h1>
   </div>
 </template>
 
