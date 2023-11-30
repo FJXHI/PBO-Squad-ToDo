@@ -27,6 +27,7 @@ export default {
   outline: none;
   border: none;
 
+  width: 100%;
   color: hsl(0, 0%, 50%);
   font-size: 16pt;
 }
