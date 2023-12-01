@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 /*defineProps<{
     btnType: string
@@ -6,9 +5,9 @@
 </script>
 
 <template>
-    <button class="navbtn">
-        <slot></slot>
-    </button>
+  <button class="navbtn">
+    <slot></slot>
+  </button>
 </template>
 
 <style>
@@ -26,5 +25,4 @@
   transition: 0.5s;
   transition-property: border-left, border-right, box-shadow;
 }
-
 </style>
