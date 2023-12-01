@@ -59,7 +59,7 @@ export default {
   <div class="edit">
     <form class="input-field"><!-- action="#" method="post" -->
       <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Chancel</button>
+        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
         <button class="btn_save" type="submit" @click="saveEdit">Save</button>
       </span>
       
@@ -129,7 +129,7 @@ export default {
 
     .input_descript {
         height: revert;
-    }
+            }
 
     .user-input:hover, .user-input:focus, .user-input:active{
       background-color: #2C2C2E;
