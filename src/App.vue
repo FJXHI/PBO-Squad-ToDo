@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import NavigationBar from './components/NavigationBar.vue';
+import NavigationBar from './components/NavigationBar.vue'
 import SearchBar from './components/SearchBar.vue'
-
 </script>
 
 <template>
   <header>
     <SearchBar />
-      <!-- <nav> -->
-      <!-- <RouterLink to="/settings">Settings</RouterLink>-->
-      <!-- </nav> -->
+    <!-- <nav> -->
+    <!-- <RouterLink to="/settings">Settings</RouterLink>-->
+    <!-- </nav> -->
   </header>
   <main class="full-width">
     <RouterView />
@@ -23,14 +22,12 @@ import SearchBar from './components/SearchBar.vue'
 </template>
 
 <style scoped>
-
 main {
   position: absolute;
   margin-top: 38px;
   left: 0px;
   right: 0px;
 }
-
 
 /*
 .logo {
@@ -109,4 +106,5 @@ footer {
   /* Stick it to the bottom */
   width: 100%;
   /* Full width */
-}</style>
+}
+</style>

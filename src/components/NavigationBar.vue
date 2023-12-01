@@ -1,49 +1,53 @@
 <script lang="ts">
-import NavigationButton from '@/components/NavigationButton.vue';
+import NavigationButton from '@/components/NavigationButton.vue'
 export default {
-    components: {
-        NavigationButton,
-    },
-    methods: {
+  components: {
+    NavigationButton
+  },
+  methods: {
     homeClicked() {
-        console.log("homeClicked");
-        this.$router.push('/');
+      console.log('homeClicked')
+      this.$router.push('/')
     },
     homeAdd() {
-        console.log("addClicked");
-        this.$router.push('/edit');
+      console.log('addClicked')
+      this.$router.push('/edit')
     },
     menuClicked() {
-        console.log("menuClicked");
+      console.log('menuClicked')
     }
-  },
-};
+  }
+}
 </script>
 
 <template>
-<div class="nav">
+  <div class="nav">
     <div class="nav-field">
-        <span class="nav_btn"><!-- .svg file ready, but the icon's are to big -->
-            <NavigationButton class="btn_home" @click=homeClicked btnType="@/assets/home_icon.png"> 
-                <img alt="" class="icon" src="@/assets/icon_density_small.png"/>
-            </NavigationButton>      
-            <NavigationButton class="btn_add" @click=homeAdd btnType="@/assets/add_icon.png">
-                <img alt="" class="icon" src="@/assets/icon_add.png"/>
-            </NavigationButton>
-            <NavigationButton class="btn_overview" @click=menuClicked btnType="@/assets/menu_icon.png">
-                <img alt="" class="icon" src="@/assets/icon_grid_view.png"/>
-            </NavigationButton>
-        </span>
+      <span class="nav_btn"
+        ><!-- .svg file ready, but the icon's are to big -->
+        <NavigationButton class="btn_home" @click="homeClicked" btnType="@/assets/home_icon.png">
+          <img alt="" class="icon" src="@/assets/icon_density_small.png" />
+        </NavigationButton>
+        <NavigationButton class="btn_add" @click="homeAdd" btnType="@/assets/add_icon.png">
+          <img alt="" class="icon" src="@/assets/icon_add.png" />
+        </NavigationButton>
+        <NavigationButton
+          class="btn_overview"
+          @click="menuClicked"
+          btnType="@/assets/menu_icon.png"
+        >
+          <img alt="" class="icon" src="@/assets/icon_grid_view.png" />
+        </NavigationButton>
+      </span>
     </div>
-</div>
+  </div>
 </template>
 
 <style>
-
 .nav_btn {
   display: flex;
   justify-content: space-around;
-  background-color: #1C1C1E;
+  background-color: #1c1c1e;
 }
 
 .nav_btn button {
@@ -52,7 +56,7 @@ export default {
   width: 40%;
   height: 55px;
   color: #fff;
-  background-color: #1C1C1E;
+  background-color: #1c1c1e;
   font-size: 8px;
   letter-spacing: 1px;
   border-radius: 5px;
@@ -62,5 +66,4 @@ export default {
   padding: 15px 32px;
   margin: 4px 2px;
 }
-
 </style>
