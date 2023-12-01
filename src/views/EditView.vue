@@ -1,22 +1,32 @@
 <script lang="ts">
+import { useToDoEntryStore } from '@/stores/entry_store'
 //import editButton from '@/components/editButton.vue';
+const store = useToDoEntryStore();
+
 export default {
   /*components: {
         editButton,
     },*/
-  data() {
-    return {
-      inputTitle: '',
-      inputDate: '',
-      inputDuration: '',
-      inputDurationUnit: 'minutes',
-      inputDescript: '',
-      inputTags: ''
-    }
-  },
-  methods: {
+    data() {
+        return {
+            inputTitle: '',
+            inputDate: '',
+            inputDuration: '',
+            inputDurationUnit: 'm',
+            inputDescript: '',
+            inputTags: ''
+        }
+    },
+    methods: {
     saveEdit() {
-      if (this.inputTitle.trim() !== '') {
+      if(this.inputTitle.trim() !== ''){
+        store.addEntry({
+          title: this.inputTitle,
+          description: this.inputDescript,
+          color: {r: 255, g: 59, b: 48},
+          deadline: new Date(this.inputDate),
+          expenditure: {time: parseInt(this.inputDuration), unit: this.inputDurationUnit}
+        });
         const output = {
           title: this.inputTitle,
           date: this.inputDate,
@@ -83,10 +93,10 @@ export default {
         min="0"
       />
       <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-        <option value="minutes">minutes</option>
-        <option value="hours">hours</option>
-        <option value="days">days</option>
-        <option value="weeks">weeks</option>
+          <option value="m">minutes</option>
+          <option value="h">hours</option>
+          <option value="d">days</option>
+          <option value="w">weeks</option>
       </select>
 
       <label for="id_tags">Tags:</label>

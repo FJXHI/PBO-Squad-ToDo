@@ -12,9 +12,9 @@ export default {
     homeAdd() {
       console.log('addClicked')
       this.$router.push('/edit')
-    },
-    menuClicked() {
-      console.log('menuClicked')
+    moreClicked() {
+      console.log('moreClicked')
+      this.$router.push('/more')
     }
   }
 }
@@ -22,20 +22,15 @@ export default {
 
 <template>
   <div class="nav">
-    <div class="nav-field">
-      <span class="nav_btn"
-        ><!-- .svg file ready, but the icon's are to big -->
-        <NavigationButton class="btn_home" @click="homeClicked" btnType="@/assets/home_icon.png">
+      <span class="nav_bar">
+        <!-- .svg file ready, but the icon's are to big -->
+        <NavigationButton class="btn_home" @click="homeClicked">
           <img alt="" class="icon" src="@/assets/icon_density_small.png" />
         </NavigationButton>
-        <NavigationButton class="btn_add" @click="homeAdd" btnType="@/assets/add_icon.png">
+        <NavigationButton class="btn_add" @click="homeAdd">
           <img alt="" class="icon" src="@/assets/icon_add.png" />
         </NavigationButton>
-        <NavigationButton
-          class="btn_overview"
-          @click="menuClicked"
-          btnType="@/assets/menu_icon.png"
-        >
+        <NavigationButton class="btn_overview" @click="moreClicked">
           <img alt="" class="icon" src="@/assets/icon_grid_view.png" />
         </NavigationButton>
       </span>
@@ -43,27 +38,10 @@ export default {
   </div>
 </template>
 
-<style>
-.nav_btn {
+.nav_bar {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   background-color: #1c1c1e;
-}
-
-.nav_btn button {
-  outline: none;
-  border: none;
-  width: 40%;
-  height: 55px;
-  color: #fff;
-  background-color: #1c1c1e;
-  font-size: 8px;
-  letter-spacing: 1px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.5s;
-  transition-property: border-left, border-right, box-shadow;
-  padding: 15px 32px;
-  margin: 4px 2px;
 }
 </style>

@@ -24,7 +24,7 @@ import SearchBar from './components/SearchBar.vue'
 <style scoped>
 main {
   position: absolute;
-  margin-top: 38px;
+  /* margin-top: 38px; */
   left: 0px;
   right: 0px;
 }
@@ -100,7 +100,7 @@ nav a:first-of-type {
 } */
 
 footer {
-  position: fixed;
+  position: absolute;
   /* Keeps it in place */
   bottom: 0;
   /* Stick it to the bottom */

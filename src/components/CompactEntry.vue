@@ -30,47 +30,32 @@ function changeExpand() {
   isExpanded.value = !isExpanded.value
 }
 </script>
+    <article ref="entryBox" :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']" :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
+        <!-- <div class="center-vertically"> -->
+        <div>
+            <h1 class="entry-title">{{ entry?.title ? entry?.title : "" }}</h1>
+            <section class="info-box-1d">
+                <template v-if="entry.deadline != undefined">
+                    <span class="entry-text"><img src="@/assets/icon_deadline.png" /> {{ entry?.deadline.toLocaleDateString()
+                    }}</span>
+                </template>
+                <template v-if="entry.expenditure != undefined">
+                    <span class="entry-text"><img src="@/assets/icon_timespan.png" /> {{ entry.expenditure.time + " " + entry.expenditure.unit }}</span>
 
-<template>
-  <article
-    ref="entryBox"
-    :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
-    :style="'--element-color: ' + backgoundColor"
-    @click="changeExpand()"
-  >
-    <!-- <article ref="entryBox"
-        :class="['rounded-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
-        :style="'--element-color: ' + backgoundColor" @click="changeExpand()">
--->
-    <!-- <div class="center-vertically"> -->
-    <div>
-      <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
-      <section class="info-box-1d">
-        <template v-if="entry.deadline != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_deadline.png" />
-            {{ entry?.deadline.toLocaleDateString() }}</span
-          >
-        </template>
-        <template v-if="entry.expenditure != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_timespan.png" />
-            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}</span
-          >
-        </template>
-      </section>
-      <template v-if="isExpanded && entry.description != undefined">
-        <p class="entry-text">{{ entry.description }}</p>
-      </template>
-      <span v-if="isExpanded">
-        <nav class="info-box-1d">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-        </nav>
-      </span>
-    </div>
-  </article>
+                </template>
+            </section>
+            <template v-if="isExpanded && entry.description != undefined">
+                <p class="entry-text">{{ entry.description }}</p>
+            </template>
+            <span v-if="isExpanded">
+                <nav class="info-box-1d">
+                    <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg"/></button>
+                    <button @click="console.log('editClicked')"><img src="@/assets/icon_edit.svg"/></button>
+                    <button @click="console.log('doneClicked')"><img src="@/assets/icon_done.svg"/></button>
+                </nav>
+            </span>
+        </div>
+    </article>
 </template>
 
 <style scoped>
@@ -86,17 +71,25 @@ function changeExpand() {
   padding-left: 0;
 }
 
-.info-box-1d span,
-button {
-  flex: 0 0 50%;
+.info-box-1d span {
+    flex: 0 0 50
+}
+
+.info-box-1d button {
+    flex: 0 0 calc(100%/3);
+    border: none;
+    background-color: transparent;
+}
+
+.info-box-1d button:hover, button:focus, button:active {
+    background-color: grey;
 }
 
 .entry-text {
   font-size: 16pt;
 }
 
-.entry-box {
-  /*border-radius: 15px;*/
+.entry-box 
 
   background-color: var(--element-color);
 
