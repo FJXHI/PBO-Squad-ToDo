@@ -25,7 +25,7 @@ export default {
           description: this.inputDescript,
           color: {r: 255, g: 59, b: 48},
           deadline: new Date(this.inputDate),
-          expenditure: {time: this.inputDuration, unit: this.inputDurationUnit}
+          expenditure: {time: parseInt(this.inputDuration), unit: this.inputDurationUnit}
         });
         const output = {
           title: this.inputTitle,
