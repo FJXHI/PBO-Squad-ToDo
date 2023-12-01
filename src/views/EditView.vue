@@ -124,14 +124,14 @@ form {
 
 label {
   color: #808080;
-  font-size: 18px;
+  font-size: 14pt;
   margin-left: 6px;
   display: block;
 }
 
 .user-input {
   font-size: 14pt;
-  height: 35px;
+  height: 2.1em;
   width: 100%;
   background: #1c1c1e;
   color: #808080;
