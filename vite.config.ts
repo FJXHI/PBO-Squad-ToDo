@@ -29,21 +29,21 @@ export default defineConfig({
           }
         ]
       },
-      // workbox: {
-      //   runtimeCaching: [
-      //     {
-      //       urlPattern: /\/assets\/.*\.(svg|png)$/, // Regular expression to match SVG files in assets folder
-      //       handler: 'CacheFirst',
-      //       options: {
-      //         cacheName: 'svg-icons',
-      //         expiration: {
-      //           maxEntries: 10,
-      //           maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 30 Days
-      //         },
-      //       },
-      //     },
-      //   ],
-      // }
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: /\/assets\/.*\.svg$/, // Regular expression to match SVG files in assets folder
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'svg-icons',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 30 Days
+              },
+            },
+          },
+        ],
+      }
 
     }),
   ],
