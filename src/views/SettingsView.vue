@@ -5,10 +5,10 @@
 </template>
 
 <style scoped>
-  .settings {
-    margin-left: 5%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.settings {
+  margin-left: 5%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
 </style>
