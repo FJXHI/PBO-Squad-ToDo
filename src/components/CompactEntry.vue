@@ -42,9 +42,9 @@ function changeExpand() {
             </template>
             <span v-if="isExpanded">
                 <nav class="info-box-1d">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
+                    <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg"/></button>
+                    <button @click="console.log('editClicked')"><img src="@/assets/icon_edit.svg"/></button>
+                    <button @click="console.log('doneClicked')"><img src="@/assets/icon_done.svg"/></button>
                 </nav>
             </span>
         </div>
@@ -64,8 +64,18 @@ function changeExpand() {
     padding-left: 0;
 }
 
-.info-box-1d span, button {
+.info-box-1d span {
     flex: 0 0 50%;
+}
+
+.info-box-1d button {
+    flex: 0 0 calc(100%/3);
+    border: none;
+    background-color: transparent;
+}
+
+.info-box-1d button:hover, button:focus, button:active {
+    background-color: grey;
 }
 
 .entry-text {
