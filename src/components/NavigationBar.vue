@@ -12,6 +12,7 @@ export default {
     homeAdd() {
       console.log('addClicked')
       this.$router.push('/edit')
+    },
     moreClicked() {
       console.log('moreClicked')
       this.$router.push('/more')
@@ -22,6 +23,7 @@ export default {
 
 <template>
   <div class="nav">
+    <div class="nav-field">
       <span class="nav_bar">
         <!-- .svg file ready, but the icon's are to big -->
         <NavigationButton class="btn_home" @click="homeClicked">
@@ -38,6 +40,7 @@ export default {
   </div>
 </template>
 
+<style>
 .nav_bar {
   display: flex;
   justify-content: space-around;
