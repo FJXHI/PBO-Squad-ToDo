@@ -24,10 +24,17 @@ import SearchBar from './components/SearchBar.vue'
 <style scoped>
 main {
   position: absolute;
-  /* margin-top: 38px; */
   left: 0px;
   right: 0px;
-  padding-bottom: 8vh;
+  margin-top: 4vh; /* Space for searchbar */
+  padding-bottom: 8vh; /* Space for navbar */
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 /*

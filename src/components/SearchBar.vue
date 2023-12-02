@@ -16,7 +16,7 @@ export default {
       <input class="search-input" type="text" placeholder="Search" />
     </div>
     <button @click="settingsClick" class="button">
-      <img src="@/assets/icon_settings.svg" style="width: 100%; height: 100%" />
+      <img src="@/assets/icon_settings.svg" />
     </button>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
   outline: none;
   border: none;
 
+  margin-right: 1vh;
   width: 100%;
   color: hsl(0, 0%, 50%);
   font-size: 16pt;
@@ -38,17 +39,14 @@ export default {
 
 .search {
   display: flex;
-  width: 0;
   flex-grow: 1;
   background-color: #1c1c1e;
   border-radius: 10px;
-  margin-right: 1vh;
 }
 
 .topbar {
   display: flex;
   height: 8vh;
-  width: 100%;
   padding: 1vh;
 }
 
@@ -56,9 +54,18 @@ button {
   background: none;
   outline: none;
   border: none;
-
-  height: 6vh;
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  margin-left: 1vh;
   width: 6vh;
-  padding: 0;
+  justify-content: center;
+}
+
+button img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
+  width: 80%;
 }
 </style>
