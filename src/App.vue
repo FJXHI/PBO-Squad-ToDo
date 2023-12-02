@@ -27,6 +27,7 @@ main {
   /* margin-top: 38px; */
   left: 0px;
   right: 0px;
+  padding-bottom: 8vh;
 }
 
 /*
@@ -100,7 +101,7 @@ nav a:first-of-type {
 } */
 
 footer {
-  position: absolute;
+  position: fixed;
   /* Keeps it in place */
   bottom: 0;
   /* Stick it to the bottom */
