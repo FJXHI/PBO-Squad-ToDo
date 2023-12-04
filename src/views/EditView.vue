@@ -16,13 +16,13 @@ export default {
   methods: {
     saveEdit() {
       if (this.inputTitle.trim() !== '') {
-
         //fix this
-        let deadlineDate;
-        if (this.inputDate.trim() !== '') { //not add empty date
-          deadlineDate = new Date(this.inputDate);
+        let deadlineDate
+        if (this.inputDate.trim() !== '') {
+          //not add empty date
+          deadlineDate = new Date(this.inputDate)
         } else {
-          deadlineDate = new Date(''); //fix this: if deadline Empty not showing "invalid date"
+          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
         }
         //if (this.inputDuration.trim() !== '') {} //not add empty duration
 
@@ -41,7 +41,7 @@ export default {
           description: this.inputDescript,
           tags: this.inputTags
         }
-        console.log(Output);
+        console.log(Output)
         this.clearInput() // Clear Inputs after Save
       }
     },
@@ -57,15 +57,15 @@ export default {
       this.inputDescript = ''
       this.inputTags = ''
     },
-    
+
     //Function to fill input with data
     fillinput(dataObject) {
-      this.inputTitle = dataObject.title;
-      this.inputDate = dataObject.date;
-      this.inputDuration = dataObject.duration;
-      this.inputDurationUnit = dataObject.unit;
-      this.inputDescript = dataObject.description;
-      this.inputTags = dataObject.tags;
+      this.inputTitle = dataObject.title
+      this.inputDate = dataObject.date
+      this.inputDuration = dataObject.duration
+      this.inputDurationUnit = dataObject.unit
+      this.inputDescript = dataObject.description
+      this.inputTags = dataObject.tags
     }
   }
 }
@@ -73,7 +73,7 @@ export default {
 
 <template>
   <div class="edit">
-    <form class="input-field" @submit.prevent="saveEdit"> 
+    <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
         <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>

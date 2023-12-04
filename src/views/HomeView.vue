@@ -4,7 +4,6 @@ import CompactEntry from '../components/CompactEntry.vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()
-
 </script>
 
 <template>

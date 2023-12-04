@@ -50,7 +50,6 @@ store.addEntry({
   description: 'Test 8 Description',
   color: { r: 162, g: 132, b: 94 }
 })
-
 </script>
 
 <template>
