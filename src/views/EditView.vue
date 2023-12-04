@@ -59,7 +59,7 @@ export default {
     <form class="input-field">
       <!-- action="#" method="post" -->
       <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Chancel</button>
+        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
         <button class="btn_save" type="submit" @click="saveEdit">Save</button>
       </span>
 
@@ -84,20 +84,22 @@ export default {
       />
 
       <label for="id_duration">Estimated duration:</label>
-      <input
-        class="user-input duration"
-        type="number"
-        id="id_duration"
-        v-model="inputDuration"
-        placeholder="Estimated duration"
-        min="0"
-      />
-      <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-        <option value="m">minutes</option>
-        <option value="h">hours</option>
-        <option value="d">days</option>
-        <option value="w">weeks</option>
-      </select>
+      <div style="display: flex">
+        <input
+          class="user-input duration"
+          type="number"
+          id="id_duration"
+          v-model="inputDuration"
+          placeholder="Estimated duration"
+          min="0"
+        />
+        <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
+          <option value="m">minutes</option>
+          <option value="h">hours</option>
+          <option value="d">days</option>
+          <option value="w">weeks</option>
+        </select>
+      </div>
 
       <label for="id_tags">Tags:</label>
       <input class="user-input" type="text" id="id_tags" v-model="inputTags" placeholder="Tags" />
@@ -122,14 +124,14 @@ form {
 
 label {
   color: #808080;
-  font-size: 18px;
+  font-size: 14pt;
   margin-left: 6px;
   display: block;
 }
 
 .user-input {
-  font-size: 16px;
-  height: 35px;
+  font-size: 14pt;
+  height: 2.1em;
   width: 100%;
   background: #1c1c1e;
   color: #808080;
