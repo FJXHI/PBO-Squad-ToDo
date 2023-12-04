@@ -1,12 +1,8 @@
 <script lang="ts">
 import { useToDoEntryStore } from '@/stores/entry_store'
-//import editButton from '@/components/editButton.vue';
 const store = useToDoEntryStore()
 
 export default {
-  /*components: {
-        editButton,
-    },*/
   data() {
     return {
       inputTitle: '',
@@ -20,14 +16,24 @@ export default {
   methods: {
     saveEdit() {
       if (this.inputTitle.trim() !== '') {
+
+        //fix this
+        let deadlineDate;
+        if (this.inputDate.trim() !== '') { //not add empty date
+          deadlineDate = new Date(this.inputDate);
+        } else {
+          deadlineDate = new Date(''); //fix this: if deadline Empty not showing "invalid date"
+        }
+        //if (this.inputDuration.trim() !== '') {} //not add empty duration
+
         store.addEntry({
           title: this.inputTitle,
           description: this.inputDescript,
           color: { r: 255, g: 59, b: 48 },
-          deadline: new Date(this.inputDate),
+          deadline: deadlineDate,
           expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
         })
-        const output = {
+        const Output = {
           title: this.inputTitle,
           date: this.inputDate,
           duration: this.inputDuration,
@@ -35,7 +41,7 @@ export default {
           description: this.inputDescript,
           tags: this.inputTags
         }
-        console.log(output)
+        console.log(Output);
         this.clearInput() // Clear Inputs after Save
       }
     },
@@ -47,8 +53,19 @@ export default {
       this.inputTitle = ''
       this.inputDate = ''
       this.inputDuration = ''
+      this.inputDurationUnit = 'm'
       this.inputDescript = ''
       this.inputTags = ''
+    },
+    
+    //Function to fill input with data
+    fillinput(dataObject) {
+      this.inputTitle = dataObject.title;
+      this.inputDate = dataObject.date;
+      this.inputDuration = dataObject.duration;
+      this.inputDurationUnit = dataObject.unit;
+      this.inputDescript = dataObject.description;
+      this.inputTags = dataObject.tags;
     }
   }
 }
@@ -56,11 +73,11 @@ export default {
 
 <template>
   <div class="edit">
-    <form class="input-field">
-      <!-- action="#" method="post" -->
+    <form class="input-field" @submit.prevent="saveEdit"> 
+      <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
         <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
-        <button class="btn_save" type="submit" @click="saveEdit">Save</button>
+        <button class="btn_save" type="submit">Save</button>
       </span>
 
       <label for="id_title">Title:</label>
@@ -80,7 +97,6 @@ export default {
         id="id_date"
         v-model="inputDate"
         placeholder="Date"
-        required
       />
 
       <label for="id_duration">Estimated duration:</label>
