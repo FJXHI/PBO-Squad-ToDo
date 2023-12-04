@@ -41,18 +41,21 @@ function changeExpand() {
     <div>
       <h1 class="entry-title">{{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}</h1>
       <section class="info-box-1d">
-        <template v-if="entry.todoEntry.deadline != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_deadline.png" />
-            {{ entry?.todoEntry.deadline.toLocaleDateString() }}</span
-          >
+        <template v-if="entry.deadline != undefined">
+          <span class="entry-text">
+            {{ entry?.deadline.toLocaleDateString() }}
+          </span>
         </template>
-        <!-- <br v-if="entry.deadline != undefined && entry.expenditure != undefined"> -->
-        <template v-if="entry.todoEntry.expenditure != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_timespan.png" />
-            {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}</span
-          >
+        <span
+          class="entry-text"
+          v-if="entry.deadline != undefined && entry.expenditure != undefined"
+        >
+          -
+        </span>
+        <template v-if="entry.expenditure != undefined">
+          <span class="entry-text">
+            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+          </span>
         </template>
       </section>
       <template v-if="isExpanded && entry.todoEntry.description != undefined">
@@ -71,29 +74,23 @@ function changeExpand() {
 
 <style scoped>
 .entry-title {
-  font-size: 14pt;
+  font-size: 4vw;
   font-weight: 600;
 }
 
 .entry-text {
-  font-size: 8pt;
+  font-size: 2.5vw;
 }
 
 .info-box-1d span {
   flex: 0 0 50%;
 }
 
-.entry-text img {
-  width: 14px;
-  height: auto;
-}
-
 .entry-box {
-  width: 300px;
-  flex: 0 0 33%;
   background-color: var(--element-color);
   color: #000000;
   padding: 1%;
+  height: 100%;
 }
 
 .info-btn button {
