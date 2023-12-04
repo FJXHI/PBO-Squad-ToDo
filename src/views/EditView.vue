@@ -27,11 +27,13 @@ export default {
         //if (this.inputDuration.trim() !== '') {} //not add empty duration
 
         store.addEntry({
-          title: this.inputTitle,
-          description: this.inputDescript,
-          color: { r: 255, g: 59, b: 48 },
-          deadline: deadlineDate,
-          expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit },
+          todoEntry: {
+            title: this.inputTitle,
+            description: this.inputDescript,
+            color: { r: 255, g: 59, b: 48 },
+            deadline: deadlineDate,
+            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
+          },
           isVisible: true
         })
         const dataObject = {
