@@ -8,7 +8,7 @@ const store = useToDoEntryStore()
 
 <template>
   <main class="more">
-    <div v-for="entry in store.entries.slice(0, 21)" :key="entry.title">
+    <div v-for="entry in store.entries.slice(0, 30)" :key="entry.title">
       <SquareEntry :entry="entry" :style="'margin-bottom: 5px'"></SquareEntry>
     </div>
   </main>
@@ -16,8 +16,10 @@ const store = useToDoEntryStore()
 
 <style>
 .more {
-  display: flex;
-  flex-wrap: wrap;
-  /* 3 Elements per row? */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 </style>
