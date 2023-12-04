@@ -89,8 +89,6 @@ function changeExpand() {
 }
 
 .entry-box {
-  width: 300px;
-  flex: 0 0 33%;
   background-color: var(--element-color);
   color: #000000;
   padding: 1%;
