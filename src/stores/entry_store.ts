@@ -23,6 +23,8 @@ export interface ToDoEntry {
   flatPriority?: number
 
   tags?: Tag[]
+
+  isVisible: boolean
 }
 
 export const useToDoEntryStore = defineStore('todoEntries', () => {
