@@ -42,17 +42,17 @@ function changeExpand() {
       <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
       <section class="info-box-1d">
         <template v-if="entry.deadline != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_deadline.png" />
-            {{ entry?.deadline.toLocaleDateString() }}</span
-          >
+          <span class="entry-text">
+            {{ entry?.deadline.toLocaleDateString() }}
+          </span>
         </template>
-        <!-- <br v-if="entry.deadline != undefined && entry.expenditure != undefined"> -->
+        <span class="entry-text" v-if="entry.deadline != undefined && entry.expenditure != undefined">
+          -
+        </span>
         <template v-if="entry.expenditure != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_timespan.png" />
-            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}</span
-          >
+          <span class="entry-text">
+            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+          </span>
         </template>
       </section>
       <template v-if="isExpanded && entry.description != undefined">
