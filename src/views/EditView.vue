@@ -84,21 +84,21 @@ export default {
       />
 
       <label for="id_duration">Estimated duration:</label>
-      <div style="display: flex;">
-      <input
-        class="user-input duration"
-        type="number"
-        id="id_duration"
-        v-model="inputDuration"
-        placeholder="Estimated duration"
-        min="0"
-      />
-      <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-        <option value="m">minutes</option>
-        <option value="h">hours</option>
-        <option value="d">days</option>
-        <option value="w">weeks</option>
-      </select>
+      <div style="display: flex">
+        <input
+          class="user-input duration"
+          type="number"
+          id="id_duration"
+          v-model="inputDuration"
+          placeholder="Estimated duration"
+          min="0"
+        />
+        <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
+          <option value="m">minutes</option>
+          <option value="h">hours</option>
+          <option value="d">days</option>
+          <option value="w">weeks</option>
+        </select>
       </div>
 
       <label for="id_tags">Tags:</label>
