@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { search } from '@/services/searchService'
 
 const router = useRouter()
-let input = ref('')
+let input = ref<string>('')
 
 function handleInputChange() {
   search(input.value)
