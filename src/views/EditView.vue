@@ -91,13 +91,7 @@ export default {
       />
 
       <label for="id_date">Date:</label>
-      <input
-        class="user-input"
-        type="date"
-        id="id_date"
-        v-model="inputDate"
-        placeholder="Date"
-      />
+      <input class="user-input" type="date" id="id_date" v-model="inputDate" placeholder="Date" />
 
       <label for="id_duration">Estimated duration:</label>
       <div style="display: flex">
