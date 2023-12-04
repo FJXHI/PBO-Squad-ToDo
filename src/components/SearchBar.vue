@@ -1,11 +1,17 @@
-<script lang="ts">
-export default {
-  methods: {
-    settingsClick() {
-      console.log('Settings button clicked')
-      this.$router.push('/settings')
-    }
-  }
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { search } from '@/services/searchService'
+
+const router = useRouter()
+let input = ref<string>('')
+
+function handleInputChange() {
+  search(input.value)
+}
+
+function settingsClick() {
+  router.push('/settings')
 }
 </script>
 
@@ -13,9 +19,15 @@ export default {
   <div class="topbar">
     <div class="search">
       <img src="@/assets/icon_search.svg" class="search-icon" />
-      <input class="search-input" type="text" placeholder="Search" />
+      <input
+        class="search-input"
+        type="text"
+        v-model="input"
+        placeholder="Search"
+        @input="handleInputChange()"
+      />
     </div>
-    <button @click="settingsClick" class="button">
+    <button @click="settingsClick()" class="button">
       <img src="@/assets/icon_settings.svg" />
     </button>
   </div>

@@ -17,13 +17,13 @@ let isExpanded = ref(false)
 let entry: ToDoEntry = props.entry
 let backgoundColor =
   'rgba(' +
-  entry.color.r.toString() +
+  entry.todoEntry.color.r.toString() +
   ',' +
-  entry.color.g.toString() +
+  entry.todoEntry.color.g.toString() +
   ',' +
-  entry.color.b.toString() +
+  entry.todoEntry.color.b.toString() +
   ',' +
-  (entry.color.a ? entry.color.a : 255) +
+  (entry.todoEntry.color.a ? entry.todoEntry.color.a : 255) +
   ')'
 
 function changeExpand() {
@@ -39,27 +39,23 @@ function changeExpand() {
     @click="changeExpand()"
   >
     <div>
-      <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
+      <h1 class="entry-title">{{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}</h1>
       <section class="info-box-1d">
-        <template v-if="entry.deadline != undefined">
+        <template v-if="entry.todoEntry.deadline != undefined">
           <span class="entry-text">
-            {{ entry?.deadline.toLocaleDateString() }}
+            {{ entry?.todoEntry.deadline.toLocaleDateString() }}
           </span>
         </template>
-        <span
-          class="entry-text"
-          v-if="entry.deadline != undefined && entry.expenditure != undefined"
-        >
-          -
-        </span>
-        <template v-if="entry.expenditure != undefined">
-          <span class="entry-text">
-            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
-          </span>
+        <!-- <br v-if="entry.deadline != undefined && entry.expenditure != undefined"> -->
+        <template v-if="entry.todoEntry.expenditure != undefined">
+          <span class="entry-text"
+            ><img src="@/assets/icon_timespan.png" />
+            {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}</span
+          >
         </template>
       </section>
-      <template v-if="isExpanded && entry.description != undefined">
-        <p class="entry-text">{{ entry.description }}</p>
+      <template v-if="isExpanded && entry.todoEntry.description != undefined">
+        <p class="entry-text">{{ entry.todoEntry.description }}</p>
       </template>
       <span v-if="isExpanded">
         <nav class="info-btn">

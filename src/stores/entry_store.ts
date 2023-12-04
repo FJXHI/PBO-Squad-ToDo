@@ -12,7 +12,7 @@ export interface Tag {
   tagColor: Color
 }
 
-export interface ToDoEntry {
+export interface ToDoEntryInfo {
   title: string
   description?: string
   color: Color
@@ -23,6 +23,11 @@ export interface ToDoEntry {
   flatPriority?: number
 
   tags?: Tag[]
+}
+
+export interface ToDoEntry {
+  todoEntry: ToDoEntryInfo
+  isVisible: boolean
 }
 
 export const useToDoEntryStore = defineStore('todoEntries', () => {
