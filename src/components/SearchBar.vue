@@ -16,7 +16,7 @@ export default {
       <input class="search-input" type="text" placeholder="Search" />
     </div>
     <button @click="settingsClick" class="button">
-      <img src="@/assets/icon_settings.svg" style="width: 100%; height: 100%" />
+      <img src="/src/assets/icon_settings.svg" style="width: 100%; height: 100%" />
     </button>
   </div>
 </template>

@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      includeAssets: ['favicon.ico', 'logo-512x512.png', 'logo.svg', 'src/assets/*.svg', 'src/assets/*.png'],
+      includeAssets: ['favicon.ico', 'logo-512x512.png', 'logo.svg', 'src/assets/*.svg'],
       manifest: {
         name: 'PBO-ToDo',
         short_name: 'PBO-ToDo',
@@ -28,22 +28,23 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
-      },
-      workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: /\/assets\/.*\.svg$/, // Regular expression to match SVG files in assets folder
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'svg-icons',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 30 Days
-              },
-            },
-          },
-        ],
       }
+
+      // workbox: {
+      //   runtimeCaching: [
+      //     {
+      //       urlPattern: /\/assets\/.*\.svg$/, // Regular expression to match SVG files in assets folder
+      //       handler: 'CacheFirst',
+      //       options: {
+      //         cacheName: 'svg-icons',
+      //         expiration: {
+      //           maxEntries: 10,
+      //           maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 30 Days
+      //         },
+      //       },
+      //     },
+      //   ],
+      // }
 
     }),
   ],
