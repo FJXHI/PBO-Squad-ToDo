@@ -33,7 +33,7 @@ export default {
           deadline: deadlineDate,
           expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
         })
-        const Output = {
+        const dataObject = {
           title: this.inputTitle,
           date: this.inputDate,
           duration: this.inputDuration,
@@ -41,7 +41,7 @@ export default {
           description: this.inputDescript,
           tags: this.inputTags
         }
-        console.log(Output)
+        console.log(dataObject)
         this.clearInput() // Clear Inputs after Save
       }
     },
@@ -56,17 +56,18 @@ export default {
       this.inputDurationUnit = 'm'
       this.inputDescript = ''
       this.inputTags = ''
-    },
+    }
 
     //Function to fill input with data
-    fillinput(dataObject) {
+    /*
+    fillinput(dataObject) { //Parameter 'dataObject' implicitly has an 'any' type.
       this.inputTitle = dataObject.title
       this.inputDate = dataObject.date
       this.inputDuration = dataObject.duration
       this.inputDurationUnit = dataObject.unit
       this.inputDescript = dataObject.description
       this.inputTags = dataObject.tags
-    }
+    }*/
   }
 }
 </script>
