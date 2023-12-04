@@ -4,7 +4,6 @@ import SquareEntry from '../components/SquareEntry.vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()
-
 </script>
 
 <template>
@@ -21,5 +20,4 @@ const store = useToDoEntryStore()
   flex-wrap: wrap;
   /* 3 Elements per row? */
 }
-
 </style>
