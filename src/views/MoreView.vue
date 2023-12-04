@@ -9,7 +9,7 @@ const store = useToDoEntryStore()
 <template>
   <main class="more">
     <div v-for="entry in store.entries.slice(0, 30)" :key="entry.title">
-      <SquareEntry :entry="entry" :style="'margin-bottom: 5px'" class="grid-item"></SquareEntry>
+      <SquareEntry :entry="entry" :style="'margin-bottom: 5px'"></SquareEntry>
     </div>
   </main>
 </template>
@@ -20,12 +20,6 @@ const store = useToDoEntryStore()
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3px;
   margin-left: 3px;
-  margin-right: 3px ;
+  margin-right: 3px;
 }
-
-.grid-item {
-  width: 100%;
-  height: 100%;
-}
-
 </style>

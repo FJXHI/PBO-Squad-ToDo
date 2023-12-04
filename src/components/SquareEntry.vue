@@ -46,7 +46,10 @@ function changeExpand() {
             {{ entry?.deadline.toLocaleDateString() }}
           </span>
         </template>
-        <span class="entry-text" v-if="entry.deadline != undefined && entry.expenditure != undefined">
+        <span
+          class="entry-text"
+          v-if="entry.deadline != undefined && entry.expenditure != undefined"
+        >
           -
         </span>
         <template v-if="entry.expenditure != undefined">
@@ -71,27 +74,23 @@ function changeExpand() {
 
 <style scoped>
 .entry-title {
-  font-size: 14pt;
+  font-size: 4vw;
   font-weight: 600;
 }
 
 .entry-text {
-  font-size: 8pt;
+  font-size: 2.5vw;
 }
 
 .info-box-1d span {
   flex: 0 0 50%;
 }
 
-.entry-text img {
-  width: 14px;
-  height: auto;
-}
-
 .entry-box {
   background-color: var(--element-color);
   color: #000000;
   padding: 1%;
+  height: 100%;
 }
 
 .info-btn button {
