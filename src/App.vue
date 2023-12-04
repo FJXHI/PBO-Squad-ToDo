@@ -7,48 +7,56 @@ import { useToDoEntryStore } from '@/stores/entry_store'
 const store = useToDoEntryStore()
 
 store.addEntry({
-  title: 'Test Entry 1',
-  description: 'Test 1 Description',
+  title: 'Meeting with Client',
+  description: 'Discuss project requirements and timeline',
   color: { r: 255, g: 59, b: 48 },
   deadline: new Date('2024-01-07'),
-  expenditure: { time: 5, unit: 'h' }
+  expenditure: { time: 5, unit: 'h' },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 2',
-  description: 'Test 2 Description',
+  title: 'Prepare Presentation',
+  description: 'Create slides for upcoming presentation',
   color: { r: 50, g: 173, b: 230 },
-  expenditure: { time: 30, unit: 'min' }
+  expenditure: { time: 30, unit: 'min' },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 3',
-  description: 'Test 3 Description',
+  title: 'Research New Feature',
+  description: 'Explore options for implementing a new feature',
   color: { r: 162, g: 132, b: 94 },
-  deadline: new Date('2027-09-29')
+  deadline: new Date('2027-09-29'),
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 4',
-  description: 'Test 4 Description',
-  color: { r: 52, g: 199, b: 89 }
+  title: 'Bug Fixing',
+  description: 'Investigate and resolve reported bugs',
+  color: { r: 52, g: 199, b: 89 },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 5',
-  description: 'Test 5 Description',
-  color: { r: 255, g: 204, b: 0 }
+  title: 'Code Refactoring',
+  description: 'Improve code quality and maintainability',
+  color: { r: 255, g: 204, b: 0 },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 6',
-  description: 'Test 6 Description',
-  color: { r: 255, g: 59, b: 48 }
+  title: 'Testing Phase',
+  description: 'Perform comprehensive testing of the application',
+  color: { r: 255, g: 59, b: 48 },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 7',
-  description: 'Test 7 Description',
-  color: { r: 50, g: 173, b: 230 }
+  title: 'UI Design Review',
+  description: 'Evaluate and enhance user interface design',
+  color: { r: 50, g: 173, b: 230 },
+  isVisible: true
 })
 store.addEntry({
-  title: 'Test Entry 8',
-  description: 'Test 8 Description',
-  color: { r: 162, g: 132, b: 94 }
+  title: 'Documentation Fix',
+  description: 'Update project documentation with recent changes',
+  color: { r: 162, g: 132, b: 94 },
+  isVisible: true
 })
 </script>
 
