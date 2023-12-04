@@ -31,7 +31,8 @@ export default {
           description: this.inputDescript,
           color: { r: 255, g: 59, b: 48 },
           deadline: deadlineDate,
-          expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
+          expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit },
+          isVisible: true
         })
         const dataObject = {
           title: this.inputTitle,
