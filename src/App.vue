@@ -98,7 +98,7 @@ main {
   position: absolute;
   left: 0px;
   right: 0px;
-  margin-top: 4vh; /* Space for searchbar */
+  margin-top: 3vh; /* Space for searchbar */
   padding-bottom: 8vh; /* Space for navbar */
 }
 
