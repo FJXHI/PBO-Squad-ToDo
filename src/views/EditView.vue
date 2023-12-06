@@ -3,5 +3,5 @@ import InputForm from '@/components/TheInputForm.vue'
 </script>
 
 <template>
-    <InputForm />
+  <InputForm />
 </template>
