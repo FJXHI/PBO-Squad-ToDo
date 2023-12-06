@@ -9,9 +9,9 @@ export default {
       console.log('homeClicked')
       this.$router.push('/')
     },
-    homeAdd() {
+    addClicked() {
       console.log('addClicked')
-      this.$router.push('/edit')
+      this.$router.push('/add')
     },
     moreClicked() {
       console.log('moreClicked')
@@ -26,13 +26,13 @@ export default {
     <div class="nav-field">
       <span class="nav_bar">
         <NavigationButton class="btn_home" @click="homeClicked">
-          <img alt="" class="icon" src="@/assets/icon_density_small.svg" />
+          <img alt="Home" class="icon" src="@/assets/icon_density_small.svg" />
         </NavigationButton>
-        <NavigationButton class="btn_add" @click="homeAdd">
-          <img alt="" class="icon" src="@/assets/icon_add.svg" />
+        <NavigationButton class="btn_add" @click="addClicked">
+          <img alt="Add" class="icon" src="@/assets/icon_add.svg" />
         </NavigationButton>
         <NavigationButton class="btn_overview" @click="moreClicked">
-          <img alt="" class="icon" src="@/assets/icon_grid_view.svg" />
+          <img alt="More" class="icon" src="@/assets/icon_grid_view.svg" />
         </NavigationButton>
       </span>
     </div>
