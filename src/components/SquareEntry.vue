@@ -46,12 +46,16 @@ function changeExpand() {
             {{ entry?.todoEntry.deadline.toLocaleDateString() }}
           </span>
         </template>
-        <!-- <br v-if="entry.deadline != undefined && entry.expenditure != undefined"> -->
+        <span
+          class="entry-text"
+          v-if="entry.deadline != undefined && entry.expenditure != undefined"
+        >
+          -
+        </span>
         <template v-if="entry.todoEntry.expenditure != undefined">
-          <span class="entry-text"
-            ><img src="@/assets/icon_timespan.png" />
-            {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}</span
-          >
+          <span class="entry-text">
+            {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}
+          </span>
         </template>
       </section>
       <template v-if="isExpanded && entry.todoEntry.description != undefined">
