@@ -48,7 +48,7 @@ function changeExpand() {
         </template>
         <span
           class="entry-text"
-          v-if="entry.deadline != undefined && entry.expenditure != undefined"
+          v-if="entry.todoEntry.deadline != undefined && entry.todoEntry.expenditure != undefined"
         >
           -
         </span>
