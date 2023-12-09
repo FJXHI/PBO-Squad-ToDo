@@ -42,7 +42,7 @@ function settingsClick() {
   margin-right: 1vh;
   width: 100%;
   color: hsl(0, 0%, 50%);
-  font-size: 14pt;
+  font-size: 15pt;
 }
 
 .search-icon {
