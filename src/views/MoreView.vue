@@ -8,7 +8,10 @@ const store = useToDoEntryStore()
 
 <template>
   <main class="more">
-    <div v-for="entry in store.entries.slice(0, 30)" :key="entry.todoEntry.title">
+    <div
+      v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 30)"
+      :key="entry.todoEntry.title"
+    >
       <SquareEntry :entry="entry" :style="'margin-bottom: 5px'"></SquareEntry>
     </div>
   </main>
