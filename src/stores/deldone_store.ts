@@ -23,7 +23,7 @@ export interface ToDoEntryInfo {
   flatPriority?: number
 
   tags?: Tag[]
-  }
+}
 
 export interface ToDoEntry {
   todoEntry: ToDoEntryInfo
