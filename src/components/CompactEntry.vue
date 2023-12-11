@@ -2,7 +2,7 @@
 import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import { useDeleteStore } from '@/stores/delete_done_store'
-import { removeAndAddEntry }  from '@/services/DeleteDoneService'
+import { removeAndAddEntry } from '@/services/DeleteDoneService'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive, defineComponent } from 'vue'
