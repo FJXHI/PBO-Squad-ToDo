@@ -4,6 +4,10 @@ import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import { useDelDoneStore } from '@/stores/deldone_store'
+
+const store = useToDoEntryStore()
+const deldoneStore = useDelDoneStore()
 
 const props = defineProps({
   entry: {
@@ -33,19 +37,22 @@ function changeExpand() {
 
 function delClicked(entry: ToDoEntry) {
   console.log('delClicked')
-  const store: Store<"todoEntries"> = useToDoEntryStore()
+  console.log(entry.todoEntry)
+  deldoneStore.addEntry(entry)
+  //isdeleted: true
   store.removeEntry(entry)
 }
 
 function editClicked() {
   console.log('editClicked')
-
 }
 
-function doneClicked() {
+function doneClicked(entry: ToDoEntry) {
   console.log('doneClicked')
+  console.log(entry.todoEntry)
+  deldoneStore.addEntry(entry)
+  store.removeEntry(entry)
 }
-
 </script>
 
 <template>
@@ -82,7 +89,7 @@ function doneClicked() {
         <nav class="info-btn">
           <button @click="delClicked(entry)"><img src="@/assets/icon_delete.svg" /></button>
           <button @click="editClicked()"><img src="@/assets/icon_edit.svg" /></button>
-          <button @click="doneClicked()"><img src="@/assets/icon_done.svg" /></button>
+          <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
         </nav>
       </span>
     </div>

@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
+import { useToDoEntryStore } from '@/stores/entry_store'
+import { useDelDoneStore } from '@/stores/deldone_store'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
+
+const store = useToDoEntryStore()
+const deldoneStore = useDelDoneStore()
 
 const props = defineProps({
   entry: {
@@ -28,6 +33,25 @@ let backgoundColor =
 
 function changeExpand() {
   isExpanded.value = !isExpanded.value
+}
+
+function delClicked(entry: ToDoEntry) {
+  console.log('delClicked')
+  console.log(entry.todoEntry)
+  deldoneStore.addEntry(entry)
+  //isdeleted: true
+  store.removeEntry(entry)
+}
+
+function editClicked() {
+  console.log('editClicked')
+}
+
+function doneClicked(entry: ToDoEntry) {
+  console.log('doneClicked')
+  console.log(entry.todoEntry)
+  deldoneStore.addEntry(entry)
+  store.removeEntry(entry)
 }
 </script>
 
@@ -60,9 +84,9 @@ function changeExpand() {
       </template>
       <span v-if="isExpanded">
         <nav class="info-box-1d">
-          <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg" /></button>
-          <button @click="console.log('editClicked')"><img src="@/assets/icon_edit.svg" /></button>
-          <button @click="console.log('doneClicked')"><img src="@/assets/icon_done.svg" /></button>
+          <button @click="delClicked(entry)"><img src="@/assets/icon_delete.svg" /></button>
+          <button @click="editClicked()"><img src="@/assets/icon_edit.svg" /></button>
+          <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
         </nav>
       </span>
     </div>
