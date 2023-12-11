@@ -44,5 +44,5 @@ export const useToDoEntryStore = defineStore('todoEntries', () => {
     }
   }
 
-  return { entries, addEntry }
+  return { entries, addEntry, removeEntry }
 })
