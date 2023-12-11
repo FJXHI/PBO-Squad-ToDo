@@ -42,11 +42,11 @@ function settingsClick() {
   margin-right: 1vh;
   width: 100%;
   color: hsl(0, 0%, 50%);
-  font-size: 16pt;
+  font-size: 15pt;
 }
 
 .search-icon {
-  padding: 1vh;
+  padding: 4px;
 }
 
 .search {
@@ -58,8 +58,8 @@ function settingsClick() {
 
 .topbar {
   display: flex;
-  height: 8vh;
-  padding: 1vh;
+  height: 6vh;
+  padding: 6px;
 }
 
 button {
@@ -69,7 +69,7 @@ button {
   background-color: #1c1c1e;
   border-radius: 10px;
   margin-left: 1vh;
-  width: 6vh;
+  width: 5vh;
   justify-content: center;
 }
 
@@ -77,7 +77,7 @@ button img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
 }
 </style>
