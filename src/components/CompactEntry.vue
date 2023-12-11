@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { useDelDoneStore } from '@/stores/deldone_store'
+import { useDeleteStore } from '@/stores/delete_done_store'
+import { removeAndAddEntry }  from '@/services/DeleteDoneService'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, defineComponent } from 'vue'
 
 const store = useToDoEntryStore()
-const deldoneStore = useDelDoneStore()
 
 const props = defineProps({
   entry: {
@@ -35,12 +35,10 @@ function changeExpand() {
   isExpanded.value = !isExpanded.value
 }
 
-function delClicked(entry: ToDoEntry) {
+function delClicked(entry: ToDoEntry): void {
   console.log('delClicked')
-  console.log(entry.todoEntry)
-  deldoneStore.addEntry(entry)
-  //isdeleted: true
-  store.removeEntry(entry)
+  console.log(entry)
+  removeAndAddEntry(entry)
 }
 
 function editClicked() {
@@ -50,8 +48,8 @@ function editClicked() {
 function doneClicked(entry: ToDoEntry) {
   console.log('doneClicked')
   console.log(entry.todoEntry)
-  deldoneStore.addEntry(entry)
-  store.removeEntry(entry)
+  //deldoneStore.addEntry(entry.todoEntry)
+  //store.removeEntry(entry)
 }
 </script>
 
