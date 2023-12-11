@@ -23,7 +23,7 @@ export interface ToDoEntryInfo {
   flatPriority?: number
 
   tags?: Tag[]
-}
+  }
 
 export interface ToDoEntry {
   todoEntry: ToDoEntryInfo
@@ -31,7 +31,7 @@ export interface ToDoEntry {
   isdeleted: boolean
 }
 
-export const useToDoEntryStore = defineStore('todoEntries', () => {
+export const useDelDoneStore = defineStore('todoEntries', () => {
   const entries = ref<ToDoEntry[]>([])
 
   function addEntry(entry: ToDoEntry): void {
