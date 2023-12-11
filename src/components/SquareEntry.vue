@@ -4,10 +4,10 @@ import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { useDelDoneStore } from '@/stores/deldone_store'
+//import { useDelDoneStore } from '@/stores/done_store'
 
 const store = useToDoEntryStore()
-const deldoneStore = useDelDoneStore()
+//const deldoneStore = useDelDoneStore()
 
 const props = defineProps({
   entry: {
@@ -38,7 +38,7 @@ function changeExpand() {
 function delClicked(entry: ToDoEntry) {
   console.log('delClicked')
   console.log(entry.todoEntry)
-  deldoneStore.addEntry(entry)
+  //deldoneStore.addEntry(entry)
   //isdeleted: true
   store.removeEntry(entry)
 }
@@ -50,7 +50,7 @@ function editClicked() {
 function doneClicked(entry: ToDoEntry) {
   console.log('doneClicked')
   console.log(entry.todoEntry)
-  deldoneStore.addEntry(entry)
+  //deldoneStore.addEntry(entry)
   store.removeEntry(entry)
 }
 </script>
