@@ -6,6 +6,7 @@ import { removeAndAddEntry } from '@/services/DeleteDoneService'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive, defineComponent } from 'vue'
+import InputForm from '@/components/TheInputForm.vue'
 
 const store = useToDoEntryStore()
 
@@ -18,6 +19,7 @@ const props = defineProps({
 
 const entryBox = ref(null)
 let isExpanded = ref(false)
+let showEntryInput = ref(false)
 
 let entry: ToDoEntryInfo = props.entry.todoEntry
 let backgoundColor =
@@ -41,8 +43,10 @@ function delClicked(entry: ToDoEntry): void {
   removeAndAddEntry(entry)
 }
 
-function editClicked() {
+function editClicked(entry: ToDoEntry) {
   console.log('editClicked')
+  //showEntryInput = ref(true);
+  showEntryInput.value = !showEntryInput.value
 }
 
 function doneClicked(entry: ToDoEntry) {
@@ -83,10 +87,14 @@ function doneClicked(entry: ToDoEntry) {
       <span v-if="isExpanded">
         <nav class="info-box-1d">
           <button @click="delClicked(entry)"><img src="@/assets/icon_delete.svg" /></button>
-          <button @click="editClicked()"><img src="@/assets/icon_edit.svg" /></button>
+          <button @click="editClicked(entry)"><img src="@/assets/icon_edit.svg" /></button>
           <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
         </nav>
       </span>
+      <div class="Entry-InputForm" v-if="showEntryInput">
+        <InputForm :entry="entry" />
+        <!-- ERR: Entry not sent to Input Form -->
+      </div>
     </div>
   </article>
 </template>
