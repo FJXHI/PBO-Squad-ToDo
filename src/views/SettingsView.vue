@@ -1,3 +1,37 @@
+<script lang="ts">
+function applyColor() {
+            // Das Farbeneingabefeld auswählen
+            //var colorPicker = document.getElementById("colorPicker");
+            alert("Test");
+            
+            //alert(colorPicker.value);
+            // Den ausgewählten Farbwert erhalten
+            
+            // Den Farbwert in einem Element anzeigen
+          }
+
+function updateColor() {
+            // Das Farbeneingabefeld auswählen
+            var colorPicker = document.getElementById("colorPicker");
+            // Den ausgewählten Farbwert erhalten
+            var selectedColor = colorPicker.value;
+            alert(selectedColor);
+            // Den Farbwert in einem Element anzeigen
+            var selectedColorElement = document.getElementById("selectedColor");
+            selectedColorElement.textContent = selectedColor;
+        }
+
+
+//colorPicker.addEventListener("input", updateFirst, false);
+//colorPicker.addEventListener("change", watchColorPicker, false);
+/*
+function watchColorPicker(event) {
+  
+}
+*/
+</script>
+
+
 <template>
   <div class="settings">
     <div class="line">
@@ -11,6 +45,10 @@
     </div>
     <div class="line">
       <span class="text">Tags</span>
+      <input class="incolor" type="color" id="colorPicker" v-model="inputColor">
+      <!--<button class="btn" @click=applyColor()>Save</button>
+      <p class="text" >Die ausgewählte Farbe ist: <span id="selectedColor">#ff0000</span></p>
+-->
     </div>
     <div class="line">
       <span class="text">Switch</span>
