@@ -42,15 +42,22 @@ function changeExpand() {
 
 let deleteWidth = ref(0);
 let tickWidth = ref(0);
+let swipeDir = ref(0);
 const {direction, isSwiping, lengthX, lengthY} = useSwipe(
   entryBox,
   {
     passive: true,
     onSwipe(e: TouchEvent){
-      if (lengthX.value < 0)
-        deleteWidth.value = Math.abs(lengthX.value)
-      else
-        tickWidth.value = Math.abs(lengthX.value)
+      if (swipeDir.value == 0)
+        swipeDir.value = lengthX.value > 0 ? 1 : -1;
+
+        // check for swipe in same direction
+        if (lengthX.value * swipeDir.value >= 0){
+          if (lengthX.value < 0)
+            deleteWidth.value = Math.abs(lengthX.value)
+          else
+            tickWidth.value = Math.abs(lengthX.value)
+        }
     },
     onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
       // check for enough swipe for tick/delete
@@ -58,6 +65,7 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
 
       // reset swipe chanes if not
       deleteWidth.value = tickWidth.value = 0;
+      swipeDir.value = 0
     }
   }
 )
