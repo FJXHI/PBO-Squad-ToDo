@@ -29,12 +29,7 @@ defineProps({
             <slot name="body">default body</slot>
           </div>
 
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="closeModal()">OK</button>
-            </slot>
-          </div>
+          <button class="btn_cancel" type="button" @click="closeModal()">Close</button>
         </div>
       </div>
     </div>
@@ -72,15 +67,31 @@ defineProps({
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
 }
 
 .modal-body {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
+.btn_cancel {
+  color: #d05050;
+
+  font-size: 14pt;
+  height: 40px;
+  width: calc(50% - 5px);
+  min-width: 6em;
+  background: #2c2c2e;
+  letter-spacing: 1px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn_cancel:hover,
+.btn_cancel:active,
+.btn_cancel:focus {
+  background-color: #d05050;
+  color: #fff;
 }
 
 /*
