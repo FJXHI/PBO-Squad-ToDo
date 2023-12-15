@@ -14,6 +14,7 @@ function handleSortChange() {
 
 function handleSortOrderChange() {
   const option = searchStore.sortOptions.find((option) => option.name == props.title)
+  // const option = searchStore.sortOptions
   if (option == undefined) {
     return
   }

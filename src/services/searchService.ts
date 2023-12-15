@@ -1,4 +1,5 @@
 import { useToDoEntryStore } from '@/stores/entry_store'
+import { useSearchStore } from '@/stores/search_store'
 
 export function search(query: string): void {
   const store = useToDoEntryStore()
@@ -20,4 +21,12 @@ export function search(query: string): void {
     entry.isVisible = containsTitle || containsDescription
     //entry.isVisible = contains ? true : false
   })
+}
+
+export function sortEntries(): void {
+  const store = useToDoEntryStore()
+  const entries = store.entries
+
+  const searchStore = useSearchStore()
+  const sortOptions = searchStore.sortOptions
 }
