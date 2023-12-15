@@ -14,7 +14,11 @@ const props = defineProps({
 })
 
 const entryBox = ref(null)
+const entryBoxSize = useElementSize(entryBox)
 let isExpanded = ref(false)
+
+const title = ref(null)
+const titleSize = useElementSize(title);
 
 const content = ref(null)
 const initialContentSize = {width: useElementSize(content).width, height: useElementSize(content).height}
@@ -64,8 +68,8 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
   <span class="horizontal-box stretch-horizontally">
     <!-- delete tooltip-->
     <aside class="delete-box restrict-size"
-      :style="`width: ${deleteWidth}px;`">
-      <img alt="" class="icon no-padding" src="@/assets/icon_delete.svg" />
+      :style="`display: flex; width: ${deleteWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
+      <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-height: ${titleSize.height.value}px`"/>
     </aside>
 
     <!-- main entry content -->
@@ -78,7 +82,7 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
         :style="`width: ${initialContentSize.width}px;
         `">
         <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
-        <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
+        <h1 ref="title" class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
             <span class="entry-text"
@@ -109,8 +113,8 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
 
     <!-- accept tooltip -->
     <aside class="tick-box restrict-size"
-      :style="`width: ${tickWidth}px;`">
-      <img alt="" class="icon no-padding" src="@/assets/icon_done.svg" />
+      :style="`display: flex; width: ${tickWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
+      <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-height: ${titleSize.height.value}px`"/>
     </aside>
 
   </span>
@@ -121,6 +125,12 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
 .entry-title {
   font-size: 27pt;
   font-weight: 600;
+}
+
+.center {
+  width: 100%;
+  margin: auto;
+  display: block;
 }
 
 .tick-box {
