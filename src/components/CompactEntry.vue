@@ -29,7 +29,9 @@ let backgoundColor =
   ')'
 
 function changeExpand() {
-  emit('collapse-others');
+  if (!isExpanded.value) {
+    emit('collapse-others');
+  }
   isExpanded.value = !isExpanded.value
 }
 </script>
