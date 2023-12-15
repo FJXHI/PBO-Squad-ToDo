@@ -2,9 +2,11 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { search } from '@/services/searchService'
+import FilterModal from './FilterModal.vue'
 
 const router = useRouter()
 let input = ref<string>('')
+let isOpen = ref<boolean>(false)
 
 function handleInputChange() {
   search(input.value)
@@ -12,6 +14,14 @@ function handleInputChange() {
 
 function settingsClick() {
   router.push('/settings')
+}
+
+function openModal() {
+  isOpen.value = true
+}
+
+function closeModal() {
+  isOpen.value = false
 }
 </script>
 
@@ -27,12 +37,13 @@ function settingsClick() {
         @input="handleInputChange()"
       />
     </div>
-    <button class="button">
-      <img src="@/assets/icon_filter.svg" alt="">
+    <button @click="openModal()" class="button">
+      <img src="@/assets/icon_filter.svg" alt="" />
     </button>
     <button @click="settingsClick()" class="button">
       <img src="@/assets/icon_settings.svg" />
     </button>
+    <FilterModal :is-open="isOpen" @close="closeModal()" ><template #body><div>asd</div></template></FilterModal>
   </div>
 </template>
 
@@ -82,5 +93,12 @@ button img {
   margin-right: auto;
   height: 90%;
   width: 90%;
+}
+
+.filter {
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  height: 6vh;
+  width: 100%;
 }
 </style>
