@@ -4,27 +4,8 @@ import SortSetting from './SortSetting.vue'
 
 const emit = defineEmits(['close', 'save', 'updateSort'])
 
-const filters = ref({
-  title: '',
-  description: '',
-  color: '',
-  deadline: '',
-  expenditure: '',
-  sort: []
-})
-
 function closeModal() {
   emit('close')
-}
-
-function updateSort(sortSetting: any) {
-  filters.value.sort = sortSetting
-  console.log(filters.value.sort)
-}
-
-function applyFilters() {
-  emit('updateSort', filters.value)
-  emit('save', filters.value)
 }
 
 const props = defineProps({
@@ -46,14 +27,14 @@ const props = defineProps({
           <div class="modal-body">
             <!--Sort input fields-->
             <h2>Sort by</h2>
-            <SortSetting title="Title" @sort-change="updateSort"></SortSetting>
-            <SortSetting title="Deadline" @sort-change="updateSort"></SortSetting>
-            <SortSetting title="Expenditure" @sort-change="updateSort"></SortSetting>
-            <SortSetting title="Last Added" @sort-change="updateSort"></SortSetting>
+            <SortSetting title="Title"></SortSetting>
+            <SortSetting title="Deadline"></SortSetting>
+            <SortSetting title="Expenditure"></SortSetting>
+            <SortSetting title="Last Added"></SortSetting>
           </div>
           <div class="button-wrapper">
             <button class="btn btn_cancel" type="button" @click="closeModal()">Discard</button>
-            <button class="btn btn_save" type="button" @click="applyFilters()">Apply</button>
+            <button class="btn btn_save" type="button" @click="closeModal()">Apply</button>
           </div>
         </div>
       </div>

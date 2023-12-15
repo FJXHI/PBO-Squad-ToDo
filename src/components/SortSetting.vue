@@ -1,41 +1,24 @@
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { useSearchStore } from '@/stores/search_store'
 
-const emit = defineEmits(['sortChange'])
+const searchStore = useSearchStore()
 
-// order: true = ascending, false = descending
-const sortOptions = ref([
-  { name: 'Title', value: false, sortOrder: false },
-  { name: 'Deadline', value: false, sortOrder: false },
-  { name: 'Expenditure', value: false, sortOrder: false },
-  { name: 'Last Added', value: false, sortOrder: false }
-])
-
-function handleSortChange(sortOption: string) {
-  sortOptions.value.forEach((option) => {
-    if (option.name === sortOption) {
-      option.value = !option.value
-    }
-  })
-  emit('sortChange', sortOptions.value)
-}
-
-function handleSortOrderChange(sortOption: string) {
-  sortOptions.value.forEach((option) => {
-    if (option.name === sortOption) {
-      option.sortOrder = !option.sortOrder
-    }
-  })
-  emit('sortChange', sortOptions.value)
-}
-
-function getSortIcon(title: string) {
-  const sortOption = sortOptions.value.find((option) => option.name === title)
-  if (sortOption?.sortOrder) {
-    return '/src/assets/icon_sort_ascending.svg'
-  } else {
-    return '/src/assets/icon_sort_descending.svg'
+function handleSortChange() {
+  const option = searchStore.sortOptions.find((option) => option.name == props.title)
+  if (option == undefined) {
+    return
   }
+
+  option.isActive = !option.isActive
+}
+
+function handleSortOrderChange() {
+  const option = searchStore.sortOptions.find((option) => option.name == props.title)
+  if (option == undefined) {
+    return
+  }
+
+  option.descending = !option.descending
 }
 
 const props = defineProps({
@@ -51,11 +34,11 @@ const props = defineProps({
     <span>{{ props.title }}</span>
     <div class="controls">
       <label class="switch">
-        <input type="checkbox" @input="handleSortChange('Title')" />
+        <input type="checkbox" @input="handleSortChange" />
         <span class="slider round"></span>
       </label>
-      <button class="sort-order" @click="handleSortOrderChange(props.title)">
-        <img :src="getSortIcon(props.title)" alt="" />
+      <button class="sort-order" @input="handleSortOrderChange">
+        <img src="@/assets/icon_filter.svg" alt="" />
       </button>
     </div>
   </div>

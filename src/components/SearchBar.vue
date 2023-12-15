@@ -6,7 +6,7 @@ import FilterModal from './FilterModal.vue'
 
 const router = useRouter()
 let input = ref<string>('')
-let isOpen = ref<boolean>(false)
+let isModalOpen = ref<boolean>(false)
 
 function handleInputChange() {
   search(input.value)
@@ -17,11 +17,11 @@ function settingsClick() {
 }
 
 function openModal() {
-  isOpen.value = true
+  isModalOpen.value = true
 }
 
 function closeModal() {
-  isOpen.value = false
+  isModalOpen.value = false
 }
 </script>
 
@@ -44,7 +44,7 @@ function closeModal() {
       <img src="@/assets/icon_settings.svg" />
     </button>
   </div>
-  <FilterModal :is-open="isOpen" @close="closeModal()" @save="closeModal()"> ></FilterModal>
+  <FilterModal :is-open="isModalOpen" @close="closeModal()" @save="closeModal()"> ></FilterModal>
 </template>
 
 <style scoped>
