@@ -79,7 +79,7 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
     <!-- delete box to the left of the main entry -->
     <aside class="delete-box restrict-size"
     :style="`display: flex; width: ${deleteWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
-      <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-height: ${titleSize.height.value}px`"/>
+      <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-height: ${entryBoxSize.height.value / 2}px`"/>
     </aside>
 
     <!-- main entry box -->
@@ -129,7 +129,7 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
     <!-- tick box to the right of the main entry  -->
     <aside class="tick-box restrict-size"
     :style="`display: flex; width: ${tickWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
-      <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-height: ${titleSize.height.value}px`"/>
+      <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-height: ${entryBoxSize.height.value / 2}px`"/>
     </aside>
 
   </span>
