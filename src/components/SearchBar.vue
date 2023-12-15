@@ -43,8 +43,8 @@ function closeModal() {
     <button @click="settingsClick()" class="button">
       <img src="@/assets/icon_settings.svg" />
     </button>
-    <FilterModal :is-open="isOpen" @close="closeModal()" ><template #body><div>asd</div></template></FilterModal>
   </div>
+  <FilterModal :is-open="isOpen" @close="closeModal()" @save="closeModal()"> ></FilterModal>
 </template>
 
 <style scoped>

@@ -1,11 +1,31 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import SortSetting from './SortSetting.vue'
 
-const message = ref('This is a modal popup')
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'save'])
 
-const closeModal = () => {
+const filters = ref({
+  title: '',
+  description: '',
+  color: '',
+  deadline: '',
+  expenditure: ''
+})
+
+// order: true = ascending, false = descending
+const sortOptions = ref([
+  { name: 'Title', value: false, order: true },
+  { name: 'Deadline', value: false, order: true },
+  { name: 'Expenditure', value: false, order: true },
+  { name: 'Last Added', value: false, order: true }
+])
+
+function closeModal() {
   emit('close')
+}
+
+function saveModal() {
+  emit('save', filters.value)
 }
 
 defineProps({
@@ -21,22 +41,22 @@ defineProps({
     <div v-if="isOpen" class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header">
-            <slot name="header">default header</slot>
-          </div>
-
           <div class="modal-body">
-            <slot name="body">default body</slot>
+            <!--Sort input fields-->
+            <h2>Sort by</h2>
+            <SortSetting title="Title"></SortSetting>
           </div>
-
-          <button class="btn_cancel" type="button" @click="closeModal()">Close</button>
+          <div class="button-wrapper">
+            <button class="btn btn_cancel" type="button" @click="closeModal()">Discard</button>
+            <button class="btn btn_save" type="button" @click="saveModal()">Apply</button>
+          </div>
         </div>
       </div>
     </div>
   </Transition>
 </template>
 
-<style>
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -65,17 +85,16 @@ defineProps({
   transition: all 0.3s ease;
 }
 
-.modal-header h3 {
-  margin-top: 0;
-}
-
 .modal-body {
-  margin: 20px 0;
 }
 
-.btn_cancel {
-  color: #d05050;
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
+.btn {
   font-size: 14pt;
   height: 40px;
   width: calc(50% - 5px);
@@ -87,6 +106,21 @@ defineProps({
   border-radius: 5px;
 }
 
+.btn_save {
+  color: #4caf50;
+}
+
+.btn_cancel {
+  color: #d05050;
+}
+
+.btn_save:hover,
+.btn_save:active,
+.btn_save:focus {
+  background-color: #4caf50;
+  color: #fff;
+}
+
 .btn_cancel:hover,
 .btn_cancel:active,
 .btn_cancel:focus {
@@ -94,14 +128,7 @@ defineProps({
   color: #fff;
 }
 
-/*
-   * The following styles are auto-applied to elements with
-   * transition="modal" when their visibility is toggled
-   * by Vue.js.
-   *
-   * You can easily play with the modal transition by editing
-   * these styles.
-   */
+/* Auto applied animation styles for Transition */
 
 .modal-enter-from {
   opacity: 0;
