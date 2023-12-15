@@ -22,6 +22,9 @@ function openModal() {
 
 function closeModal() {
   isModalOpen.value = false
+
+  
+
 }
 </script>
 

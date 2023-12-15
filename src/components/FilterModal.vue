@@ -8,6 +8,8 @@ function closeModal() {
   emit('close')
 }
 
+
+
 const props = defineProps({
   isOpen: {
     type: Boolean,
