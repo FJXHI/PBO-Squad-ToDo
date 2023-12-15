@@ -1,14 +1,114 @@
 <template>
   <div class="settings">
-    <h1>This is the settings page</h1>
+    <div class="line">
+      <span class="text">Text</span>
+      <button class="btn">Test</button>
+    </div>
+    <div class="line">
+      <span class="text">Text</span>
+      <button class="btn">Test</button>
+      <button class="btn">Test</button>
+    </div>
+    <div class="line">
+      <span class="text">Tags</span>
+    </div>
+    <div class="line">
+      <span class="text">Switch</span>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .settings {
-  margin-left: 5%;
-  min-height: 100vh;
+  margin-top: 4vh;
+  color: #808080;
+  padding: 1vh;
+}
+
+.line {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+  padding: 6px;
+  font-size: 14pt;
+}
+
+.text {
+  flex-grow: 1;
+}
+
+.settings .btn {
+  min-width: 10%;
+  background-color: #808080;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #808080;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #4caf50;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 15px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 </style>

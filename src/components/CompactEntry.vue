@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ToDoEntry } from '@/stores/entry_store'
+import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
@@ -23,7 +23,7 @@ const titleSize = useElementSize(title);
 const content = ref(null)
 const initialContentSize = {width: useElementSize(content).width, height: useElementSize(content).height}
 
-let entry: ToDoEntry = props.entry
+let entry: ToDoEntryInfo = props.entry.todoEntry
 let backgoundColor =
   'rgba(' +
   entry.color.r.toString() +

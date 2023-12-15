@@ -8,7 +8,10 @@ const store = useToDoEntryStore()
 
 <template>
   <main>
-    <div v-for="entry in store.entries.slice(0, 5)" :key="entry.title">
+    <div
+      v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 5)"
+      :key="entry.todoEntry.title"
+    >
       <CompactEntry :entry="entry" :style="'margin-bottom: 5px'"></CompactEntry>
     </div>
   </main>
