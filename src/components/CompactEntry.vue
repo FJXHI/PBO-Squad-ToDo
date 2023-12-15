@@ -4,6 +4,8 @@ import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
 
+const emit = defineEmits(['collapse-others'])
+
 const props = defineProps({
   entry: {
     type: Object as PropType<ToDoEntry>,
@@ -27,6 +29,7 @@ let backgoundColor =
   ')'
 
 function changeExpand() {
+  emit('collapse-others');
   isExpanded.value = !isExpanded.value
 }
 </script>
