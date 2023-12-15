@@ -27,6 +27,9 @@ function settingsClick() {
         @input="handleInputChange()"
       />
     </div>
+    <button class="button">
+      <img src="@/assets/icon_filter.svg" alt="">
+    </button>
     <button @click="settingsClick()" class="button">
       <img src="@/assets/icon_settings.svg" />
     </button>
