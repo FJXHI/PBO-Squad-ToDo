@@ -1,37 +1,40 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
+const emit = defineEmits(['sortChange'])
+
+// order: true = ascending, false = descending
 const sortOptions = ref([
-  { name: 'Title', value: false, sortOrder: 'descending' },
-  { name: 'Deadline', value: false, sortOrder: 'descending' },
-  { name: 'Expenditure', value: false, sortOrder: 'descending' },
-  { name: 'Last Added', value: false, sortOrder: 'descending' }
+  { name: 'Title', value: false, sortOrder: false },
+  { name: 'Deadline', value: false, sortOrder: false },
+  { name: 'Expenditure', value: false, sortOrder: false },
+  { name: 'Last Added', value: false, sortOrder: false }
 ])
 
 function handleSortChange(sortOption: string) {
   sortOptions.value.forEach((option) => {
     if (option.name === sortOption) {
       option.value = !option.value
-      option.sortOrder = option.value ? 'ascending' : 'descending'
     }
   })
+  emit('sortChange', sortOptions.value)
+}
+
+function handleSortOrderChange(sortOption: string) {
+  sortOptions.value.forEach((option) => {
+    if (option.name === sortOption) {
+      option.sortOrder = !option.sortOrder
+    }
+  })
+  emit('sortChange', sortOptions.value)
 }
 
 function getSortIcon(title: string) {
   const sortOption = sortOptions.value.find((option) => option.name === title)
-  if (sortOption?.sortOrder === 'ascending') {
+  if (sortOption?.sortOrder) {
     return '/src/assets/icon_sort_ascending.svg'
   } else {
     return '/src/assets/icon_sort_descending.svg'
-  }
-}
-
-function changeSortIcon(title: string) {
-  const sortOption = sortOptions.value.find((option) => option.name === title)
-  if (sortOption?.sortOrder === 'ascending') {
-    sortOption.sortOrder = 'descending'
-  } else {
-    sortOption.sortOrder = 'ascending'
   }
 }
 
@@ -51,7 +54,7 @@ const props = defineProps({
         <input type="checkbox" @input="handleSortChange('Title')" />
         <span class="slider round"></span>
       </label>
-      <button class="sort-order" @click="handleSortChange(props.title)">
+      <button class="sort-order" @click="handleSortOrderChange(props.title)">
         <img :src="getSortIcon(props.title)" alt="" />
       </button>
     </div>
@@ -78,10 +81,7 @@ const props = defineProps({
 .sort-order {
   height: 34px;
   background: none;
-  outline: none;
   border: none;
-  background-color: #1c1c1e;
-  border-radius: 10px;
   margin-left: 1vh;
   justify-content: center;
 }

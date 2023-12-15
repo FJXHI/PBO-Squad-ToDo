@@ -1,37 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import SortSetting from './SortSetting.vue'
 
-const emit = defineEmits(['close', 'save'])
+const emit = defineEmits(['close', 'save', 'updateSort'])
 
 const filters = ref({
   title: '',
   description: '',
   color: '',
   deadline: '',
-  expenditure: ''
+  expenditure: '',
+  sort: []
 })
-
-// order: true = ascending, false = descending
-const sortOptions = ref([
-  { name: 'Title', value: false, order: true },
-  { name: 'Deadline', value: false, order: true },
-  { name: 'Expenditure', value: false, order: true },
-  { name: 'Last Added', value: false, order: true }
-])
 
 function closeModal() {
   emit('close')
 }
 
-function saveModal() {
+function updateSort(sortSetting: any) {
+  filters.value.sort = sortSetting
+  console.log(filters.value.sort)
+}
+
+function applyFilters() {
+  emit('updateSort', filters.value)
   emit('save', filters.value)
 }
 
-defineProps({
+const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true
+  },
+  sortSetting: {
+    type: Array
   }
 })
 </script>
@@ -44,11 +46,14 @@ defineProps({
           <div class="modal-body">
             <!--Sort input fields-->
             <h2>Sort by</h2>
-            <SortSetting title="Title"></SortSetting>
+            <SortSetting title="Title" @sort-change="updateSort"></SortSetting>
+            <SortSetting title="Deadline" @sort-change="updateSort"></SortSetting>
+            <SortSetting title="Expenditure" @sort-change="updateSort"></SortSetting>
+            <SortSetting title="Last Added" @sort-change="updateSort"></SortSetting>
           </div>
           <div class="button-wrapper">
             <button class="btn btn_cancel" type="button" @click="closeModal()">Discard</button>
-            <button class="btn btn_save" type="button" @click="saveModal()">Apply</button>
+            <button class="btn btn_save" type="button" @click="applyFilters()">Apply</button>
           </div>
         </div>
       </div>
