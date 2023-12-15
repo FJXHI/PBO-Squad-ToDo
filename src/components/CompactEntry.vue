@@ -46,12 +46,14 @@ let swipeDir = ref(0);
 const {direction, isSwiping, lengthX, lengthY} = useSwipe(
   entryBox,
   {
+    // dont change this to false -> prevent click event
     passive: true,
     onSwipe(e: TouchEvent){
       if (swipeDir.value == 0)
         swipeDir.value = lengthX.value > 0 ? 1 : -1;
 
         // check for swipe in same direction
+        // -> only do things if swipe diretion for ongoing swipe hasnt changed
         if (lengthX.value * swipeDir.value >= 0){
           if (lengthX.value < 0)
             deleteWidth.value = Math.abs(lengthX.value)
@@ -60,54 +62,59 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
         }
     },
     onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
-      // check for enough swipe for tick/delete
+      // check for "enough swipe" for tick/delete
       // do stuff if critera is met
 
-      // reset swipe chanes if not
+      // reset swipe changes if not
       deleteWidth.value = tickWidth.value = 0;
       swipeDir.value = 0
     }
   }
 )
-
 </script>
 
 <template>
   <span class="horizontal-box stretch-horizontally">
-    <!-- delete tooltip-->
+    
+    <!-- delete box to the left of the main entry -->
     <aside class="delete-box restrict-size"
-      :style="`display: flex; width: ${deleteWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
+    :style="`display: flex; width: ${deleteWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
       <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-height: ${titleSize.height.value}px`"/>
     </aside>
 
-    <!-- main entry content -->
+    <!-- main entry box -->
     <article
     ref="entryBox"
     :class="['entry-box', isExpanded ? 'detail-height' : 'compact-height']"
     :style="`--element-color: ${backgoundColor};`"
     @click="changeExpand()">
+
+      <!-- div holding the content -->
       <div ref="content" 
-        :style="`width: ${initialContentSize.width}px;
-        `">
-        <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
+      :style="`width: ${initialContentSize.width}px;`">   <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
         <h1 ref="title" class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
+
+        <!-- row for deadline and expenditure -->
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
-            <span class="entry-text"
-              ><img src="@/assets/icon_deadline.png" />
-              {{ entry?.deadline.toLocaleDateString() }}</span
-            >
+            <span class="entry-text">
+              <img src="@/assets/icon_deadline.png" />
+              {{ entry?.deadline.toLocaleDateString() }}
+            </span>
           </template>
           <template v-if="entry.expenditure != undefined">
-            <span class="entry-text"
-              ><img src="@/assets/icon_timespan.png" />
-              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}</span
-            >
+            <span class="entry-text">
+              <img src="@/assets/icon_timespan.png" />
+              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+            </span>
           </template>
         </section>
+
         <template v-if="isExpanded && entry.description != undefined">
           <p class="entry-text">{{ entry.description }}</p>
         </template>
+
+        <!-- action buttons -->
         <span v-if="isExpanded">
           <nav class="info-box-1d">
             <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg" /></button>
@@ -119,9 +126,9 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
 
     </article>
 
-    <!-- accept tooltip -->
+    <!-- tick box to the right of the main entry  -->
     <aside class="tick-box restrict-size"
-      :style="`display: flex; width: ${tickWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
+    :style="`display: flex; width: ${tickWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
       <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-height: ${titleSize.height.value}px`"/>
     </aside>
 
