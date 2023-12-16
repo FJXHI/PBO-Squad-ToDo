@@ -65,7 +65,11 @@ function doneClicked(entry: ToDoEntry) {
     @click="changeExpand()"
   >
     <!-- <div class="center-vertically"> -->
-    <div>
+    <div class="Entry-InputForm" v-if="showEntryInput">
+      <InputForm :entry="entry" />
+      <!-- ERR: Entry not sent to Input Form -->
+    </div>
+    <div v-if="!showEntryInput">
       <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
       <section class="info-box-1d">
         <template v-if="entry.deadline != undefined">
@@ -91,10 +95,6 @@ function doneClicked(entry: ToDoEntry) {
           <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
         </nav>
       </span>
-      <div class="Entry-InputForm" v-if="showEntryInput">
-        <InputForm :entry="entry" />
-        <!-- ERR: Entry not sent to Input Form -->
-      </div>
     </div>
   </article>
 </template>
