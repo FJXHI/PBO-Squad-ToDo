@@ -9,8 +9,6 @@ interface SortOptions {
 }
 
 export const useSearchStore = defineStore('searchSettings', () => {
-
-
   const sortOptions = ref<SortOptions>({
     Title: { isActive: true, isDescending: true },
     Deadline: { isActive: false, isDescending: true },
