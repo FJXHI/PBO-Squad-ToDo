@@ -24,10 +24,8 @@ function handleSortActiveChange() {
 
   if (currentStatus) {
     const activeOptions = Object.values(searchStore.sortOptions).filter((option) => option.isActive)
-    console.log(activeOptions)
 
     if (activeOptions.length == 1) {
-      console.log('ret')
       return
     }
   }
@@ -56,6 +54,7 @@ const props = defineProps({
     required: true
   }
 })
+
 </script>
 
 <template>
