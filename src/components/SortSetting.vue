@@ -1,25 +1,53 @@
+s
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/search_store'
+import { computed } from 'vue'
 
 const searchStore = useSearchStore()
 
-function handleSortChange() {
-  const option = searchStore.sortOptions.find((option) => option.name == props.title)
-  if (option == undefined) {
-    return
+/**
+ * Computed property that determines if the item is ticked.
+ * @returns {boolean} True if the item is ticked, false otherwise.
+ */
+const isTicked = computed(() => {
+  const option = searchStore.sortOptions[props.title]
+  return option ? option.isActive : false
+})
+
+/**
+ * This function first deactivates eevery sort,
+ * and then activates the corresponding sort,
+ * as only one sort is allowed to be active at a time
+ */
+function handleSortActiveChange() {
+  const currentStatus = searchStore.sortOptions[props.title].isActive
+
+  if (currentStatus) {
+    const activeOptions = Object.values(searchStore.sortOptions).filter((option) => option.isActive)
+    console.log(activeOptions)
+
+    if (activeOptions.length == 1) {
+      console.log('ret')
+      return
+    }
   }
 
-  option.isActive = !option.isActive
+  Object.keys(searchStore.sortOptions).forEach((key) => {
+    searchStore.sortOptions[key].isActive = false
+  })
+
+  searchStore.sortOptions[props.title].isActive = !currentStatus
+  console.log(searchStore.sortOptions)
 }
 
 function handleSortOrderChange() {
-  const option = searchStore.sortOptions.find((option) => option.name == props.title)
-  // const option = searchStore.sortOptions
-  if (option == undefined) {
+  const option = searchStore.sortOptions[props.title]
+  if (!option) {
     return
   }
 
-  option.descending = !option.descending
+  option.isDescending = !option.isDescending
+  console.log(option.isDescending)
 }
 
 const props = defineProps({
@@ -35,11 +63,11 @@ const props = defineProps({
     <span>{{ props.title }}</span>
     <div class="controls">
       <label class="switch">
-        <input type="checkbox" @input="handleSortChange" />
+        <input type="checkbox" :checked="isTicked" @input="handleSortActiveChange" />
         <span class="slider round"></span>
       </label>
       <button class="sort-order" @input="handleSortOrderChange">
-        <img src="@/assets/icon_filter.svg" alt="" />
+        <img src="@/assets/icon_sort_descending.svg" alt="" />
       </button>
     </div>
   </div>
@@ -66,7 +94,6 @@ const props = defineProps({
   height: 34px;
   background: none;
   border: none;
-  margin-left: 1vh;
   justify-content: center;
 }
 </style>

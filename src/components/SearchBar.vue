@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { search } from '@/services/searchService'
+import { search, sortEntries } from '@/services/searchService'
 import FilterModal from './FilterModal.vue'
 
 const router = useRouter()
@@ -23,8 +23,7 @@ function openModal() {
 function closeModal() {
   isModalOpen.value = false
 
-  
-
+  sortEntries()
 }
 </script>
 
@@ -47,7 +46,7 @@ function closeModal() {
       <img src="@/assets/icon_settings.svg" />
     </button>
   </div>
-  <FilterModal :is-open="isModalOpen" @close="closeModal()" @save="closeModal()"> ></FilterModal>
+  <FilterModal :is-open="isModalOpen" @close="closeModal()"> ></FilterModal>
 </template>
 
 <style scoped>

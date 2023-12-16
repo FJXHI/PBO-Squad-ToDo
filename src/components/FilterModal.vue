@@ -2,13 +2,11 @@
 import { ref, defineProps } from 'vue'
 import SortSetting from './SortSetting.vue'
 
-const emit = defineEmits(['close', 'save', 'updateSort'])
+const emit = defineEmits(['close'])
 
-function closeModal() {
+function close() {
   emit('close')
 }
-
-
 
 const props = defineProps({
   isOpen: {
@@ -32,11 +30,11 @@ const props = defineProps({
             <SortSetting title="Title"></SortSetting>
             <SortSetting title="Deadline"></SortSetting>
             <SortSetting title="Expenditure"></SortSetting>
-            <SortSetting title="Last Added"></SortSetting>
+            <SortSetting title="LastAdded"></SortSetting>
           </div>
           <div class="button-wrapper">
-            <button class="btn btn_cancel" type="button" @click="closeModal()">Discard</button>
-            <button class="btn btn_save" type="button" @click="closeModal()">Apply</button>
+            <button class="btn btn_cancel" type="button" @click="close()">Discard</button>
+            <button class="btn btn_save" type="button" @click="close()">Apply</button>
           </div>
         </div>
       </div>
