@@ -22,6 +22,6 @@ function closeView() {
 </script>
 
 <template>
-  <InputForm @closeaction="closeView()"/>
+  <InputForm @closeaction="closeView()" />
   <button @click="closeView()">Close</button>
 </template>

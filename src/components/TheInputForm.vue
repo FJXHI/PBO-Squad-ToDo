@@ -93,7 +93,6 @@ export default defineComponent({
 */
 const store = useToDoEntryStore()
 
-
 export default {
   data() {
     return {
@@ -171,8 +170,6 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <template>
