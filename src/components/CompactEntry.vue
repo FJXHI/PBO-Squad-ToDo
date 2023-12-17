@@ -4,8 +4,6 @@ import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
 
-const emit = defineEmits(['collapse-others'])
-
 const props = defineProps({
   entry: {
     type: Object as PropType<ToDoEntry>,
@@ -13,57 +11,57 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['collapse-others'])
 const entryBox = ref(null)
-let isExpanded = ref(false)
 
-let entry: ToDoEntryInfo = props.entry.todoEntry
+let entry: ToDoEntry = props.entry
 let backgoundColor =
   'rgba(' +
-  entry.color.r.toString() +
+  entry.todoEntry.color.r.toString() +
   ',' +
-  entry.color.g.toString() +
+  entry.todoEntry.color.g.toString() +
   ',' +
-  entry.color.b.toString() +
+  entry.todoEntry.color.b.toString() +
   ',' +
-  (entry.color.a ? entry.color.a : 255) +
+  (entry.todoEntry.color.a ? entry.todoEntry.color.a : 255) +
   ')'
 
 function changeExpand() {
-  if (!isExpanded.value) {
+  if (!entry.isExpanded) {
     emit('collapse-others');
   }
-  isExpanded.value = !isExpanded.value
+  entry.isExpanded = !entry.isExpanded
 }
 </script>
 
 <template>
   <article
     ref="entryBox"
-    :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
+    :class="['entry-box', 'stretch-horizontally', entry.isExpanded ? 'detail-height' : 'compact-height']"
     :style="'--element-color: ' + backgoundColor"
-    @click="changeExpand()"
+    @click="changeExpand"
   >
     <!-- <div class="center-vertically"> -->
     <div>
-      <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
+      <h1 class="entry-title">{{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}</h1>
       <section class="info-box-1d">
-        <template v-if="entry.deadline != undefined">
+        <template v-if="entry.todoEntry.deadline != undefined">
           <span class="entry-text"
             ><img src="@/assets/icon_deadline.png" />
-            {{ entry?.deadline.toLocaleDateString() }}</span
+            {{ entry?.todoEntry.deadline.toLocaleDateString() }}</span
           >
         </template>
-        <template v-if="entry.expenditure != undefined">
+        <template v-if="entry.todoEntry.expenditure != undefined">
           <span class="entry-text"
             ><img src="@/assets/icon_timespan.png" />
-            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}</span
+            {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}</span
           >
         </template>
       </section>
-      <template v-if="isExpanded && entry.description != undefined">
-        <p class="entry-text">{{ entry.description }}</p>
+      <template v-if="entry.isExpanded && entry.todoEntry.description != undefined">
+        <p class="entry-text">{{ entry.todoEntry.description }}</p>
       </template>
-      <span v-if="isExpanded">
+      <span v-if="entry.isExpanded">
         <nav class="info-box-1d">
           <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg" /></button>
           <button @click="console.log('editClicked')"><img src="@/assets/icon_edit.svg" /></button>

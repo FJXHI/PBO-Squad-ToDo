@@ -6,7 +6,13 @@ import { useToDoEntryStore } from '@/stores/entry_store'
 const store = useToDoEntryStore()
 
 function collapseOthers() {
-  console.log("Collapse Others")
+  // Iterate through all entries and collapse them
+  for (const entry of store.entries) {
+    console.log(entry.isExpanded)
+    if (entry.isExpanded) {
+      entry.isExpanded = false
+    }
+  }
 }
 
 </script>
