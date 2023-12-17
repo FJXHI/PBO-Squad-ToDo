@@ -1,6 +1,98 @@
 <script lang="ts">
+import { defineEmits } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
+/*
+export default defineComponent({
+  setup() {
+    const store = useToDoEntryStore();
+
+    const data = {
+      inputTitle: '',
+      inputDate: '',
+      inputDuration: '',
+      inputDurationUnit: 'min',
+      inputDescript: '',
+      inputTags: ''
+    };
+    
+    const populateFormFields = () => {
+      console.log(data.entry); // ERR: Entry is not sent
+      if (data.entry) {
+        const { title, date, duration, unit, description, tags } = data.entry;
+        data.inputTitle = title || '';
+        data.inputDate = date || '';
+        data.inputDuration = duration || '';
+        data.inputDurationUnit = unit || 'min';
+        data.inputDescript = description || '';
+        data.inputTags = tags || '';
+      }
+    };
+
+    const saveEdit = () => {
+      if (this.inputTitle.trim() !== '') {
+        //fix this
+        let deadlineDate
+        if (this.inputDate.trim() !== '') {
+          //not add empty date
+          deadlineDate = new Date(this.inputDate)
+        } else {
+          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
+        }
+        //if (this.inputDuration.trim() !== '') {} //not add empty duration
+
+        store.addEntry({
+          todoEntry: {
+            title: this.inputTitle,
+            description: this.inputDescript,
+            color: { r: 255, g: 59, b: 48 },
+            deadline: deadlineDate,
+            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
+          },
+          isVisible: true,
+          isExpanded: false
+        })
+        const dataObject = {
+          title: this.inputTitle,
+          date: this.inputDate,
+          duration: this.inputDuration,
+          unit: this.inputDurationUnit,
+          description: this.inputDescript,
+          tags: this.inputTags
+        }
+        console.log(dataObject)
+        this.clearInput() // Clear Inputs after Save
+      }
+    };
+
+    const cancelEdit = () => {
+      //clearInput();
+      const emitCloseAction = defineEmits(['closeaction']);
+      emitCloseAction('closeaction');
+      // Note: Assuming that $router is properly set up in your Vue instance
+    };
+
+    const clearInput = () => {
+      this.inputTitle = ''
+      this.inputDate = ''
+      this.inputDuration = ''
+      this.inputDurationUnit = 'min'
+      this.inputDescript = ''
+      this.inputTags = ''
+    };
+
+    // Returning the data and methods to be used in the template
+    return {
+      data,
+      populateFormFields,
+      saveEdit,
+      cancelEdit,
+      clearInput
+    };
+  }
+});
+*/
 const store = useToDoEntryStore()
+
 
 export default {
   data() {
@@ -65,7 +157,8 @@ export default {
     },
     cancelEdit() {
       this.clearInput()
-      //this.close()
+      const emit = defineEmits(['closeaction'])
+      emit('closeaction') //not working
       //this.$router.push('/')
     },
     clearInput() {
@@ -75,13 +168,11 @@ export default {
       this.inputDurationUnit = 'min'
       this.inputDescript = ''
       this.inputTags = ''
-    },
-    close() {
-      const emit = defineEmits(['closeaction'])
-      emit('closeaction')
     }
   }
 }
+
+
 </script>
 
 <template>
