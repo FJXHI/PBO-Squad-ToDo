@@ -43,9 +43,8 @@ function changeExpand() {
 }
 
 function delClicked(entry: ToDoEntry): void {
-  console.log('delClicked')
-  console.log(entry)
-  removeAndAddEntry(entry)
+  console.log('Clicked Delete')
+  removeAndAddEntry(entry, true)
 }
 
 function editClicked(entry: ToDoEntry) {
@@ -55,10 +54,8 @@ function editClicked(entry: ToDoEntry) {
 }
 
 function doneClicked(entry: ToDoEntry) {
-  console.log('doneClicked')
-  console.log(entry.todoEntry)
-  //deldoneStore.addEntry(entry.todoEntry)
-  //store.removeEntry(entry)
+  console.log('Clicked Done')
+  removeAndAddEntry(entry, false)
 }
 
 function closeInputModal() {
