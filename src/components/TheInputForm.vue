@@ -8,9 +8,23 @@ export default {
       inputTitle: '',
       inputDate: '',
       inputDuration: '',
-      inputDurationUnit: 'm',
+      inputDurationUnit: 'min',
       inputDescript: '',
       inputTags: ''
+    }
+  },
+  created() {
+    // Populate form fields with data from the entry prop
+    // Build ERR: Property 'entry' does not exist on type '{} & {}'.
+    console.log(this.$props.entry) //ERR: Entry is not sent
+    if (this.$props.entry) {
+      const { title, date, duration, unit, description, tags } = this.$props.entry
+      this.inputTitle = title || ''
+      this.inputDate = date || ''
+      this.inputDuration = duration || ''
+      this.inputDurationUnit = unit || 'min'
+      this.inputDescript = description || ''
+      this.inputTags = tags || ''
     }
   },
   methods: {
@@ -50,28 +64,17 @@ export default {
       }
     },
     cancelEdit() {
-      this.clearInput() // Clear Inputs after Cancel
-      this.$router.push('/') //Return to Home
+      this.clearInput()
+      this.$router.push('/')
     },
     clearInput() {
       this.inputTitle = ''
       this.inputDate = ''
       this.inputDuration = ''
-      this.inputDurationUnit = 'm'
+      this.inputDurationUnit = 'min'
       this.inputDescript = ''
       this.inputTags = ''
     }
-
-    //Function to fill input with data
-    /*
-    fillinput(dataObject) { //Parameter 'dataObject' implicitly has an 'any' type.
-      this.inputTitle = dataObject.title
-      this.inputDate = dataObject.date
-      this.inputDuration = dataObject.duration
-      this.inputDurationUnit = dataObject.unit
-      this.inputDescript = dataObject.description
-      this.inputTags = dataObject.tags
-    }*/
   }
 }
 </script>
@@ -109,10 +112,10 @@ export default {
           min="0"
         />
         <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-          <option value="m">minutes</option>
+          <option value="min">minutes</option>
           <option value="h">hours</option>
-          <option value="d">days</option>
-          <option value="w">weeks</option>
+          <option value="days">days</option>
+          <option value="weeks">weeks</option>
         </select>
       </div>
 

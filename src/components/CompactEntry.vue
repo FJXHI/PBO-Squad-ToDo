@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
+import { useToDoEntryStore } from '@/stores/entry_store'
+import { useDeleteStore } from '@/stores/delete_done_store'
+import { removeAndAddEntry } from '@/services/DeleteDoneService'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, defineComponent } from 'vue'
+import InputForm from '@/components/TheInputForm.vue'
+
+const store = useToDoEntryStore()
 
 const props = defineProps({
   entry: {
@@ -13,6 +19,9 @@ const props = defineProps({
 
 const emit = defineEmits(['collapse-others'])
 const entryBox = ref(null)
+
+let isExpanded = ref(false)
+let showEntryInput = ref(false)
 
 let entry: ToDoEntry = props.entry
 let backgoundColor =
@@ -32,6 +41,25 @@ function changeExpand() {
   }
   entry.isExpanded = !entry.isExpanded
 }
+
+function delClicked(entry: ToDoEntry): void {
+  console.log('delClicked')
+  console.log(entry)
+  removeAndAddEntry(entry)
+}
+
+function editClicked(entry: ToDoEntry) {
+  console.log('editClicked')
+  //showEntryInput = ref(true);
+  showEntryInput.value = !showEntryInput.value
+}
+
+function doneClicked(entry: ToDoEntry) {
+  console.log('doneClicked')
+  console.log(entry.todoEntry)
+  //deldoneStore.addEntry(entry.todoEntry)
+  //store.removeEntry(entry)
+}
 </script>
 
 <template>
@@ -46,8 +74,14 @@ function changeExpand() {
     @click="changeExpand"
   >
     <!-- <div class="center-vertically"> -->
-    <div>
+
+    <div class="Entry-InputForm" v-if="showEntryInput">
+      <InputForm :entry="entry" />
+      <!-- ERR: Entry not sent to Input Form -->
+    </div>
+    <div v-if="!showEntryInput">
       <h1 class="entry-title">{{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}</h1>
+
       <section class="info-box-1d">
         <template v-if="entry.todoEntry.deadline != undefined">
           <span class="entry-text"
@@ -67,9 +101,9 @@ function changeExpand() {
       </template>
       <span v-if="entry.isExpanded">
         <nav class="info-box-1d">
-          <button @click="console.log('delClicked')"><img src="@/assets/icon_delete.svg" /></button>
-          <button @click="console.log('editClicked')"><img src="@/assets/icon_edit.svg" /></button>
-          <button @click="console.log('doneClicked')"><img src="@/assets/icon_done.svg" /></button>
+          <button @click="delClicked(entry)"><img src="@/assets/icon_delete.svg" /></button>
+          <button @click="editClicked(entry)"><img src="@/assets/icon_edit.svg" /></button>
+          <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
         </nav>
       </span>
     </div>
