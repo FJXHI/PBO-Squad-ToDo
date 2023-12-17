@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { PropType } from 'vue'
+import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()
@@ -13,8 +15,22 @@ const inputTags = ref('')
 
 const emit = defineEmits(['closeaction'])
 
+const props = defineProps({
+  entry: {
+    type: Object as PropType<ToDoEntry>
+  }
+})
+
 onMounted(() => {
   // logic for default values here
+  if (props.entry) {
+    inputTitle.value = props.entry.todoEntry.title || ''
+    inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
+    inputDuration.value = props.entry.todoEntry.expenditure?.time || ''
+    inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
+    inputDescript.value = props.entry.todoEntry.description || ''
+    //inputTags.value = props.entry.todoEntry.tags || ''
+  }
 })
 
 const saveEdit = () => {
@@ -48,6 +64,7 @@ const saveEdit = () => {
     }
     console.log(dataObject)
     clearInput()
+    emit('closeaction')
   }
 }
 
@@ -74,7 +91,6 @@ const clearInput = () => {
         <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
         <button class="btn_save" type="submit">Save</button>
       </span>
-
       <label for="id_title">Title:</label>
       <input
         class="user-input"

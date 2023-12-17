@@ -76,7 +76,7 @@ function closeInputModal() {
   >
     <!-- <div class="center-vertically"> v-if="showEntryInput" -->
     <div class="Entry-InputForm">
-      <InputModal :is-open="showEntryInput" @close="closeInputModal()"></InputModal>
+      <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
       <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
       <!-- ERR: Entry not sent to Input Form-->
     </div>

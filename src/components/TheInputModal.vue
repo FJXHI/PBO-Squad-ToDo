@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
+import type { PropType } from 'vue'
+import type { ToDoEntry } from '@/stores/entry_store'
 import InputForm from './TheInputForm.vue'
 
 const emit = defineEmits(['close'])
@@ -12,6 +14,9 @@ const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true
+  },
+  entry: {
+    type: Object as PropType<ToDoEntry>
   }
 })
 </script>
@@ -23,8 +28,8 @@ const props = defineProps({
         <div class="modal-container">
           <div class="modal-body">
             <!--Sort input fields-->
-            <InputForm @closeaction="close()"></InputForm>
-            <!-- <InputForm @closeaction="close()" :entry="entry"></InputForm> -->
+            <!-- <InputForm @closeaction="close()"></InputForm> -->
+            <InputForm @closeaction="close()" :entry="entry"></InputForm>
           </div>
         </div>
       </div>
