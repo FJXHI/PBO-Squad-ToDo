@@ -34,7 +34,8 @@ export default {
             deadline: deadlineDate,
             expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
           },
-          isVisible: true
+          isVisible: true,
+          isExpanded: false
         })
         const dataObject = {
           title: this.inputTitle,
