@@ -46,7 +46,7 @@ function closeModal() {
       <img src="@/assets/icon_settings.svg" />
     </button>
   </div>
-  <FilterModal :is-open="isModalOpen" @close="closeModal()"> ></FilterModal>
+  <FilterModal :is-open="isModalOpen" @close="closeModal()"></FilterModal>
 </template>
 
 <style scoped>

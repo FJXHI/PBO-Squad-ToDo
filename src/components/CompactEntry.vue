@@ -64,7 +64,6 @@ function doneClicked(entry: ToDoEntry) {
 function closeInputModal() {
   showEntryInput.value = false
 }
-
 </script>
 
 <template>
