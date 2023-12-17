@@ -28,7 +28,7 @@ let backgoundColor =
 
 function changeExpand() {
   if (!entry.isExpanded) {
-    emit('collapse-others');
+    emit('collapse-others')
   }
   entry.isExpanded = !entry.isExpanded
 }
@@ -37,7 +37,11 @@ function changeExpand() {
 <template>
   <article
     ref="entryBox"
-    :class="['entry-box', 'stretch-horizontally', entry.isExpanded ? 'detail-height' : 'compact-height']"
+    :class="[
+      'entry-box',
+      'stretch-horizontally',
+      entry.isExpanded ? 'detail-height' : 'compact-height'
+    ]"
     :style="'--element-color: ' + backgoundColor"
     @click="changeExpand"
   >

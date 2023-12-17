@@ -14,7 +14,6 @@ function collapseOthers() {
     }
   }
 }
-
 </script>
 
 <template>
@@ -23,7 +22,11 @@ function collapseOthers() {
       v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 5)"
       :key="entry.todoEntry.title"
     >
-      <CompactEntry :entry="entry" :style="'margin-bottom: 5px'" @collapse-others="collapseOthers"></CompactEntry>
+      <CompactEntry
+        :entry="entry"
+        :style="'margin-bottom: 5px'"
+        @collapse-others="collapseOthers"
+      ></CompactEntry>
     </div>
   </main>
 </template>
