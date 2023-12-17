@@ -26,7 +26,7 @@ onMounted(() => {
   if (props.entry) {
     inputTitle.value = props.entry.todoEntry.title || ''
     inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.todoEntry.expenditure?.time || ''
+    inputDuration.value = props.entry.todoEntry.expenditure?.time.toString() || ''
     inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
     inputDescript.value = props.entry.todoEntry.description || ''
     //inputTags.value = props.entry.todoEntry.tags || ''
