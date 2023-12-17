@@ -1,27 +1,14 @@
-<script lang="ts">
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
 import InputForm from '@/components/TheInputForm.vue'
+const router = useRouter()
 
-export default {
-  components: {
-    InputForm
-  },
-  methods: {
-    closeView() {
-      console.log('CloseAddView')
-      this.$router.push('/')
-    }
-  }
-}
-
-/* //setup
 function closeView() {
-  console.log('LeaveAddView')
-  this.$router.push('/') // is not working, "this.$router"
+  console.log('CloseAddView')
+  router.push('/')
 }
-*/
 </script>
 
 <template>
   <InputForm @closeaction="closeView()" />
-  <button @click="closeView()">Close</button>
 </template>
