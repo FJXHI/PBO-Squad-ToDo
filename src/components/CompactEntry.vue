@@ -6,7 +6,7 @@ import { removeAndAddEntry } from '@/services/DeleteDoneService'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive, defineComponent } from 'vue'
-import InputForm from '@/components/TheInputForm.vue'
+import InputModal from './TheInputModal.vue'
 
 const store = useToDoEntryStore()
 
@@ -60,6 +60,11 @@ function doneClicked(entry: ToDoEntry) {
   //deldoneStore.addEntry(entry.todoEntry)
   //store.removeEntry(entry)
 }
+
+function closeInputModal() {
+  showEntryInput.value = false
+}
+
 </script>
 
 <template>
@@ -74,12 +79,11 @@ function doneClicked(entry: ToDoEntry) {
     @click="changeExpand"
   >
     <!-- <div class="center-vertically"> -->
-
     <div class="Entry-InputForm" v-if="showEntryInput">
-      <InputForm :entry="entry" />
-      <!-- ERR: Entry not sent to Input Form -->
+      <InputModal :is-open="showEntryInput" @close="closeInputModal()"></InputModal>
+      <!-- ERR: Entry not sent to Input Form <InputForm :entry="entry" />-->
     </div>
-    <div v-if="!showEntryInput">
+    <div>
       <h1 class="entry-title">{{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}</h1>
 
       <section class="info-box-1d">
