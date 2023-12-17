@@ -107,8 +107,8 @@ export default {
   created() {
     // Populate form fields with data from the entry prop
     // Build ERR: Property 'entry' does not exist on type '{} & {}'.
-    console.log(this.$props.entry) //ERR: Entry is not sent
-    if (this.$props.entry) {
+    //console.log(this.$props.entry) //ERR: Entry is not sent
+    /*if (this.$props.entry) {
       const { title, date, duration, unit, description, tags } = this.$props.entry
       this.inputTitle = title || ''
       this.inputDate = date || ''
@@ -116,7 +116,7 @@ export default {
       this.inputDurationUnit = unit || 'min'
       this.inputDescript = description || ''
       this.inputTags = tags || ''
-    }
+    }*/
   },
   methods: {
     saveEdit() {

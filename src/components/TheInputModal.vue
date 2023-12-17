@@ -23,7 +23,8 @@ const props = defineProps({
         <div class="modal-container">
           <div class="modal-body">
             <!--Sort input fields-->
-            <InputForm @closeaction="close()" :entry="entry"></InputForm>
+            <InputForm @closeaction="close()"></InputForm>
+            <!-- <InputForm @closeaction="close()" :entry="entry"></InputForm> -->
           </div>
           <div class="button-wrapper">
             <button class="btn btn_cancel" type="button" @click="close()">Close</button>
