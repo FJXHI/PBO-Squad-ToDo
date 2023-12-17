@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { useRouter } from 'vue-router'
 
 const store = useToDoEntryStore()
 
@@ -12,7 +11,7 @@ const inputDurationUnit = ref('min')
 const inputDescript = ref('')
 const inputTags = ref('')
 
-const router = useRouter()
+const emit = defineEmits(['closeaction'])
 
 onMounted(() => {
   // logic for default values here
@@ -54,7 +53,7 @@ const saveEdit = () => {
 
 const cancelEdit = () => {
   clearInput()
-  router.push('/')
+  emit('closeaction')
 }
 
 const clearInput = () => {
