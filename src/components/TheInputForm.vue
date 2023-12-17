@@ -1,5 +1,96 @@
 <script lang="ts">
+import { defineEmits } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
+/*
+export default defineComponent({
+  setup() {
+    const store = useToDoEntryStore();
+
+    const data = {
+      inputTitle: '',
+      inputDate: '',
+      inputDuration: '',
+      inputDurationUnit: 'min',
+      inputDescript: '',
+      inputTags: ''
+    };
+    
+    const populateFormFields = () => {
+      console.log(data.entry); // ERR: Entry is not sent
+      if (data.entry) {
+        const { title, date, duration, unit, description, tags } = data.entry;
+        data.inputTitle = title || '';
+        data.inputDate = date || '';
+        data.inputDuration = duration || '';
+        data.inputDurationUnit = unit || 'min';
+        data.inputDescript = description || '';
+        data.inputTags = tags || '';
+      }
+    };
+
+    const saveEdit = () => {
+      if (this.inputTitle.trim() !== '') {
+        //fix this
+        let deadlineDate
+        if (this.inputDate.trim() !== '') {
+          //not add empty date
+          deadlineDate = new Date(this.inputDate)
+        } else {
+          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
+        }
+        //if (this.inputDuration.trim() !== '') {} //not add empty duration
+
+        store.addEntry({
+          todoEntry: {
+            title: this.inputTitle,
+            description: this.inputDescript,
+            color: { r: 255, g: 59, b: 48 },
+            deadline: deadlineDate,
+            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
+          },
+          isVisible: true,
+          isExpanded: false
+        })
+        const dataObject = {
+          title: this.inputTitle,
+          date: this.inputDate,
+          duration: this.inputDuration,
+          unit: this.inputDurationUnit,
+          description: this.inputDescript,
+          tags: this.inputTags
+        }
+        console.log(dataObject)
+        this.clearInput() // Clear Inputs after Save
+      }
+    };
+
+    const cancelEdit = () => {
+      //clearInput();
+      const emitCloseAction = defineEmits(['closeaction']);
+      emitCloseAction('closeaction');
+      // Note: Assuming that $router is properly set up in your Vue instance
+    };
+
+    const clearInput = () => {
+      this.inputTitle = ''
+      this.inputDate = ''
+      this.inputDuration = ''
+      this.inputDurationUnit = 'min'
+      this.inputDescript = ''
+      this.inputTags = ''
+    };
+
+    // Returning the data and methods to be used in the template
+    return {
+      data,
+      populateFormFields,
+      saveEdit,
+      cancelEdit,
+      clearInput
+    };
+  }
+});
+*/
 const store = useToDoEntryStore()
 
 export default {
@@ -8,10 +99,24 @@ export default {
       inputTitle: '',
       inputDate: '',
       inputDuration: '',
-      inputDurationUnit: 'm',
+      inputDurationUnit: 'min',
       inputDescript: '',
       inputTags: ''
     }
+  },
+  created() {
+    // Populate form fields with data from the entry prop
+    // Build ERR: Property 'entry' does not exist on type '{} & {}'.
+    //console.log(this.$props.entry) //ERR: Entry is not sent
+    /*if (this.$props.entry) {
+      const { title, date, duration, unit, description, tags } = this.$props.entry
+      this.inputTitle = title || ''
+      this.inputDate = date || ''
+      this.inputDuration = duration || ''
+      this.inputDurationUnit = unit || 'min'
+      this.inputDescript = description || ''
+      this.inputTags = tags || ''
+    }*/
   },
   methods: {
     saveEdit() {
@@ -50,28 +155,19 @@ export default {
       }
     },
     cancelEdit() {
-      this.clearInput() // Clear Inputs after Cancel
-      this.$router.push('/') //Return to Home
+      this.clearInput()
+      const emit = defineEmits(['closeaction'])
+      emit('closeaction') //not working
+      //this.$router.push('/')
     },
     clearInput() {
       this.inputTitle = ''
       this.inputDate = ''
       this.inputDuration = ''
-      this.inputDurationUnit = 'm'
+      this.inputDurationUnit = 'min'
       this.inputDescript = ''
       this.inputTags = ''
     }
-
-    //Function to fill input with data
-    /*
-    fillinput(dataObject) { //Parameter 'dataObject' implicitly has an 'any' type.
-      this.inputTitle = dataObject.title
-      this.inputDate = dataObject.date
-      this.inputDuration = dataObject.duration
-      this.inputDurationUnit = dataObject.unit
-      this.inputDescript = dataObject.description
-      this.inputTags = dataObject.tags
-    }*/
   }
 }
 </script>
@@ -109,10 +205,10 @@ export default {
           min="0"
         />
         <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-          <option value="m">minutes</option>
+          <option value="min">minutes</option>
           <option value="h">hours</option>
-          <option value="d">days</option>
-          <option value="w">weeks</option>
+          <option value="days">days</option>
+          <option value="weeks">weeks</option>
         </select>
       </div>
 
