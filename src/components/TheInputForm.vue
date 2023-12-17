@@ -34,6 +34,11 @@ onMounted(() => {
 })
 
 const saveEdit = () => {
+  if (props.entry) {
+    //Alternative update function
+    console.log('Update Entry -> rm old & create new Entry' + props.entry)
+    store.removeEntry(props.entry)
+  }
   if (inputTitle.value.trim() !== '') {
     let deadlineDate
     if (inputDate.value.trim() !== '') {
