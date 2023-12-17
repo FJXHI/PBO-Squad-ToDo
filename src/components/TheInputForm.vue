@@ -65,7 +65,8 @@ export default {
     },
     cancelEdit() {
       this.clearInput()
-      this.$router.push('/')
+      //this.close()
+      //this.$router.push('/')
     },
     clearInput() {
       this.inputTitle = ''
@@ -74,6 +75,10 @@ export default {
       this.inputDurationUnit = 'min'
       this.inputDescript = ''
       this.inputTags = ''
+    },
+    close() {
+      const emit = defineEmits(['closeaction'])
+      emit('closeaction')
     }
   }
 }

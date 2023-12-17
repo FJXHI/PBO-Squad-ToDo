@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
-import SortSetting from './SortSetting.vue'
 import InputForm from './TheInputForm.vue'
 
 const emit = defineEmits(['close'])
@@ -13,9 +12,6 @@ const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true
-  },
-  sortSetting: {
-    type: Array
   }
 })
 </script>
@@ -27,7 +23,7 @@ const props = defineProps({
         <div class="modal-container">
           <div class="modal-body">
             <!--Sort input fields-->
-            <InputForm></InputForm>
+            <InputForm @closeaction="close()" :entry="entry"></InputForm>
           </div>
           <div class="button-wrapper">
             <button class="btn btn_cancel" type="button" @click="close()">Close</button>
@@ -58,8 +54,7 @@ const props = defineProps({
 }
 
 .modal-container {
-  width: 80%;
-  max-width: 500px;
+  width: 99%;
   margin: auto;
   padding: 20px 30px;
   background-color: black;

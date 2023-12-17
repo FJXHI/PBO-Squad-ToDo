@@ -77,9 +77,9 @@ function closeInputModal() {
     :style="'--element-color: ' + backgoundColor"
     @click="changeExpand"
   >
-    <!-- <div class="center-vertically"> -->
-    <div class="Entry-InputForm" v-if="showEntryInput">
-      <InputModal :is-open="showEntryInput" @close="closeInputModal()"></InputModal>
+    <!-- <div class="center-vertically"> v-if="showEntryInput" -->
+    <div class="Entry-InputForm">
+      <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
       <!-- ERR: Entry not sent to Input Form <InputForm :entry="entry" />-->
     </div>
     <div>
