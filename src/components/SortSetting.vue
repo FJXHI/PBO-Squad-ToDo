@@ -79,6 +79,7 @@ const props = defineProps({
   justify-content: space-between;
   align-items: center;
   background-color: #2c2c2e;
+  color: #808080;
   border-radius: 10px;
   margin-bottom: 1vh;
   padding: 6px;

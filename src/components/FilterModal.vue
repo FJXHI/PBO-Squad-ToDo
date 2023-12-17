@@ -72,6 +72,7 @@ const props = defineProps({
 }
 
 .modal-body {
+  color: #808080;
 }
 
 .button-wrapper {
