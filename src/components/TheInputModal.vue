@@ -26,10 +26,6 @@ const props = defineProps({
             <InputForm @closeaction="close()"></InputForm>
             <!-- <InputForm @closeaction="close()" :entry="entry"></InputForm> -->
           </div>
-          <div class="button-wrapper">
-            <button class="btn btn_cancel" type="button" @click="close()">Close</button>
-            <button class="btn btn_save" type="button" @click="close()">Apply</button>
-          </div>
         </div>
       </div>
     </div>
