@@ -1,174 +1,68 @@
-<script lang="ts">
-import { defineEmits } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
-/*
-export default defineComponent({
-  setup() {
-    const store = useToDoEntryStore();
 
-    const data = {
-      inputTitle: '',
-      inputDate: '',
-      inputDuration: '',
-      inputDurationUnit: 'min',
-      inputDescript: '',
-      inputTags: ''
-    };
-    
-    const populateFormFields = () => {
-      console.log(data.entry); // ERR: Entry is not sent
-      if (data.entry) {
-        const { title, date, duration, unit, description, tags } = data.entry;
-        data.inputTitle = title || '';
-        data.inputDate = date || '';
-        data.inputDuration = duration || '';
-        data.inputDurationUnit = unit || 'min';
-        data.inputDescript = description || '';
-        data.inputTags = tags || '';
-      }
-    };
-
-    const saveEdit = () => {
-      if (this.inputTitle.trim() !== '') {
-        //fix this
-        let deadlineDate
-        if (this.inputDate.trim() !== '') {
-          //not add empty date
-          deadlineDate = new Date(this.inputDate)
-        } else {
-          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
-        }
-        //if (this.inputDuration.trim() !== '') {} //not add empty duration
-
-        store.addEntry({
-          todoEntry: {
-            title: this.inputTitle,
-            description: this.inputDescript,
-            color: { r: 255, g: 59, b: 48 },
-            deadline: deadlineDate,
-            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
-          },
-          isVisible: true,
-          isExpanded: false
-        })
-        const dataObject = {
-          title: this.inputTitle,
-          date: this.inputDate,
-          duration: this.inputDuration,
-          unit: this.inputDurationUnit,
-          description: this.inputDescript,
-          tags: this.inputTags
-        }
-        console.log(dataObject)
-        this.clearInput() // Clear Inputs after Save
-      }
-    };
-
-    const cancelEdit = () => {
-      //clearInput();
-      const emitCloseAction = defineEmits(['closeaction']);
-      emitCloseAction('closeaction');
-      // Note: Assuming that $router is properly set up in your Vue instance
-    };
-
-    const clearInput = () => {
-      this.inputTitle = ''
-      this.inputDate = ''
-      this.inputDuration = ''
-      this.inputDurationUnit = 'min'
-      this.inputDescript = ''
-      this.inputTags = ''
-    };
-
-    // Returning the data and methods to be used in the template
-    return {
-      data,
-      populateFormFields,
-      saveEdit,
-      cancelEdit,
-      clearInput
-    };
-  }
-});
-*/
 const store = useToDoEntryStore()
 
-export default {
-  data() {
-    return {
-      inputTitle: '',
-      inputDate: '',
-      inputDuration: '',
-      inputDurationUnit: 'min',
-      inputDescript: '',
-      inputTags: ''
-    }
-  },
-  created() {
-    // Populate form fields with data from the entry prop
-    // Build ERR: Property 'entry' does not exist on type '{} & {}'.
-    //console.log(this.$props.entry) //ERR: Entry is not sent
-    /*if (this.$props.entry) {
-      const { title, date, duration, unit, description, tags } = this.$props.entry
-      this.inputTitle = title || ''
-      this.inputDate = date || ''
-      this.inputDuration = duration || ''
-      this.inputDurationUnit = unit || 'min'
-      this.inputDescript = description || ''
-      this.inputTags = tags || ''
-    }*/
-  },
-  methods: {
-    saveEdit() {
-      if (this.inputTitle.trim() !== '') {
-        //fix this
-        let deadlineDate
-        if (this.inputDate.trim() !== '') {
-          //not add empty date
-          deadlineDate = new Date(this.inputDate)
-        } else {
-          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
-        }
-        //if (this.inputDuration.trim() !== '') {} //not add empty duration
+const inputTitle = ref('')
+const inputDate = ref('')
+const inputDuration = ref('')
+const inputDurationUnit = ref('min')
+const inputDescript = ref('')
+const inputTags = ref('')
 
-        store.addEntry({
-          todoEntry: {
-            title: this.inputTitle,
-            description: this.inputDescript,
-            color: { r: 255, g: 59, b: 48 },
-            deadline: deadlineDate,
-            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
-          },
-          isVisible: true,
-          isExpanded: false
-        })
-        const dataObject = {
-          title: this.inputTitle,
-          date: this.inputDate,
-          duration: this.inputDuration,
-          unit: this.inputDurationUnit,
-          description: this.inputDescript,
-          tags: this.inputTags
-        }
-        console.log(dataObject)
-        this.clearInput() // Clear Inputs after Save
-      }
-    },
-    cancelEdit() {
-      this.clearInput()
-      const emit = defineEmits(['closeaction'])
-      emit('closeaction') //not working
-      //this.$router.push('/')
-    },
-    clearInput() {
-      this.inputTitle = ''
-      this.inputDate = ''
-      this.inputDuration = ''
-      this.inputDurationUnit = 'min'
-      this.inputDescript = ''
-      this.inputTags = ''
+const emit = defineEmits(['closeaction'])
+
+onMounted(() => {
+  // logic for default values here
+})
+
+const saveEdit = () => {
+  if (inputTitle.value.trim() !== '') {
+    let deadlineDate
+    if (inputDate.value.trim() !== '') {
+      deadlineDate = new Date(inputDate.value)
+    } else {
+      deadlineDate = new Date('')
     }
+
+    store.addEntry({
+      todoEntry: {
+        title: inputTitle.value,
+        description: inputDescript.value,
+        color: { r: 255, g: 59, b: 48 },
+        deadline: deadlineDate,
+        expenditure: { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+      },
+      isVisible: true,
+      isExpanded: false
+    })
+
+    const dataObject = {
+      title: inputTitle.value,
+      date: inputDate.value,
+      duration: inputDuration.value,
+      unit: inputDurationUnit.value,
+      description: inputDescript.value,
+      tags: inputTags.value
+    }
+    console.log(dataObject)
+    clearInput()
   }
+}
+
+const cancelEdit = () => {
+  clearInput()
+  emit('closeaction')
+}
+
+const clearInput = () => {
+  inputTitle.value = ''
+  inputDate.value = ''
+  inputDuration.value = ''
+  inputDurationUnit.value = 'min'
+  inputDescript.value = ''
+  inputTags.value = ''
 }
 </script>
 
@@ -241,6 +135,19 @@ label {
 }
 
 .user-input {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
   font-size: 14pt;
   height: 2.1em;
   width: 100%;

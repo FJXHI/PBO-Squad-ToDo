@@ -1,21 +1,19 @@
 s
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/search_store'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const searchStore = useSearchStore()
 
-/**
- * Computed property that determines if the item is ticked.
- * @returns {boolean} True if the item is ticked, false otherwise.
- */
+const isDescending = ref(true)
+
 const isTicked = computed(() => {
   const option = searchStore.sortOptions[props.title]
   return option ? option.isActive : false
 })
 
 /**
- * This function first deactivates eevery sort,
+ * This function first deactivates every sort,
  * and then activates the corresponding sort,
  * as only one sort is allowed to be active at a time
  */
@@ -44,8 +42,8 @@ function handleSortOrderChange() {
     return
   }
 
+  isDescending.value = !isDescending.value
   option.isDescending = !option.isDescending
-  console.log(option.isDescending)
 }
 
 const props = defineProps({
@@ -64,8 +62,9 @@ const props = defineProps({
         <input type="checkbox" :checked="isTicked" @input="handleSortActiveChange" />
         <span class="slider round"></span>
       </label>
-      <button class="sort-order" @input="handleSortOrderChange">
-        <img src="@/assets/icon_sort_descending.svg" alt="" />
+      <button class="sort-order" @click="handleSortOrderChange">
+        <img v-show="isDescending" src="@/assets/icon_sort_descending.svg" alt="" />
+        <img v-show="!isDescending" src="@/assets/icon_sort_ascending.svg" alt="" />
       </button>
     </div>
   </div>
