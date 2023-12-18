@@ -57,7 +57,7 @@ function closeModal() {
 
   margin-right: 1vh;
   width: 100%;
-  color: hsl(0, 0%, 50%);
+  color: #F8F8F8;
   font-size: 15pt;
 }
 
