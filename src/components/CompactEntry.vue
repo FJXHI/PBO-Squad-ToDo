@@ -86,13 +86,13 @@ function closeInputModal() {
       <section class="info-box-1d">
         <template v-if="entry.todoEntry.deadline != undefined">
           <span class="entry-text"
-            ><img src="@/assets/icon_deadline.png" />
+            ><img src="/assets/icon_deadline.png" />
             {{ entry?.todoEntry.deadline.toLocaleDateString() }}</span
           >
         </template>
         <template v-if="entry.todoEntry.expenditure != undefined">
           <span class="entry-text"
-            ><img src="@/assets/icon_timespan.png" />
+            ><img src="/assets/icon_timespan.png" />
             {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}</span
           >
         </template>
@@ -102,9 +102,9 @@ function closeInputModal() {
       </template>
       <span v-if="entry.isExpanded">
         <nav class="info-box-1d">
-          <button @click="delClicked(entry)"><img src="@/assets/icon_delete.svg" /></button>
-          <button @click="editClicked(entry)"><img src="@/assets/icon_edit.svg" /></button>
-          <button @click="doneClicked(entry)"><img src="@/assets/icon_done.svg" /></button>
+          <button @click="delClicked(entry)"><img src="/assets/icon_delete.svg" /></button>
+          <button @click="editClicked(entry)"><img src="/assets/icon_edit.svg" /></button>
+          <button @click="doneClicked(entry)"><img src="/assets/icon_done.svg" /></button>
         </nav>
       </span>
     </div>
