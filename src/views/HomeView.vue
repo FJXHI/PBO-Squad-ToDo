@@ -7,12 +7,12 @@ const store = useToDoEntryStore()
 </script>
 
 <template>
-  <main>
+  <div :style="`position: relative;`">
     <div
       v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 5)"
       :key="entry.todoEntry.title"
     >
       <CompactEntry :entry="entry" :style="'margin-bottom: 5px'"></CompactEntry>
     </div>
-  </main>
-</template>
+  </div>
+</template> 
