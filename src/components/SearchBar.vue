@@ -1,11 +1,29 @@
-<script lang="ts">
-export default {
-  methods: {
-    settingsClick() {
-      console.log('Settings button clicked')
-      this.$router.push('/settings')
-    }
-  }
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { search, sortEntries } from '@/services/searchService'
+import FilterModal from './FilterModal.vue'
+
+const router = useRouter()
+let input = ref<string>('')
+let isModalOpen = ref<boolean>(false)
+
+function handleInputChange() {
+  search(input.value)
+}
+
+function settingsClick() {
+  router.push('/settings')
+}
+
+function openModal() {
+  isModalOpen.value = true
+}
+
+function closeModal() {
+  isModalOpen.value = false
+
+  sortEntries()
 }
 </script>
 
@@ -13,12 +31,22 @@ export default {
   <div class="topbar">
     <div class="search">
       <img src="@/assets/icon_search.svg" class="search-icon" />
-      <input class="search-input" type="text" placeholder="Search" />
+      <input
+        class="search-input"
+        type="text"
+        v-model="input"
+        placeholder="Search"
+        @input="handleInputChange()"
+      />
     </div>
-    <button @click="settingsClick" class="button">
-      <img src="/src/assets/icon_settings.svg" style="width: 100%; height: 100%" />
+    <button @click="openModal()" class="button">
+      <img src="@/assets/icon_filter.svg" alt="" />
+    </button>
+    <button @click="settingsClick()" class="button">
+      <img src="@/assets/icon_settings.svg" />
     </button>
   </div>
+  <FilterModal :is-open="isModalOpen" @close="closeModal()"></FilterModal>
 </template>
 
 <style scoped>
@@ -27,38 +55,52 @@ export default {
   outline: none;
   border: none;
 
+  margin-right: 1vh;
   width: 100%;
   color: hsl(0, 0%, 50%);
-  font-size: 16pt;
+  font-size: 15pt;
 }
 
 .search-icon {
-  padding: 1vh;
+  padding: 4px;
 }
 
 .search {
   display: flex;
-  width: 0;
   flex-grow: 1;
   background-color: #1c1c1e;
   border-radius: 10px;
-  margin-right: 1vh;
 }
 
 .topbar {
   display: flex;
-  height: 8vh;
-  width: 100%;
-  padding: 1vh;
+  height: 6vh;
+  padding: 6px;
 }
 
 button {
   background: none;
   outline: none;
   border: none;
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  margin-left: 1vh;
+  width: 5vh;
+  justify-content: center;
+}
 
+button img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 90%;
+  width: 90%;
+}
+
+.filter {
+  background-color: #1c1c1e;
+  border-radius: 10px;
   height: 6vh;
-  width: 6vh;
-  padding: 0;
+  width: 100%;
 }
 </style>
