@@ -13,6 +13,8 @@ const props = defineProps({
   }
 })
 
+const boxWidth = 40;
+
 const entryBox = ref(null)
 const entryBoxSize = useElementSize(entryBox)
 let isExpanded = ref(false)
@@ -24,21 +26,16 @@ const content = ref(null)
 const initialContentSize = {width: useElementSize(content).width, height: useElementSize(content).height}
 
 let entry: ToDoEntryInfo = props.entry.todoEntry
-let backgoundColor =
-  'rgba(' +
-  entry.color.r.toString() +
-  ',' +
-  entry.color.g.toString() +
-  ',' +
-  entry.color.b.toString() +
-  ',' +
-  (entry.color.a ? entry.color.a : 255) +
-  ')'
+let backgoundColor = `rgba(${entry.color.r}, ${entry.color.g}, ${entry.color.b}, ${entry.color.a ? entry.color.a : 255})`
 
 function changeExpand() {
   isExpanded.value = !isExpanded.value
 }
 
+const container = ref<HTMLElement | null>(null)
+const containerWidth = computed(() => container.value?.offsetWidth)
+const left = ref('0')
+const opacity = ref(1)
 
 let deleteWidth = ref(0);
 let tickWidth = ref(0);
@@ -47,55 +44,90 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
   entryBox,
   {
     // dont change this to false -> prevent click event
+    // passive: true,
+    // onSwipe(e: TouchEvent){
+    //   if (swipeDir.value == 0)
+    //     swipeDir.value = lengthX.value > 0 ? 1 : -1;
+
+    //     // check for swipe in same direction
+    //     // -> only do things if swipe diretion for ongoing swipe hasnt changed
+    //     if (lengthX.value * swipeDir.value >= 0){
+    //       if (lengthX.value < 0)
+    //         deleteWidth.value = Math.abs(lengthX.value)
+    //       else
+    //         tickWidth.value = Math.abs(lengthX.value)
+    //     }
+    // },
     passive: true,
-    onSwipe(e: TouchEvent){
-      if (swipeDir.value == 0)
-        swipeDir.value = lengthX.value > 0 ? 1 : -1;
+    onSwipe(e: TouchEvent) {
+      if (containerWidth.value && Math.abs(lengthY.value) < 50) {
 
-        // check for swipe in same direction
-        // -> only do things if swipe diretion for ongoing swipe hasnt changed
-        if (lengthX.value * swipeDir.value >= 0){
-          if (lengthX.value < 0)
-            deleteWidth.value = Math.abs(lengthX.value)
-          else
-            tickWidth.value = Math.abs(lengthX.value)
-        }
+        const length = Math.abs(lengthX.value)
+        const percentage = length / containerWidth.value
+
+        if (percentage * 100 > boxWidth)
+          left.value = `${ - Math.sign(lengthX.value) * boxWidth}%`
+        else 
+          left.value = `${ - Math.sign(lengthX.value) * length}px`
+      }
+      else {
+        left.value = '0'
+        opacity.value = 1
+      }
+
     },
-    onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
-      // check for "enough swipe" for tick/delete
-      // do stuff if critera is met
+    // onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
+    //   // check for "enough swipe" for tick/delete
+    //   // do stuff if critera is met
 
-      // reset swipe changes if not
-      deleteWidth.value = tickWidth.value = 0;
-      swipeDir.value = 0
-    }
+    //   // reset swipe changes if not
+    //   deleteWidth.value = tickWidth.value = 0;
+    //   swipeDir.value = 0
+    // }
+    onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
+      // if (lengthX.value < 0 && containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
+      //   left.value = '20%'
+      //   opacity.value = 0
+      // }
+      // else {
+      //   left.value = '0'
+      //   opacity.value = 1
+      // }
+
+      left.value = `0`
+    },
   }
 )
 </script>
 
 <template>
-  <span class="horizontal-box stretch-horizontally">
-    
-    <!-- delete box to the left of the main entry -->
-    <aside class="delete-box restrict-size"
-    :style="`display: flex; width: ${deleteWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
-      <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-height: ${entryBoxSize.height.value / 2}px`"/>
-    </aside>
-
+  <span ref="container" class="horizontal-box stretch-horizontally" :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${backgoundColor}; `">
     <!-- main entry box -->
     <article
     ref="entryBox"
     :class="['entry-box', isExpanded ? 'detail-height' : 'compact-height']"
-    :style="`--element-color: ${backgoundColor};`"
+    :style="`position: relative; width: 100%; left: ${left}; margin: 0; transition: all 200ms ease-out;`"
     @click="changeExpand()">
+
+      <!-- delete box to the left of the main entry -->
+      <aside class="delete-box restrict-size"
+      :style="`position: absolute; display: flex; width: ${boxWidth}%; height: 100%; left: 0; transform: translateX(-100%)`">
+        <img alt="" class="icon no-padding center" src="@/assets/icon_delete.svg" :style="`max-width: ${entryBoxSize.height.value / 2}px`"/>
+      </aside>
+
+      <!-- tick box to the right of the main entry  -->
+      <aside class="tick-box restrict-size"
+      :style="`position: absolute; display: flex; width: ${boxWidth}%; height: 100%; right: 0; transform: translateX(100%)`">
+        <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-width: ${entryBoxSize.height.value / 2}px`"/>
+      </aside>
 
       <!-- div holding the content -->
       <div ref="content" 
-      :style="`width: ${initialContentSize.width}px;`">   <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
-        <h1 ref="title" class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
+      :style="`width: ${initialContentSize.width}px; padding: 10px;`">   <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
+        <h1 ref="title" class="text-2xl font-medium">{{ entry?.title ? entry?.title : '' }}</h1>
 
         <!-- row for deadline and expenditure -->
-        <section class="info-box-1d">
+        <section class="info-box-1d"> 
           <template v-if="entry.deadline != undefined">
             <span class="entry-text">
               <img src="@/assets/icon_deadline.png" />
@@ -111,7 +143,7 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
         </section>
 
         <template v-if="isExpanded && entry.description != undefined">
-          <p class="entry-text">{{ entry.description }}</p>
+          <p :style="`color: #000000; padding: 0 10px 10px 10px; position: relative;`" class="text-base">{{ entry.description }}</p>
         </template>
 
         <!-- action buttons -->
@@ -124,14 +156,8 @@ const {direction, isSwiping, lengthX, lengthY} = useSwipe(
         </span>
       </div>
 
+      
     </article>
-
-    <!-- tick box to the right of the main entry  -->
-    <aside class="tick-box restrict-size"
-    :style="`display: flex; width: ${tickWidth}px; max-height: ${entryBoxSize.height.value + 20}px;`">
-      <img alt="" class="icon no-padding center" src="@/assets/icon_done.svg" :style="`max-height: ${entryBoxSize.height.value / 2}px`"/>
-    </aside>
-
   </span>
   
 </template>
@@ -199,7 +225,7 @@ button:active {
   background-color: var(--element-color);
   /* min-width: 100vh; */
 
-  padding: 10px;
+  /* padding: 10px; */
   flex-grow: 1;
 
   color: #000000;
@@ -230,4 +256,10 @@ button:active {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.gorg {
+  /* <what is animatied> <length> <timing-function> */
+  transition: all 200ms ease-out;
+}
+
 </style>
