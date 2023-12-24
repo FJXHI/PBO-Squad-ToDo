@@ -28,6 +28,7 @@ export interface ToDoEntryInfo {
 export interface ToDoEntry {
   todoEntry: ToDoEntryInfo
   isVisible: boolean
+  isExpanded: boolean
 }
 
 export const useToDoEntryStore = defineStore('todoEntries', () => {
@@ -44,5 +45,5 @@ export const useToDoEntryStore = defineStore('todoEntries', () => {
     }
   }
 
-  return { entries, addEntry }
+  return { entries, addEntry, removeEntry }
 })

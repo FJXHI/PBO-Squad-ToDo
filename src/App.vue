@@ -14,7 +14,8 @@ store.addEntry({
     deadline: new Date('2024-01-07'),
     expenditure: { time: 5, unit: 'h' }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -23,7 +24,8 @@ store.addEntry({
     color: { r: 50, g: 173, b: 230 },
     expenditure: { time: 30, unit: 'min' }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -32,7 +34,8 @@ store.addEntry({
     color: { r: 162, g: 132, b: 94 },
     deadline: new Date('2027-09-29')
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -40,7 +43,8 @@ store.addEntry({
     description: 'Investigate and resolve reported bugs',
     color: { r: 52, g: 199, b: 89 }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -48,7 +52,8 @@ store.addEntry({
     description: 'Improve code quality and maintainability',
     color: { r: 255, g: 204, b: 0 }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -56,7 +61,8 @@ store.addEntry({
     description: 'Perform comprehensive testing of the application',
     color: { r: 255, g: 59, b: 48 }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -64,7 +70,8 @@ store.addEntry({
     description: 'Evaluate and enhance user interface design',
     color: { r: 50, g: 173, b: 230 }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 store.addEntry({
   todoEntry: {
@@ -72,7 +79,8 @@ store.addEntry({
     description: 'Update project documentation with recent changes',
     color: { r: 162, g: 132, b: 94 }
   },
-  isVisible: true
+  isVisible: true,
+  isExpanded: false
 })
 </script>
 
