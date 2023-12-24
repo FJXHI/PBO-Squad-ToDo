@@ -106,11 +106,4 @@ button img {
   height: 90%;
   width: 90%;
 }
-
-.filter {
-  background-color: #1c1c1e;
-  border-radius: 10px;
-  height: 6vh;
-  width: 100%;
-}
 </style>
