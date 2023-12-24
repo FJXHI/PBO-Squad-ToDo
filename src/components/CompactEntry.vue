@@ -211,10 +211,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </section>
 
         <template v-if="entry.isExpanded && entry.todoEntry.description != undefined">
-          <p
-            :style="`color: #000000; padding: 0 0 10px 0; position: relative;`"
-            class="text-base"
-          >
+          <p :style="`color: #000000; padding: 0 0 10px 0; position: relative;`" class="text-base">
             {{ entry.todoEntry.description }}
           </p>
         </template>

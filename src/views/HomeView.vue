@@ -29,4 +29,4 @@ function collapseOthers() {
       ></CompactEntry>
     </div>
   </div>
-</template> 
+</template>
