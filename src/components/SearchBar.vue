@@ -27,8 +27,8 @@ function closeModal() {
 }
 
 function clearClick() {
-  input.value = ""; // clear the search string
-  search(input.value); // reload the todo entries
+  input.value = '' // clear the search string
+  search(input.value) // reload the todo entries
 }
 </script>
 
