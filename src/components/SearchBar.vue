@@ -28,23 +28,26 @@ function closeModal() {
 </script>
 
 <template>
-  <div class="topbar">
-    <div class="search">
-      <img src="@/assets/icon_search.svg" class="search-icon" />
-      <input
-        class="search-input"
-        type="text"
-        v-model="input"
-        placeholder="Search"
-        @input="handleInputChange()"
-      />
+  <div :style="`position: relative;`">
+    <div class="shadow" :style="`top: 0; position: absolute; height: 3rem; width: 100%`"></div>
+    <div class="topbar" :style="`position: relative`">
+      <div class="search">
+        <img src="@/assets/icon_search.svg" class="search-icon" />
+        <input
+          class="search-input"
+          type="text"
+          v-model="input"
+          placeholder="Search"
+          @input="handleInputChange()"
+        />
+      </div>
+      <button @click="openModal()" class="button">
+        <img src="@/assets/icon_filter.svg" alt="" />
+      </button>
+      <button @click="settingsClick()" class="button">
+        <img src="@/assets/icon_settings.svg" />
+      </button>
     </div>
-    <button @click="openModal()" class="button">
-      <img src="@/assets/icon_filter.svg" alt="" />
-    </button>
-    <button @click="settingsClick()" class="button">
-      <img src="@/assets/icon_settings.svg" />
-    </button>
   </div>
   <FilterModal :is-open="isModalOpen" @close="closeModal()"></FilterModal>
 </template>
@@ -95,6 +98,10 @@ button img {
   margin-right: auto;
   height: 90%;
   width: 90%;
+}
+
+.shadow {
+  background: linear-gradient(to bottom, #000000 70%, rgba(255, 255, 255, 0) 100%);
 }
 
 .filter {
