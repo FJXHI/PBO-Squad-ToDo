@@ -41,16 +41,13 @@ function closeModal() {
           @input="handleInputChange()"
         />
       </div>
+      <button @click="openModal()" class="button">
+        <img src="@/assets/icon_filter.svg" alt="" />
+      </button>
       <button @click="settingsClick()" class="button">
         <img src="@/assets/icon_settings.svg" />
       </button>
     </div>
-    <button @click="openModal()" class="button">
-      <img src="@/assets/icon_filter.svg" alt="" />
-    </button>
-    <button @click="settingsClick()" class="button">
-      <img src="@/assets/icon_settings.svg" />
-    </button>
   </div>
   <FilterModal :is-open="isModalOpen" @close="closeModal()"></FilterModal>
 </template>
