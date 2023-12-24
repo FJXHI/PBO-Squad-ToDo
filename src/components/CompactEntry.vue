@@ -52,7 +52,7 @@ let backgoundColor =
 
 function changeExpand() {
   if (!entry.isExpanded) {
-    emit('collapse-others')
+    collapseOthers()
   }
   entry.isExpanded = !entry.isExpanded
 }
@@ -75,6 +75,16 @@ function doneClicked(entry: ToDoEntry) {
 
 function closeInputModal() {
   showEntryInput.value = false
+}
+
+function collapseOthers() {
+  // Iterate through all entries and collapse them
+  for (const entry of store.entries) {
+    console.log(entry.isExpanded)
+    if (entry.isExpanded) {
+      entry.isExpanded = false
+    }
+  }
 }
 
 const container = ref<HTMLElement | null>(null)
@@ -147,7 +157,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
     <!-- '--element-color: ' + backgoundColor -->
     <article
       ref="entryBox"
-      :class="['entry-box', isExpanded ? 'detail-height' : 'compact-height']"
+      :class="['entry-box', entry.isExpanded ? 'detail-height' : 'compact-height']"
       :style="`position: relative; width: 100%; left: ${left}; margin: 0; transition: all 200ms ease-out;`"
       @click="changeExpand()"
     >
@@ -200,9 +210,9 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
           </template>
         </section>
 
-        <template v-if="isExpanded && entry.todoEntry.description != undefined">
+        <template v-if="entry.isExpanded && entry.todoEntry.description != undefined">
           <p
-            :style="`color: #000000; padding: 0 10px 10px 10px; position: relative;`"
+            :style="`color: #000000; padding: 0 0 10px 0; position: relative;`"
             class="text-base"
           >
             {{ entry.todoEntry.description }}
@@ -210,22 +220,31 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </template>
 
         <!-- action buttons -->
-        <span v-if="isExpanded">
+        <span v-if="entry.isExpanded">
           <nav class="info-box-1d">
-            <button @click="console.log('delClicked')">
-              <img src="@/assets/icon_delete.svg" />
+            <button
+              @click="console.log('delClicked')"
+              style="display: flex; justify-content: center; align-items: center"
+            >
+              <img style="" src="@/assets/icon_delete.svg" />
             </button>
-            <button @click="console.log('editClicked')">
+            <button
+              @click="console.log('editClicked')"
+              style="display: flex; justify-content: center; align-items: center"
+            >
               <img src="@/assets/icon_edit.svg" />
             </button>
-            <button @click="console.log('doneClicked')">
+            <button
+              @click="console.log('doneClicked')"
+              style="display: flex; justify-content: center; align-items: center"
+            >
               <img src="@/assets/icon_done.svg" />
             </button>
           </nav>
         </span>
       </div>
     </article>
-    <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
+    <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
     <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
     <!-- ERR: Entry not sent to Input Form-->
   </span>
