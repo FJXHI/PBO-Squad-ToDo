@@ -173,7 +173,7 @@ label {
   height: 2.1em;
   width: 100%;
   background: #1c1c1e;
-  color: #F8F8F8;
+  color: #f8f8f8;
   outline: none;
   border: none;
   box-sizing: border-box;

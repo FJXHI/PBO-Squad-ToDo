@@ -60,7 +60,7 @@ function closeModal() {
 
   margin-right: 1vh;
   width: 100%;
-  color: #F8F8F8;
+  color: #f8f8f8;
   font-size: 15pt;
 }
 
