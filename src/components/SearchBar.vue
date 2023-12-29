@@ -42,7 +42,7 @@ function closeModal() {
         />
       </div>
       <button @click="openModal()" class="button">
-        <img alt="Filter" src="@/assets/icon_filter.svg" alt="" />
+        <img alt="Filter" src="@/assets/icon_filter.svg" />
       </button>
       <button @click="settingsClick()" class="button">
         <img alt="Settings" src="@/assets/icon_settings.svg" />
