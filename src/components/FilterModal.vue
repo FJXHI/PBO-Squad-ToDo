@@ -8,7 +8,7 @@ function close() {
   emit('close')
 }
 
-const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'LastAdded']
+const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'Last Added']
 
 const props = defineProps({
   isOpen: {
