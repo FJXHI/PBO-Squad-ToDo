@@ -198,13 +198,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <section class="info-box-1d">
           <template v-if="entry.todoEntry.deadline != undefined">
             <span class="entry-text">
-              <img src="@/assets/icon_deadline.png" />
+              <img alt="Deadline" src="@/assets/icon_deadline.png" />
               {{ entry?.todoEntry.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.todoEntry.expenditure != undefined">
             <span class="entry-text">
-              <img src="@/assets/icon_timespan.png" />
+              <img alt="Expenditure" src="@/assets/icon_timespan.png" />
               {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}
             </span>
           </template>
@@ -217,22 +217,23 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </template>
 
         <!-- action buttons -->
-        <span class="info-box-1d" v-if="entry.isExpanded">
-          <button @click="delClicked(entry)" class="flex justify-center">
-            <img style="" src="@/assets/icon_delete.svg" />
-          </button>
-          <button @click="editClicked(entry)" class="flex justify-center">
-            <img src="@/assets/icon_edit.svg" />
-          </button>
-          <button @click="doneClicked(entry)" class="flex justify-center">
-            <img src="@/assets/icon_done.svg" />
-          </button>
+        <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
+        <span v-if="entry.isExpanded">
+          <nav class="info-box-1d">
+            <button @click="delClicked(entry)" class="flex justify-center">
+              <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
+            </button>
+            <button @click="editClicked(entry)" class="flex justify-center">
+              <img alt="Edit" src="@/assets/icon_edit.svg" />
+            </button>
+            <button @click="doneClicked(entry)" class="flex justify-center">
+              <img alt="Done" src="@/assets/icon_done.svg" />
+            </button>
+          </nav>
         </span>
       </div>
     </article>
     <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
-    <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
-    <!-- ERR: Entry not sent to Input Form-->
   </span>
 </template>
 
