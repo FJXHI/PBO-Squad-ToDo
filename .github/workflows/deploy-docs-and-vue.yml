@@ -3,8 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Trigger on changes to the main branch
-      - documentation # Trigger on changes to the docs branch
+      - main
   workflow_dispatch:
 
 permissions:

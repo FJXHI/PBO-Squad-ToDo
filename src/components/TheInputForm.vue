@@ -1,77 +1,90 @@
-<script lang="ts">
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import type { PropType } from 'vue'
+import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+
 const store = useToDoEntryStore()
 
-export default {
-  data() {
-    return {
-      inputTitle: '',
-      inputDate: '',
-      inputDuration: '',
-      inputDurationUnit: 'm',
-      inputDescript: '',
-      inputTags: ''
-    }
-  },
-  methods: {
-    saveEdit() {
-      if (this.inputTitle.trim() !== '') {
-        //fix this
-        let deadlineDate
-        if (this.inputDate.trim() !== '') {
-          //not add empty date
-          deadlineDate = new Date(this.inputDate)
-        } else {
-          deadlineDate = new Date('') //fix this: if deadline Empty not showing "invalid date"
-        }
-        //if (this.inputDuration.trim() !== '') {} //not add empty duration
+const inputTitle = ref('')
+const inputDate = ref('')
+const inputDuration = ref('')
+const inputDurationUnit = ref('min')
+const inputDescript = ref('')
+const inputTags = ref('')
 
-        store.addEntry({
-          todoEntry: {
-            title: this.inputTitle,
-            description: this.inputDescript,
-            color: { r: 255, g: 59, b: 48 },
-            deadline: deadlineDate,
-            expenditure: { time: parseInt(this.inputDuration), unit: this.inputDurationUnit }
-          },
-          isVisible: true
-        })
-        const dataObject = {
-          title: this.inputTitle,
-          date: this.inputDate,
-          duration: this.inputDuration,
-          unit: this.inputDurationUnit,
-          description: this.inputDescript,
-          tags: this.inputTags
-        }
-        console.log(dataObject)
-        this.clearInput() // Clear Inputs after Save
-      }
-    },
-    cancelEdit() {
-      this.clearInput() // Clear Inputs after Cancel
-      this.$router.push('/') //Return to Home
-    },
-    clearInput() {
-      this.inputTitle = ''
-      this.inputDate = ''
-      this.inputDuration = ''
-      this.inputDurationUnit = 'm'
-      this.inputDescript = ''
-      this.inputTags = ''
-    }
+const emit = defineEmits(['closeaction'])
 
-    //Function to fill input with data
-    /*
-    fillinput(dataObject) { //Parameter 'dataObject' implicitly has an 'any' type.
-      this.inputTitle = dataObject.title
-      this.inputDate = dataObject.date
-      this.inputDuration = dataObject.duration
-      this.inputDurationUnit = dataObject.unit
-      this.inputDescript = dataObject.description
-      this.inputTags = dataObject.tags
-    }*/
+const props = defineProps({
+  entry: {
+    type: Object as PropType<ToDoEntry>
   }
+})
+
+onMounted(() => {
+  // logic for default values here
+  if (props.entry) {
+    inputTitle.value = props.entry.todoEntry.title || ''
+    inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
+    inputDuration.value = props.entry.todoEntry.expenditure?.time.toString() || ''
+    inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
+    inputDescript.value = props.entry.todoEntry.description || ''
+    //inputTags.value = props.entry.todoEntry.tags || ''
+  }
+})
+
+const saveEdit = () => {
+  if (props.entry) {
+    //Alternative update function
+    console.log('Update Entry -> rm old & create new Entry' + props.entry)
+    store.removeEntry(props.entry)
+  }
+  if (inputTitle.value.trim() !== '') {
+    let deadlineDate
+    if (inputDate.value.trim() !== '') {
+      deadlineDate = new Date(inputDate.value)
+    } else {
+      deadlineDate = new Date('')
+    }
+
+    store.addEntry({
+      todoEntry: {
+        title: inputTitle.value,
+        description: inputDescript.value,
+        color: { r: 255, g: 59, b: 48 },
+        deadline: deadlineDate,
+        expenditure: { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+      },
+      isVisible: true,
+      isExpanded: false
+    })
+
+    const dataObject = {
+      title: inputTitle.value,
+      date: inputDate.value,
+      duration: inputDuration.value,
+      unit: inputDurationUnit.value,
+      description: inputDescript.value,
+      tags: inputTags.value
+    }
+    console.log(dataObject)
+    clearInput()
+    emit('closeaction')
+  }
+}
+
+const cancelEdit = () => {
+  clearInput()
+  emit('closeaction')
+}
+
+const clearInput = () => {
+  inputTitle.value = ''
+  inputDate.value = ''
+  inputDuration.value = ''
+  inputDurationUnit.value = 'min'
+  inputDescript.value = ''
+  inputTags.value = ''
 }
 </script>
 
@@ -83,7 +96,6 @@ export default {
         <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
         <button class="btn_save" type="submit">Save</button>
       </span>
-
       <label for="id_title">Title:</label>
       <input
         class="user-input"
@@ -108,10 +120,10 @@ export default {
           min="0"
         />
         <select class="user-input duration_unit" id="id_duration_unit" v-model="inputDurationUnit">
-          <option value="m">minutes</option>
+          <option value="min">minutes</option>
           <option value="h">hours</option>
-          <option value="d">days</option>
-          <option value="w">weeks</option>
+          <option value="days">days</option>
+          <option value="weeks">weeks</option>
         </select>
       </div>
 
@@ -144,11 +156,24 @@ label {
 }
 
 .user-input {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
   font-size: 14pt;
   height: 2.1em;
   width: 100%;
   background: #1c1c1e;
-  color: #808080;
+  color: #f8f8f8;
   outline: none;
   border: none;
   box-sizing: border-box;
