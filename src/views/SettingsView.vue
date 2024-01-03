@@ -1,24 +1,8 @@
-<script setup lang="ts">
-import {
-  clearEntries,
-  clearLocalStorage,
-  revertToDebugEntries
-} from '@/services/entryStorageService'
-</script>
-
 <template>
   <div class="settings">
     <div class="line">
-      <span class="text">Remove all entries</span>
-      <button class="btn" @click="clearEntries">Clear</button>
-    </div>
-    <div class="line">
-      <span class="text">DEBUG: Revert to debug entries</span>
-      <button class="btn" @click="revertToDebugEntries">Revert</button>
-    </div>
-    <div class="line">
-      <span class="text">DEBUG: Clear Local Storage</span>
-      <button class="btn" @click="clearLocalStorage">Revert</button>
+      <span class="text">Text</span>
+      <button class="btn">Test</button>
     </div>
     <div class="line">
       <span class="text">Text</span>
