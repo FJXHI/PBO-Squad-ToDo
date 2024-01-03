@@ -25,6 +25,11 @@ function closeModal() {
 
   sortEntries()
 }
+
+function clearClick() {
+  input.value = '' // clear the search string
+  search(input.value) // reload the todo entries
+}
 </script>
 
 <template>
@@ -40,6 +45,11 @@ function closeModal() {
           placeholder="Search"
           @input="handleInputChange()"
         />
+        <template v-if="input.length != 0">
+          <button @click="clearClick()" class="button">
+            <img src="@/assets/icon_close.svg" />
+          </button>
+        </template>
       </div>
       <button @click="openModal()" class="button">
         <img src="@/assets/icon_filter.svg" alt="" />
