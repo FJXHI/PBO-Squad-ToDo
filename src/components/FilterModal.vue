@@ -8,6 +8,8 @@ function close() {
   emit('close')
 }
 
+const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'Last Added']
+
 const props = defineProps({
   isOpen: {
     type: Boolean,
@@ -27,10 +29,9 @@ const props = defineProps({
           <div class="modal-body">
             <!--Sort input fields-->
             <h2>Sort by</h2>
-            <SortSetting title="Title"></SortSetting>
-            <SortSetting title="Deadline"></SortSetting>
-            <SortSetting title="Expenditure"></SortSetting>
-            <SortSetting title="LastAdded"></SortSetting>
+            <div v-for="title in sortSettingTitles" :key="title">
+              <SortSetting :title="title"></SortSetting>
+            </div>
           </div>
           <div class="button-wrapper">
             <button class="btn btn_cancel" type="button" @click="close()">Discard</button>

@@ -6,7 +6,6 @@ export function search(query: string): void {
   const entries = store.entries
 
   const searchParams = query.trim().split(' ')
-  console.log(searchParams)
 
   entries.forEach((entry) => {
     // const contains = entry.todoEntry.title.toLowerCase().includes(query.toLowerCase())
@@ -29,25 +28,23 @@ export function sortEntries(): void {
   const searchStore = useSearchStore()
   const sortOptions = searchStore.sortOptions
 
-  console.log(sortOptions)
-
-  if (sortOptions.Title.isActive) {
+  if (sortOptions['Title'].isActive) {
     entries.sort((entry1, entry2) =>
-      sortByTitle(entry1.todoEntry, entry2.todoEntry, sortOptions.Title.isDescending)
+      sortByTitle(entry1.todoEntry, entry2.todoEntry, sortOptions['Title'].isDescending)
     )
-  } else if (sortOptions.Deadline.isActive) {
+  } else if (sortOptions['Deadline'].isActive) {
     entries.sort((entry1, entry2) =>
-      sortByDeadline(entry1.todoEntry, entry2.todoEntry, sortOptions.Title.isDescending)
+      sortByDeadline(entry1.todoEntry, entry2.todoEntry, sortOptions['Deadline'].isDescending)
     )
-  } else if (sortOptions.Expenditure.isActive) {
+  } else if (sortOptions['Expenditure'].isActive) {
     entries.sort((entry1, entry2) =>
-      sortByExp(entry1.todoEntry, entry2.todoEntry, sortOptions.Title.isDescending)
+      sortByExp(entry1.todoEntry, entry2.todoEntry, sortOptions['Expenditure'].isDescending)
     )
-  } else if (sortOptions.LastAdded.isActive) {
+  } else if (sortOptions['Last Added'].isActive) {
     throw new Error('Not implemented yet')
 
     entries.sort((entry1, entry2) =>
-      sortByLastAdded(entry1.todoEntry, entry2.todoEntry, sortOptions.Title.isDescending)
+      sortByLastAdded(entry1.todoEntry, entry2.todoEntry, sortOptions['Last Added'].isDescending)
     )
   } else {
     throw new Error('nothing to sort')
@@ -112,8 +109,8 @@ function sortByDeadline(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending
  * @returns A number indicating the order of the two objects.
  */
 function sortByExp(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: boolean): number {
-  const expenditure1 = entry1.expenditure
-  const expenditure2 = entry2.expenditure
+  const expenditure1 = entry1.expenditure?.time
+  const expenditure2 = entry2.expenditure?.time
 
   if (expenditure1 === null || expenditure1 === undefined) {
     return 1
