@@ -217,33 +217,23 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </template>
 
         <!-- action buttons -->
+        <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
         <span v-if="entry.isExpanded">
           <nav class="info-box-1d">
-            <button
-              @click="console.log('delClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
+            <button @click="delClicked(entry)" class="flex justify-center">
               <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
             </button>
-            <button
-              @click="console.log('editClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
+            <button @click="editClicked(entry)" class="flex justify-center">
               <img alt="Edit" src="@/assets/icon_edit.svg" />
             </button>
-            <button
-              @click="console.log('doneClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
+            <button @click="doneClicked(entry)" class="flex justify-center">
               <img alt="Done" src="@/assets/icon_done.svg" />
             </button>
           </nav>
         </span>
       </div>
     </article>
-    <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
-    <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
-    <!-- ERR: Entry not sent to Input Form-->
+    <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
   </span>
 </template>
 
