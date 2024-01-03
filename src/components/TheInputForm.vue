@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import { saveEntries } from '@/services/entryStorageService';
 
 const store = useToDoEntryStore()
 
@@ -58,6 +59,8 @@ const saveEdit = () => {
       isVisible: true,
       isExpanded: false
     })
+
+    saveEntries(store.entries)
 
     const dataObject = {
       title: inputTitle.value,
