@@ -70,7 +70,7 @@ function clearClick() {
 
   margin-right: 1vh;
   width: 100%;
-  color: hsl(0, 0%, 50%);
+  color: #f8f8f8;
   font-size: 15pt;
 }
 

@@ -217,31 +217,20 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </template>
 
         <!-- action buttons -->
-        <span v-if="entry.isExpanded">
-          <nav class="info-box-1d">
-            <button
-              @click="console.log('delClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
-              <img style="" src="@/assets/icon_delete.svg" />
-            </button>
-            <button
-              @click="console.log('editClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
-              <img src="@/assets/icon_edit.svg" />
-            </button>
-            <button
-              @click="console.log('doneClicked')"
-              style="display: flex; justify-content: center; align-items: center"
-            >
-              <img src="@/assets/icon_done.svg" />
-            </button>
-          </nav>
+        <span class="info-box-1d" v-if="entry.isExpanded">
+          <button @click="delClicked(entry)" class="flex justify-center">
+            <img style="" src="@/assets/icon_delete.svg" />
+          </button>
+          <button @click="editClicked(entry)" class="flex justify-center">
+            <img src="@/assets/icon_edit.svg" />
+          </button>
+          <button @click="doneClicked(entry)" class="flex justify-center">
+            <img src="@/assets/icon_done.svg" />
+          </button>
         </span>
       </div>
     </article>
-    <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
+    <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
     <!-- <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal> -->
     <!-- ERR: Entry not sent to Input Form-->
   </span>
