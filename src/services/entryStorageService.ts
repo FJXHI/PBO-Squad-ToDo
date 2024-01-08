@@ -9,8 +9,6 @@ const archived = 'archived'
  * Loads entries from local storage and adds them to the todo entry store.
  */
 export function loadEntries(): void {
-  // revertToDebugEntries()
-
   const entries = getEntriesFromLS()
 
   const store = useToDoEntryStore()
@@ -32,21 +30,6 @@ export function addEntry(entry: ToDoEntry): void {
   localStorage.setItem(active, JSON.stringify(store.entries))
 
   // console.log("ls", getEntriesFromLS());
-}
-
-function getEntriesFromLS(): ToDoEntry[] {
-  const entries = localStorage.getItem(active)
-  if (entries) {
-    const parsedEntries = JSON.parse(entries)
-    return parsedEntries.map((entry: ToDoEntry) => {
-      if (entry.todoEntry.deadline) {
-        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
-      }
-      return entry
-    })
-  } else {
-    return []
-  }
 }
 
 /**
@@ -82,6 +65,21 @@ export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
 export function getArchivedEntries(): ToDoEntry[] {
   const entries = localStorage.getItem(archived)
 
+  if (entries) {
+    const parsedEntries = JSON.parse(entries)
+    return parsedEntries.map((entry: ToDoEntry) => {
+      if (entry.todoEntry.deadline) {
+        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
+      }
+      return entry
+    })
+  } else {
+    return []
+  }
+}
+
+function getEntriesFromLS(): ToDoEntry[] {
+  const entries = localStorage.getItem(active)
   if (entries) {
     const parsedEntries = JSON.parse(entries)
     return parsedEntries.map((entry: ToDoEntry) => {
