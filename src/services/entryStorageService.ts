@@ -62,7 +62,7 @@ export function clearEntries(): void {
 /**
  * Completes an entry by removing it from the to-do entry store and adding it to the deleted entry store.
  * @param entry - The entry to be completed.
- * @param isDelete - A boolean indicating whether the entry should be permanently deleted or not.
+ * @param isDelete - A boolean indicating whether the entry was deleted or completed.
  */
 export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
   const store = useToDoEntryStore()
