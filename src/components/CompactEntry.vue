@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
+import type { ToDoEntry, ToDoEntryMeta } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import { useDeleteStore } from '@/stores/delete_done_store'
 import type { assert } from '@vue/compiler-core'
@@ -41,20 +41,20 @@ let showEntryInput = ref(false)
 let entry: ToDoEntry = props.entry
 let backgoundColor =
   'rgba(' +
-  entry.todoEntry.color.r.toString() +
+  entry.color.r.toString() +
   ',' +
-  entry.todoEntry.color.g.toString() +
+  entry.color.g.toString() +
   ',' +
-  entry.todoEntry.color.b.toString() +
+  entry.color.b.toString() +
   ',' +
-  (entry.todoEntry.color.a ? entry.todoEntry.color.a : 255) +
+  (entry.color.a ? entry.color.a : 255) +
   ')'
 
 function changeExpand() {
-  if (!entry.isExpanded) {
+  if (!entry.metadata.isExpanded) {
     collapseOthers()
   }
-  entry.isExpanded = !entry.isExpanded
+  entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
 
 function delClicked(entry: ToDoEntry): void {
@@ -80,9 +80,9 @@ function closeInputModal() {
 function collapseOthers() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.isExpanded)
-    if (entry.isExpanded) {
-      entry.isExpanded = false
+    console.log(entry.metadata.isExpanded)
+    if (entry.metadata.isExpanded) {
+      entry.metadata.isExpanded = false
     }
   }
 }
@@ -157,7 +157,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
     <!-- '--element-color: ' + backgoundColor -->
     <article
       ref="entryBox"
-      :class="['entry-box', entry.isExpanded ? 'detail-height' : 'compact-height']"
+      :class="['entry-box', entry.metadata.isExpanded ? 'detail-height' : 'compact-height']"
       :style="`position: relative; width: 100%; left: ${left}; margin: 0; transition: all 200ms ease-out;`"
       @click="changeExpand()"
     >
@@ -191,34 +191,34 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       <div ref="content" :style="`width: ${initialContentSize.width}px; padding: 10px;`">
         <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
         <h1 ref="title" class="text-2xl font-medium">
-          {{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}
+          {{ entry?.title ? entry?.title : '' }}
         </h1>
 
         <!-- row for deadline and expenditure -->
         <section class="info-box-1d">
-          <template v-if="entry.todoEntry.deadline != undefined">
+          <template v-if="entry.deadline != undefined">
             <span class="entry-text">
               <img alt="Deadline" src="@/assets/icon_deadline.png" />
-              {{ entry?.todoEntry.deadline.toLocaleDateString() }}
+              {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
-          <template v-if="entry.todoEntry.expenditure != undefined">
+          <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
               <img alt="Expenditure" src="@/assets/icon_timespan.png" />
-              {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}
+              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
             </span>
           </template>
         </section>
 
-        <template v-if="entry.isExpanded && entry.todoEntry.description != undefined">
+        <template v-if="entry && entry.description != undefined">
           <p :style="`color: #000000; padding: 0 0 10px 0; position: relative;`" class="text-base">
-            {{ entry.todoEntry.description }}
+            {{ entry.description }}
           </p>
         </template>
 
         <!-- action buttons -->
         <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
-        <span v-if="entry.isExpanded">
+        <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
             <button @click="delClicked(entry)" class="flex justify-center">
               <img alt="Delete" style="" src="@/assets/icon_delete.svg" />

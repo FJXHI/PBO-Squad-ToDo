@@ -26,11 +26,11 @@ const props = defineProps({
 onMounted(() => {
   // logic for default values here
   if (props.entry) {
-    inputTitle.value = props.entry.todoEntry.title || ''
-    inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.todoEntry.expenditure?.time.toString() || ''
-    inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
-    inputDescript.value = props.entry.todoEntry.description || ''
+    inputTitle.value = props.entry.title || ''
+    inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
+    inputDuration.value = props.entry.expenditure?.time.toString() || ''
+    inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
+    inputDescript.value = props.entry.description || ''
     //inputTags.value = props.entry.todoEntry.tags || ''
   }
 })
@@ -55,19 +55,17 @@ const saveEdit = () => {
       timeExpenditure = undefined
     }
 
-    const entry: ToDoEntry = {
-      todoEntry: {
-        title: inputTitle.value,
-        description: inputDescript.value,
-        color: { r: 255, g: 59, b: 48 },
-        deadline: deadlineDate,
-        expenditure: timeExpenditure
-      },
-      isVisible: true,
-      isExpanded: false
-    }
-
-    addEntry(entry)
+    store.addEntry({
+      title: inputTitle.value,
+      description: inputDescript.value,
+      color: { r: 255, g: 59, b: 48 },
+      deadline: deadlineDate,
+      expenditure: timeExpenditure,
+      metadata: {
+        isVisible: true,
+        isExpanded: false
+      }
+    })
 
     const dataObject = {
       title: inputTitle.value,
