@@ -1,5 +1,4 @@
 import { useToDoEntryStore, type ToDoEntry } from '@/stores/entry_store'
-import exp from 'constants'
 
 /**
  * Loads entries from local storage and adds them to the todo entry store.
