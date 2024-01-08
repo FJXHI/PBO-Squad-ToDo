@@ -12,7 +12,9 @@ export interface Tag {
   tagColor: Color
 }
 
-export interface ToDoEntryInfo {
+export interface ToDoEntry {
+  metadata: ToDoEntryInfo
+
   title: string
   description?: string
   color: Color
@@ -25,8 +27,7 @@ export interface ToDoEntryInfo {
   tags?: Tag[]
 }
 
-export interface ToDoEntry {
-  todoEntry: ToDoEntryInfo
+export interface ToDoEntryInfo {
   isVisible: boolean
   isExpanded: boolean
 }
