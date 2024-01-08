@@ -66,8 +66,8 @@ export function getArchivedEntries(): ToDoEntry[] {
   if (entries) {
     const parsedEntries = JSON.parse(entries)
     return parsedEntries.map((entry: ToDoEntry) => {
-      if (entry.todoEntry.deadline) {
-        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
+      if (entry.deadline) {
+        entry.deadline = new Date(entry.deadline)
       }
       return entry
     })
@@ -81,8 +81,8 @@ function getEntriesFromLS(): ToDoEntry[] {
   if (entries) {
     const parsedEntries = JSON.parse(entries)
     return parsedEntries.map((entry: ToDoEntry) => {
-      if (entry.todoEntry.deadline) {
-        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
+      if (entry.deadline) {
+        entry.deadline = new Date(entry.deadline)
       }
       return entry
     })
@@ -102,80 +102,86 @@ export function revertToDebugEntries(): void {
   const debugEntries: ToDoEntry[] = []
 
   debugEntries.push({
-    todoEntry: {
-      title: 'Meeting with Client',
-      description: 'Discuss project requirements and timeline',
-      color: { r: 255, g: 59, b: 48 },
-      deadline: new Date('2024-01-07'),
-      expenditure: { time: 5, unit: 'h' }
+    title: 'Meeting with Client',
+    description: 'Discuss project requirements and timeline',
+    color: { r: 255, g: 59, b: 48 },
+    deadline: new Date('2024-01-07'),
+    expenditure: { time: 5, unit: 'h' },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
     },
-    isVisible: true,
-    isExpanded: false
   })
   debugEntries.push({
-    todoEntry: {
-      title: 'Prepare Presentation',
-      description: 'Create slides for upcoming presentation',
-      color: { r: 50, g: 173, b: 230 },
-      expenditure: { time: 30, unit: 'min' }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Prepare Presentation',
+    description: 'Create slides for upcoming presentation',
+    color: { r: 50, g: 173, b: 230 },
+    expenditure: { time: 30, unit: 'min' },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'Research New Feature',
-      description: 'Explore options for implementing a new feature',
-      color: { r: 162, g: 132, b: 94 },
-      deadline: new Date('2027-09-29')
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Research New Feature',
+    description: 'Explore options for implementing a new feature',
+    color: { r: 162, g: 132, b: 94 },
+    deadline: new Date('2027-09-29'),
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'Bug Fixing',
-      description: 'Investigate and resolve reported bugs',
-      color: { r: 52, g: 199, b: 89 }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Bug Fixing',
+    description: 'Investigate and resolve reported bugs',
+    color: { r: 52, g: 199, b: 89 },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'Code Refactoring',
-      description: 'Improve code quality and maintainability',
-      color: { r: 255, g: 204, b: 0 }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Code Refactoring',
+    description: 'Improve code quality and maintainability',
+    color: { r: 255, g: 204, b: 0 },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'Testing Phase',
-      description: 'Perform comprehensive testing of the application',
-      color: { r: 255, g: 59, b: 48 }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Testing Phase',
+    description: 'Perform comprehensive testing of the application',
+    color: { r: 255, g: 59, b: 48 },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'UI Design Review',
-      description: 'Evaluate and enhance user interface design',
-      color: { r: 50, g: 173, b: 230 }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'UI Design Review',
+    description: 'Evaluate and enhance user interface design',
+    color: { r: 50, g: 173, b: 230 },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
+
   debugEntries.push({
-    todoEntry: {
-      title: 'Documentation Fix',
-      description: 'Update project documentation with recent changes',
-      color: { r: 162, g: 132, b: 94 }
-    },
-    isVisible: true,
-    isExpanded: false
+    title: 'Documentation Fix',
+    description: 'Update project documentation with recent changes',
+    color: { r: 162, g: 132, b: 94 },
+    metadata: {
+      isVisible: true,
+      isExpanded: false
+    }
   })
 
   clearEntries()
