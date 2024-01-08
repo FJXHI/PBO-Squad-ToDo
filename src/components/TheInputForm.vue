@@ -12,6 +12,7 @@ const inputDuration = ref('')
 const inputDurationUnit = ref('min')
 const inputDescript = ref('')
 const inputTags = ref('')
+const inputColor = ref('#000000')
 
 const emit = defineEmits(['closeaction'])
 
@@ -65,7 +66,8 @@ const saveEdit = () => {
       duration: inputDuration.value,
       unit: inputDurationUnit.value,
       description: inputDescript.value,
-      tags: inputTags.value
+      tags: inputTags.value,
+      color: inputColor.value
     }
     console.log(dataObject)
     clearInput()
@@ -128,8 +130,21 @@ const clearInput = () => {
       </div>
 
       <label for="id_tags">Tags:</label>
-      <input class="user-input" type="text" id="id_tags" v-model="inputTags" placeholder="Tags" />
-
+      <div>
+        <input
+          class="user-input duration"
+          type="text"
+          id="id_tags"
+          v-model="inputTags"
+          placeholder="Tags"
+        />
+        <input
+          class="user-input short"
+          type="color"
+          id="colorPicker"
+          v-model="inputColor"
+        /><!-- Inputcolor field slightly too high up -->
+      </div>
       <label for="id_descript">Description:</label>
       <textarea
         class="user-input input_descript"
@@ -188,6 +203,11 @@ label {
 }
 
 .duration_unit {
+  width: 30%;
+  min-width: 6em;
+}
+
+.short {
   width: 30%;
   min-width: 6em;
 }
