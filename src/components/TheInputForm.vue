@@ -13,6 +13,7 @@ const inputDuration = ref('')
 const inputDurationUnit = ref('min')
 const inputDescript = ref('')
 const inputTags = ref('')
+const inputColor = ref('#000000')
 
 const emit = defineEmits(['closeaction'])
 
@@ -45,7 +46,13 @@ const saveEdit = () => {
     if (inputDate.value.trim() !== '') {
       deadlineDate = new Date(inputDate.value)
     } else {
-      deadlineDate = new Date('')
+      deadlineDate = undefined
+    }
+    let timeExpenditure
+    if (inputDuration.value.trim() !== '') {
+      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+    } else {
+      timeExpenditure = undefined
     }
 
     const entry: ToDoEntry = {
@@ -54,7 +61,7 @@ const saveEdit = () => {
         description: inputDescript.value,
         color: { r: 255, g: 59, b: 48 },
         deadline: deadlineDate,
-        expenditure: { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+        expenditure: timeExpenditure
       },
       isVisible: true,
       isExpanded: false
@@ -68,7 +75,8 @@ const saveEdit = () => {
       duration: inputDuration.value,
       unit: inputDurationUnit.value,
       description: inputDescript.value,
-      tags: inputTags.value
+      tags: inputTags.value,
+      color: inputColor.value
     }
     console.log(dataObject)
     clearInput()
@@ -131,8 +139,21 @@ const clearInput = () => {
       </div>
 
       <label for="id_tags">Tags:</label>
-      <input class="user-input" type="text" id="id_tags" v-model="inputTags" placeholder="Tags" />
-
+      <div>
+        <input
+          class="user-input duration"
+          type="text"
+          id="id_tags"
+          v-model="inputTags"
+          placeholder="Tags"
+        />
+        <input
+          class="user-input short"
+          type="color"
+          id="colorPicker"
+          v-model="inputColor"
+        /><!-- Inputcolor field slightly too high up -->
+      </div>
       <label for="id_descript">Description:</label>
       <textarea
         class="user-input input_descript"
@@ -176,7 +197,7 @@ label {
   height: 2.1em;
   width: 100%;
   background: #1c1c1e;
-  color: #808080;
+  color: #f8f8f8;
   outline: none;
   border: none;
   box-sizing: border-box;
@@ -191,6 +212,11 @@ label {
 }
 
 .duration_unit {
+  width: 30%;
+  min-width: 6em;
+}
+
+.short {
   width: 30%;
   min-width: 6em;
 }

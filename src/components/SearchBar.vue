@@ -25,6 +25,11 @@ function closeModal() {
 
   sortEntries()
 }
+
+function clearClick() {
+  input.value = '' // clear the search string
+  search(input.value) // reload the todo entries
+}
 </script>
 
 <template>
@@ -32,7 +37,7 @@ function closeModal() {
     <div class="shadow" :style="`top: 0; position: absolute; height: 3rem; width: 100%`"></div>
     <div class="topbar" :style="`position: relative`">
       <div class="search">
-        <img src="@/assets/icon_search.svg" class="search-icon" />
+        <img alt="Search" src="@/assets/icon_search.svg" class="search-icon" />
         <input
           class="search-input"
           type="text"
@@ -40,12 +45,17 @@ function closeModal() {
           placeholder="Search"
           @input="handleInputChange()"
         />
+        <template v-if="input.length != 0">
+          <button @click="clearClick()" class="button">
+            <img src="@/assets/icon_close.svg" />
+          </button>
+        </template>
       </div>
       <button @click="openModal()" class="button">
-        <img src="@/assets/icon_filter.svg" alt="" />
+        <img alt="Filter" src="@/assets/icon_filter.svg" />
       </button>
       <button @click="settingsClick()" class="button">
-        <img src="@/assets/icon_settings.svg" />
+        <img alt="Settings" src="@/assets/icon_settings.svg" />
       </button>
     </div>
   </div>
@@ -60,7 +70,7 @@ function closeModal() {
 
   margin-right: 1vh;
   width: 100%;
-  color: hsl(0, 0%, 50%);
+  color: #f8f8f8;
   font-size: 15pt;
 }
 

@@ -13,7 +13,7 @@ export const useSearchStore = defineStore('searchSettings', () => {
     Title: { isActive: true, isDescending: true },
     Deadline: { isActive: false, isDescending: true },
     Expenditure: { isActive: false, isDescending: true },
-    LastAdded: { isActive: false, isDescending: true }
+    'Last Added': { isActive: false, isDescending: true }
   })
 
   return { sortOptions }
