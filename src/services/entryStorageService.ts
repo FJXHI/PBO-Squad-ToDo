@@ -28,8 +28,6 @@ export function addEntry(entry: ToDoEntry): void {
   store.addEntry(entry)
 
   localStorage.setItem(active, JSON.stringify(store.entries))
-
-  // console.log("ls", getEntriesFromLS());
 }
 
 /**
@@ -184,7 +182,6 @@ export function revertToDebugEntries(): void {
   debugEntries.forEach((entry) => {
     addEntry(entry)
   })
-  console.log('Reverted to debug entries')
 }
 
 /**
@@ -192,5 +189,4 @@ export function revertToDebugEntries(): void {
  */
 export function clearLocalStorage(): void {
   localStorage.clear()
-  console.log('Cleared local storage')
 }
