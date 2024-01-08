@@ -45,7 +45,13 @@ const saveEdit = () => {
     if (inputDate.value.trim() !== '') {
       deadlineDate = new Date(inputDate.value)
     } else {
-      deadlineDate = new Date('')
+      deadlineDate = undefined
+    }
+    let timeExpenditure
+    if (inputDuration.value.trim() !== '') {
+      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+    } else {
+      timeExpenditure = undefined
     }
 
     store.addEntry({
@@ -54,7 +60,7 @@ const saveEdit = () => {
         description: inputDescript.value,
         color: { r: 255, g: 59, b: 48 },
         deadline: deadlineDate,
-        expenditure: { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+        expenditure: timeExpenditure
       },
       isVisible: true,
       isExpanded: false
