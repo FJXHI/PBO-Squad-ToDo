@@ -1,18 +1,24 @@
+import { useDeleteStore } from '@/stores/delete_done_store'
 import { useToDoEntryStore, type ToDoEntry } from '@/stores/entry_store'
+
+// local storage names
+const active = 'entries'
+const archived = 'archived'
 
 /**
  * Loads entries from local storage and adds them to the todo entry store.
  */
 export function loadEntries(): void {
-  const store = useToDoEntryStore()
+  // revertToDebugEntries()
 
   const entries = getEntriesFromLS()
+
+  const store = useToDoEntryStore()
+  store.clearEntries()
 
   entries.forEach((entry) => {
     store.addEntry(entry)
   })
-
-  console.log(store.entries)
 }
 
 /**
@@ -23,14 +29,21 @@ export function addEntry(entry: ToDoEntry): void {
   const store = useToDoEntryStore()
   store.addEntry(entry)
 
-  localStorage.setItem('entries', JSON.stringify(store.entries))
+  localStorage.setItem(active, JSON.stringify(store.entries))
+
+  // console.log("ls", getEntriesFromLS());
 }
 
 function getEntriesFromLS(): ToDoEntry[] {
-  const entries = localStorage.getItem('entries')
-
+  const entries = localStorage.getItem(active)
   if (entries) {
-    return JSON.parse(entries)
+    const parsedEntries = JSON.parse(entries)
+    return parsedEntries.map((entry: ToDoEntry) => {
+      if (entry.todoEntry.deadline) {
+        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
+      }
+      return entry
+    })
   } else {
     return []
   }
@@ -43,8 +56,40 @@ export function clearEntries(): void {
   const store = useToDoEntryStore()
   store.clearEntries()
 
-  localStorage.removeItem('entries')
+  localStorage.removeItem(active)
 }
+
+/**
+ * Completes an entry by removing it from the to-do entry store and adding it to the deleted entry store.
+ * @param entry - The entry to be completed.
+ * @param isDelete - A boolean indicating whether the entry should be permanently deleted or not.
+ */
+export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
+  const store = useToDoEntryStore()
+  store.removeEntry(entry)
+
+  const archivedStore = useDeleteStore()
+  archivedStore.addDeletedEntry(entry, isDelete)
+
+  localStorage.setItem(active, JSON.stringify(store.entries))
+  localStorage.setItem(archived, JSON.stringify(archivedStore.deletedEntries))
+}
+
+/**
+ * Retrieves the deleted entries from local storage.
+ * @returns An array of ToDoEntry objects representing the deleted entries.
+ */
+export function getArchivedEntries(): ToDoEntry[] {
+  const entries = localStorage.getItem(archived)
+
+  if (entries) {
+    return JSON.parse(entries)
+  } else {
+    return []
+  }
+}
+
+// ------------------ Debug Functions ------------------
 
 /**
  * Reverts the entry storage to debug entries.
@@ -135,6 +180,7 @@ export function revertToDebugEntries(): void {
   debugEntries.forEach((entry) => {
     addEntry(entry)
   })
+  console.log('Reverted to debug entries')
 }
 
 /**
@@ -142,18 +188,5 @@ export function revertToDebugEntries(): void {
  */
 export function clearLocalStorage(): void {
   localStorage.clear()
-}
-
-/**
- * Retrieves the deleted entries from local storage.
- * @returns An array of ToDoEntry objects representing the deleted entries.
- */
-export function getDeletedEntries(): ToDoEntry[] {
-  const entries = localStorage.getItem('deletedEntries')
-
-  if (entries) {
-    return JSON.parse(entries)
-  } else {
-    return []
-  }
+  console.log('Cleared local storage')
 }
