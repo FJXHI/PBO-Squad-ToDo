@@ -9,6 +9,7 @@ import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed, reactive, defineComponent } from 'vue'
 import InputModal from './TheInputModal.vue'
+import { completeEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -59,7 +60,7 @@ function changeExpand() {
 
 function delClicked(entry: ToDoEntry): void {
   console.log('Clicked Delete')
-  removeAndAddEntry(entry, true)
+  completeEntry(entry, true)
 }
 
 function editClicked(entry: ToDoEntry) {
@@ -70,7 +71,7 @@ function editClicked(entry: ToDoEntry) {
 
 function doneClicked(entry: ToDoEntry) {
   console.log('Clicked Done')
-  removeAndAddEntry(entry, false)
+  completeEntry(entry, false)
 }
 
 function closeInputModal() {
