@@ -110,7 +110,7 @@ export function revertToDebugEntries(): void {
     metadata: {
       isVisible: true,
       isExpanded: false
-    },
+    }
   })
   debugEntries.push({
     title: 'Prepare Presentation',
