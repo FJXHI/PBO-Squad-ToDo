@@ -37,7 +37,7 @@ function clearClick() {
     <div class="shadow" :style="`top: 0; position: absolute; height: 3rem; width: 100%`"></div>
     <div class="topbar" :style="`position: relative`">
       <div class="search">
-        <img alt="Search" src="@/assets/icon_search.svg" class="search-icon" />
+        <img alt="Search" src="/assets/icon_search.svg" class="search-icon" />
         <input
           class="search-input"
           type="text"
@@ -47,15 +47,15 @@ function clearClick() {
         />
         <template v-if="input.length != 0">
           <button @click="clearClick()" class="button">
-            <img src="@/assets/icon_close.svg" />
+            <img src="/assets/icon_close.svg" />
           </button>
         </template>
       </div>
       <button @click="openModal()" class="button">
-        <img alt="Filter" src="@/assets/icon_filter.svg" />
+        <img alt="Filter" src="/assets/icon_filter.svg" />
       </button>
       <button @click="settingsClick()" class="button">
-        <img alt="Settings" src="@/assets/icon_settings.svg" />
+        <img alt="Settings" src="/assets/icon_settings.svg" />
       </button>
     </div>
   </div>

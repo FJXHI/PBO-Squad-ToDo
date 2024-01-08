@@ -64,8 +64,8 @@ const props = defineProps({
         <span class="slider round"></span>
       </label>
       <button class="sort-order" @click="handleSortOrderChange">
-        <img v-show="isDescending" src="@/assets/icon_sort_descending.svg" alt="" />
-        <img v-show="!isDescending" src="@/assets/icon_sort_ascending.svg" alt="" />
+        <img v-show="isDescending" src="/assets/icon_sort_descending.svg" alt="" />
+        <img v-show="!isDescending" src="/assets/icon_sort_ascending.svg" alt="" />
       </button>
     </div>
   </div>
