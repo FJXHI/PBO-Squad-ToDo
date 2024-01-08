@@ -1,4 +1,4 @@
-import { useToDoEntryStore, type ToDoEntry, type ToDoEntryInfo } from '@/stores/entry_store'
+import { useToDoEntryStore, type ToDoEntry, type ToDoEntryMeta } from '@/stores/entry_store'
 import { useSearchStore } from '@/stores/search_store'
 
 export function search(query: string): void {
@@ -50,9 +50,9 @@ export function sortEntries(): void {
 }
 
 /**
- * Sorts two ToDoEntryInfo objects by their Title.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects by their Title.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */
@@ -72,9 +72,9 @@ function sortByTitle(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean):
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their deadlines.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their deadlines.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether to sort in descending order.
  * @returns A number indicating the order of the two objects.
  */
@@ -100,9 +100,9 @@ function sortByDeadline(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolea
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their expenditure property.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their expenditure property.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */
@@ -128,9 +128,9 @@ function sortByExp(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): n
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their last added expenditure.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their last added expenditure.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */

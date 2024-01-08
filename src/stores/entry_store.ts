@@ -13,7 +13,7 @@ export interface Tag {
 }
 
 export interface ToDoEntry {
-  metadata: ToDoEntryInfo
+  metadata: ToDoEntryMeta
 
   title: string
   description?: string
@@ -27,7 +27,7 @@ export interface ToDoEntry {
   tags?: Tag[]
 }
 
-export interface ToDoEntryInfo {
+export interface ToDoEntryMeta {
   isVisible: boolean
   isExpanded: boolean
 }

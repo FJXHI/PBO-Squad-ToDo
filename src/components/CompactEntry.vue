@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
+import type { ToDoEntry, ToDoEntryMeta } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import { useDeleteStore } from '@/stores/delete_done_store'
 import { removeAndAddEntry } from '@/services/DeleteDoneService'
