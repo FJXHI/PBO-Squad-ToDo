@@ -83,7 +83,13 @@ export function getArchivedEntries(): ToDoEntry[] {
   const entries = localStorage.getItem(archived)
 
   if (entries) {
-    return JSON.parse(entries)
+    const parsedEntries = JSON.parse(entries)
+    return parsedEntries.map((entry: ToDoEntry) => {
+      if (entry.todoEntry.deadline) {
+        entry.todoEntry.deadline = new Date(entry.todoEntry.deadline)
+      }
+      return entry
+    })
   } else {
     return []
   }
