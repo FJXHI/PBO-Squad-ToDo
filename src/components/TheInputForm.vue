@@ -12,6 +12,7 @@ const inputDuration = ref('')
 const inputDurationUnit = ref('min')
 const inputDescript = ref('')
 const inputTags = ref('')
+const inputColor = ref('#000000')
 
 const emit = defineEmits(['closeaction'])
 
@@ -24,11 +25,11 @@ const props = defineProps({
 onMounted(() => {
   // logic for default values here
   if (props.entry) {
-    inputTitle.value = props.entry.todoEntry.title || ''
-    inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.todoEntry.expenditure?.time.toString() || ''
-    inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
-    inputDescript.value = props.entry.todoEntry.description || ''
+    inputTitle.value = props.entry.title || ''
+    inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
+    inputDuration.value = props.entry.expenditure?.time.toString() || ''
+    inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
+    inputDescript.value = props.entry.description || ''
     //inputTags.value = props.entry.todoEntry.tags || ''
   }
 })
@@ -44,19 +45,25 @@ const saveEdit = () => {
     if (inputDate.value.trim() !== '') {
       deadlineDate = new Date(inputDate.value)
     } else {
-      deadlineDate = new Date('')
+      deadlineDate = undefined
+    }
+    let timeExpenditure
+    if (inputDuration.value.trim() !== '') {
+      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+    } else {
+      timeExpenditure = undefined
     }
 
     store.addEntry({
-      todoEntry: {
-        title: inputTitle.value,
-        description: inputDescript.value,
-        color: { r: 255, g: 59, b: 48 },
-        deadline: deadlineDate,
-        expenditure: { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
-      },
-      isVisible: true,
-      isExpanded: false
+      title: inputTitle.value,
+      description: inputDescript.value,
+      color: { r: 255, g: 59, b: 48 },
+      deadline: deadlineDate,
+      expenditure: timeExpenditure,
+      metadata: {
+        isVisible: true,
+        isExpanded: false
+      }
     })
 
     const dataObject = {
@@ -65,7 +72,8 @@ const saveEdit = () => {
       duration: inputDuration.value,
       unit: inputDurationUnit.value,
       description: inputDescript.value,
-      tags: inputTags.value
+      tags: inputTags.value,
+      color: inputColor.value
     }
     console.log(dataObject)
     clearInput()
@@ -128,8 +136,21 @@ const clearInput = () => {
       </div>
 
       <label for="id_tags">Tags:</label>
-      <input class="user-input" type="text" id="id_tags" v-model="inputTags" placeholder="Tags" />
-
+      <div>
+        <input
+          class="user-input duration"
+          type="text"
+          id="id_tags"
+          v-model="inputTags"
+          placeholder="Tags"
+        />
+        <input
+          class="user-input short"
+          type="color"
+          id="colorPicker"
+          v-model="inputColor"
+        /><!-- Inputcolor field slightly too high up -->
+      </div>
       <label for="id_descript">Description:</label>
       <textarea
         class="user-input input_descript"
@@ -173,7 +194,7 @@ label {
   height: 2.1em;
   width: 100%;
   background: #1c1c1e;
-  color: #808080;
+  color: #f8f8f8;
   outline: none;
   border: none;
   box-sizing: border-box;
@@ -188,6 +209,11 @@ label {
 }
 
 .duration_unit {
+  width: 30%;
+  min-width: 6em;
+}
+
+.short {
   width: 30%;
   min-width: 6em;
 }

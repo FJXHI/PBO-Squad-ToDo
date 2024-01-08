@@ -1,11 +1,13 @@
-s
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/search_store'
 import { ref, computed } from 'vue'
 
 const searchStore = useSearchStore()
 
-const isDescending = ref(true)
+const isDescending = computed(() => {
+  const option = searchStore.sortOptions[props.title]
+  return option ? option.isDescending : false
+})
 
 const isTicked = computed(() => {
   const option = searchStore.sortOptions[props.title]
@@ -42,7 +44,6 @@ function handleSortOrderChange() {
     return
   }
 
-  isDescending.value = !isDescending.value
   option.isDescending = !option.isDescending
 }
 

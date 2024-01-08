@@ -8,19 +8,19 @@ const store = useToDoEntryStore()
 function collapseOthers() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.isExpanded)
-    if (entry.isExpanded) {
-      entry.isExpanded = false
+    console.log(entry.metadata.isExpanded)
+    if (entry.metadata.isExpanded) {
+      entry.metadata.isExpanded = false
     }
   }
 }
 </script>
 
 <template>
-  <main>
+  <div :style="`position: relative;`">
     <div
-      v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 5)"
-      :key="entry.todoEntry.title"
+      v-for="entry in store.entries.filter((entry) => entry.metadata.isVisible == true).slice(0, 5)"
+      :key="entry.title"
     >
       <CompactEntry
         :entry="entry"
@@ -28,5 +28,5 @@ function collapseOthers() {
         @collapse-others="collapseOthers"
       ></CompactEntry>
     </div>
-  </main>
+  </div>
 </template>

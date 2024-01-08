@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+var inputColor = ref('#000000')
+
+function pickColor() {
+  var pickColorValue = inputColor.value
+  console.log('The Color is: ' + pickColorValue)
+  alert('The Color is: ' + pickColorValue)
+}
+</script>
+
 <template>
   <div class="settings">
     <div class="line">
@@ -11,6 +23,8 @@
     </div>
     <div class="line">
       <span class="text">Tags</span>
+      <input class="btn" type="color" id="colorPicker" v-model="inputColor" />
+      <button @click="pickColor()" class="btn">Pick Color</button>
     </div>
     <div class="line">
       <span class="text">Switch</span>
