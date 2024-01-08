@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { saveEntries } from '@/services/entryStorageService';
+import { addEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -48,7 +48,7 @@ const saveEdit = () => {
       deadlineDate = new Date('')
     }
 
-    store.addEntry({
+    const entry: ToDoEntry = {
       todoEntry: {
         title: inputTitle.value,
         description: inputDescript.value,
@@ -58,9 +58,9 @@ const saveEdit = () => {
       },
       isVisible: true,
       isExpanded: false
-    })
+    }
 
-    saveEntries(store.entries)
+    addEntry(entry)
 
     const dataObject = {
       title: inputTitle.value,

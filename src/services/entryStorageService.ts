@@ -11,17 +11,22 @@ export function loadEntries(): void {
   entries.forEach((entry) => {
     store.addEntry(entry)
   })
+
+  console.log(store.entries)
 }
 
 /**
- * Saves the given entries to the local storage.
- * @param entries - An array of entries to be saved.
+ * Saves the given entry to the store and local storage.
+ * @param entriy - The entry to save.
  */
-export function saveEntries(entries: ToDoEntry[]): void {
-  localStorage.setItem('entries', JSON.stringify(entries))
+export function addEntry(entry: ToDoEntry): void {
+  const store = useToDoEntryStore()
+  store.addEntry(entry)
+
+  localStorage.setItem('entries', JSON.stringify(store.entries))
 }
 
-export function getEntriesFromLS(): ToDoEntry[] {
+function getEntriesFromLS(): ToDoEntry[] {
   const entries = localStorage.getItem('entries')
 
   if (entries) {
@@ -41,12 +46,15 @@ export function clearEntries(): void {
   localStorage.removeItem('entries')
 }
 
+/**
+ * Reverts the entry storage to debug entries.
+ * Debug entries are pre-defined ToDoEntry objects used for testing and debugging purposes.
+ * This function clears the existing entries and adds the debug entries to the entry storage.
+ */
 export function revertToDebugEntries(): void {
-  clearEntries()
+  const debugEntries: ToDoEntry[] = []
 
-  const store = useToDoEntryStore()
-
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Meeting with Client',
       description: 'Discuss project requirements and timeline',
@@ -57,7 +65,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Prepare Presentation',
       description: 'Create slides for upcoming presentation',
@@ -67,7 +75,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Research New Feature',
       description: 'Explore options for implementing a new feature',
@@ -77,7 +85,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Bug Fixing',
       description: 'Investigate and resolve reported bugs',
@@ -86,7 +94,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Code Refactoring',
       description: 'Improve code quality and maintainability',
@@ -95,7 +103,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Testing Phase',
       description: 'Perform comprehensive testing of the application',
@@ -104,7 +112,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'UI Design Review',
       description: 'Evaluate and enhance user interface design',
@@ -113,7 +121,7 @@ export function revertToDebugEntries(): void {
     isVisible: true,
     isExpanded: false
   })
-  store.addEntry({
+  debugEntries.push({
     todoEntry: {
       title: 'Documentation Fix',
       description: 'Update project documentation with recent changes',
@@ -123,13 +131,23 @@ export function revertToDebugEntries(): void {
     isExpanded: false
   })
 
-  saveEntries(store.entries)
+  clearEntries()
+  debugEntries.forEach((entry) => {
+    addEntry(entry)
+  })
 }
 
+/**
+ * Clears the entire local storage.
+ */
 export function clearLocalStorage(): void {
   localStorage.clear()
 }
 
+/**
+ * Retrieves the deleted entries from local storage.
+ * @returns An array of ToDoEntry objects representing the deleted entries.
+ */
 export function getDeletedEntries(): ToDoEntry[] {
   const entries = localStorage.getItem('deletedEntries')
 
