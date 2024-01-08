@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import { addEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 

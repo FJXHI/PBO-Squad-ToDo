@@ -46,5 +46,9 @@ export const useToDoEntryStore = defineStore('todoEntries', () => {
     }
   }
 
-  return { entries, addEntry, removeEntry }
+  function clearEntries(): void {
+    entries.value = []
+  }
+
+  return { entries, addEntry, removeEntry, clearEntries }
 })
