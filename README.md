@@ -54,6 +54,45 @@ To start the documentation server locally:
 npm start --dev
 ```
 
+# User guide
+
+## About the application
+
+This app is a ToDo manager mainly developed for mobile devices.
+It allows the user to add and customize entries and displays them in multiple different ways.
+
+## Views
+
+The application consists of two different views: the focus mode and the overview mode.
+While the overview mode provides a way to see all todo-entries in a grid-layout, the main view is the focus mode where only 5 todo-entries are shown, which are the most important ones.
+
+## Functionality
+
+The app provides multiple features which ensure a comprehensive and easy-to-use way to manage tasks.
+
+### Searching
+
+The searchbar located at the top of the screen can be used to search all todo-entries for a specific term.
+To reset the search it is possible to clear the searchbar by clicking the 'x'-button. 
+
+### Sorting
+
+It is only possible to enable one sorting at a time.
+The app provides a sorting-functionality which allows to sort the entries by the title, its deadline, expenditure or the timestamp the entries were added.
+It is also possible to set the sorting to ascending or descending.
+
+### Operations on the entries
+
+The todo-entries can be deleted or marked as completed.
+It is possible to swipe the entry to the left to complete it or swipe to the right to delete it.
+Another way to complete and delete an entry is to click on it and select the checkmark or the garbage can.
+In addition, the selected entry can be edited to manipulate all its attributes by clicking on the pencil.
+
+### Adding and editing an entry
+
+A todo-entry has multiple different attributes.
+The one necessary attribute an entry has to have is the title, any other attributes can be added but are optional.
+It is possible to set a deadline, an estimated duration for the task, a number of tags and a description.
 
 # VUE
 
