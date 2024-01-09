@@ -24,7 +24,6 @@ const boxWidth = 40
 
 const entryBox = ref(null)
 const entryBoxSize = useElementSize(entryBox)
-let isExpanded = ref(false)
 
 const title = ref(null)
 const titleSize = useElementSize(title)
@@ -34,8 +33,6 @@ const initialContentSize = {
   width: useElementSize(content).width,
   height: useElementSize(content).height
 }
-
-const emit = defineEmits(['collapse-others'])
 
 let showEntryInput = ref(false)
 
@@ -53,7 +50,7 @@ let backgoundColor =
 
 function changeExpand() {
   if (!entry.metadata.isExpanded) {
-    collapseOthers()
+    collapseEntries()
   }
   entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
@@ -78,10 +75,9 @@ function closeInputModal() {
   showEntryInput.value = false
 }
 
-function collapseOthers() {
+function collapseEntries() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.metadata.isExpanded)
     if (entry.metadata.isExpanded) {
       entry.metadata.isExpanded = false
     }
