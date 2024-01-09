@@ -9,6 +9,7 @@ import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed, reactive, defineComponent } from 'vue'
 import InputModal from './TheInputModal.vue'
+import EntryButton from './EntryButton.vue'
 
 const store = useToDoEntryStore()
 
@@ -220,15 +221,15 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
         <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
-            <button @click="delClicked(entry)" class="flex justify-center">
+            <EntryButton @click="delClicked(entry)" class="flex justify-center">
               <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
-            </button>
-            <button @click="editClicked(entry)" class="flex justify-center">
+            </EntryButton>
+            <EntryButton @click="editClicked(entry)" class="flex justify-center">
               <img alt="Edit" src="@/assets/icon_edit.svg" />
-            </button>
-            <button @click="doneClicked(entry)" class="flex justify-center">
+            </EntryButton>
+            <EntryButton @click="doneClicked(entry)" class="flex justify-center">
               <img alt="Done" src="@/assets/icon_done.svg" />
-            </button>
+            </EntryButton>
           </nav>
         </span>
       </div>
