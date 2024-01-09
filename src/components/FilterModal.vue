@@ -35,8 +35,12 @@ const props = defineProps({
             </div>
           </div>
           <div class="button-wrapper">
-            <AcceptDeclineButton class="btn btn_cancel" type="button" @click="close()">Discard</AcceptDeclineButton>
-            <AcceptDeclineButton class="btn btn_save" type="button" @click="close()">Apply</AcceptDeclineButton>
+            <AcceptDeclineButton class="btn btn_cancel" type="button" @click="close()"
+              >Discard</AcceptDeclineButton
+            >
+            <AcceptDeclineButton class="btn btn_save" type="button" @click="close()"
+              >Apply</AcceptDeclineButton
+            >
           </div>
         </div>
       </div>

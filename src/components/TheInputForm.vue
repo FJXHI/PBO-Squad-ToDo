@@ -102,7 +102,9 @@ const clearInput = () => {
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
-        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit">Cancel</AcceptDeclineButton>
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
+          >Cancel</AcceptDeclineButton
+        >
         <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
       </span>
       <label for="id_title">Title:</label>
