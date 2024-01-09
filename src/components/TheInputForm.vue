@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 
 const store = useToDoEntryStore()
 
@@ -101,8 +102,8 @@ const clearInput = () => {
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
-        <button class="btn_save" type="submit">Save</button>
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit">Cancel</AcceptDeclineButton>
+        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
       </span>
       <label for="id_title">Title:</label>
       <input
@@ -226,19 +227,6 @@ label {
 .user-input:focus,
 .user-input:active {
   background-color: #2c2c2e;
-}
-
-.edit_btn button {
-  font-size: 18px;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
-  background: #1c1c1e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  margin-top: 32px;
 }
 
 .btn_save {
