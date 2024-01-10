@@ -157,7 +157,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_delete.svg"
+          src="/assets/icon_delete.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -170,7 +170,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_done.svg"
+          src="/assets/icon_done.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -186,13 +186,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
             <span class="entry-text">
-              <img alt="Deadline" src="@/assets/icon_deadline.png" />
+              <img alt="Deadline" src="/assets/icon_deadline.png" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
-              <img alt="Expenditure" src="@/assets/icon_timespan.png" />
+              <img alt="Expenditure" src="/assets/icon_timespan.png" />
               {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
             </span>
           </template>
@@ -209,13 +209,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
             <button @click="delClicked(entry)" class="flex justify-center">
-              <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
+              <img alt="Delete" style="" src="/assets/icon_delete.svg" />
             </button>
             <button @click="editClicked(entry)" class="flex justify-center">
-              <img alt="Edit" src="@/assets/icon_edit.svg" />
+              <img alt="Edit" src="/assets/icon_edit.svg" />
             </button>
             <button @click="doneClicked(entry)" class="flex justify-center">
-              <img alt="Done" src="@/assets/icon_done.svg" />
+              <img alt="Done" src="/assets/icon_done.svg" />
             </button>
           </nav>
         </span>

@@ -78,11 +78,11 @@ function doneClicked(entry: ToDoEntry) {
       <span v-if="isExpanded">
         <nav class="info-btn">
           <button @click="delClicked(entry)">
-            <img alt="Delete" src="@/assets/icon_delete.svg" />
+            <img alt="Delete" src="/assets/icon_delete.svg" />
           </button>
-          <button @click="editClicked()"><img alt="Edit" src="@/assets/icon_edit.svg" /></button>
+          <button @click="editClicked()"><img alt="Edit" src="/assets/icon_edit.svg" /></button>
           <button @click="doneClicked(entry)">
-            <img alt="Done" src="@/assets/icon_done.svg" />
+            <img alt="Done" src="/assets/icon_done.svg" />
           </button>
         </nav>
       </span>
