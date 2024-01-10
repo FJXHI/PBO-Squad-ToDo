@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { removeAndAddEntry } from '@/services/DeleteDoneService'
-import type { PropType } from 'vue'
+import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed } from 'vue'
 import InputModal from './TheInputModal.vue'
 import EntryButton from './EntryButton.vue'
+import { completeEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -44,7 +44,7 @@ function changeExpand() {
 
 function delClicked(entry: ToDoEntry): void {
   console.log('Clicked Delete')
-  removeAndAddEntry(entry, true)
+  completeEntry(entry, true)
 }
 
 function editClicked(entry: ToDoEntry) {
@@ -55,7 +55,7 @@ function editClicked(entry: ToDoEntry) {
 
 function doneClicked(entry: ToDoEntry) {
   console.log('Clicked Done')
-  removeAndAddEntry(entry, false)
+  completeEntry(entry, false)
 }
 
 function closeInputModal() {
@@ -80,21 +80,6 @@ let deleteWidth = ref(0)
 let tickWidth = ref(0)
 let swipeDir = ref(0)
 const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
-  // dont change this to false -> prevent click event
-  // passive: true,
-  // onSwipe(e: TouchEvent){
-  //   if (swipeDir.value == 0)
-  //     swipeDir.value = lengthX.value > 0 ? 1 : -1;
-
-  //     // check for swipe in same direction
-  //     // -> only do things if swipe diretion for ongoing swipe hasnt changed
-  //     if (lengthX.value * swipeDir.value >= 0){
-  //       if (lengthX.value < 0)
-  //         deleteWidth.value = Math.abs(lengthX.value)
-  //       else
-  //         tickWidth.value = Math.abs(lengthX.value)
-  //     }
-  // },
   passive: true,
   onSwipe(e: TouchEvent) {
     if (containerWidth.value && Math.abs(lengthY.value) < 50) {
@@ -108,25 +93,16 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       opacity.value = 1
     }
   },
-  // onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
-  //   // check for "enough swipe" for tick/delete
-  //   // do stuff if critera is met
-
-  //   // reset swipe changes if not
-  //   deleteWidth.value = tickWidth.value = 0;
-  //   swipeDir.value = 0
-  // }
   onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
-    // if (lengthX.value < 0 && containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
-    //   left.value = '20%'
-    //   opacity.value = 0
-    // }
-    // else {
-    //   left.value = '0'
-    //   opacity.value = 1
-    // }
-
-    left.value = `0`
+    // check if swiped enough
+    if (containerWidth.value && Math.abs(lengthX.value) / containerWidth.value >= 0.5) {
+      // swiped to right -> delete
+      if (lengthX.value < 0) completeEntry(entry, true)
+      // swiped to left -> tick
+      else completeEntry(entry, false)
+    } else {
+      left.value = '0'
+    }
   }
 })
 </script>
@@ -153,7 +129,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_delete.svg"
+          src="/assets/icon_delete.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -166,7 +142,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_done.svg"
+          src="/assets/icon_done.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -182,13 +158,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
             <span class="entry-text">
-              <img alt="Deadline" src="@/assets/icon_deadline.png" />
+              <img alt="Deadline" src="/assets/icon_deadline.png" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
-              <img alt="Expenditure" src="@/assets/icon_timespan.png" />
+              <img alt="Expenditure" src="/assets/icon_timespan.png" />
               {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
             </span>
           </template>

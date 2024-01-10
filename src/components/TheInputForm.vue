@@ -5,6 +5,7 @@ import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
+import { addEntry, updateLS } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -37,11 +38,22 @@ onMounted(() => {
 })
 
 const saveEdit = () => {
-  if (props.entry) {
-    //Alternative update function
-    console.log('Update Entry -> rm old & create new Entry' + props.entry)
-    store.removeEntry(props.entry)
-  }
+  // take already existing entry if one was provided or create a new one
+  let entry: ToDoEntry = props.entry
+    ? props.entry
+    : {
+        title: '',
+        description: '',
+        color: '',
+        deadline: new Date(),
+        expenditure: { time: 0, unit: 'min' },
+        metadata: {
+          isVisible: true,
+          isExpanded: false
+        }
+      }
+
+  // process inputs
   if (inputTitle.value.trim() !== '') {
     let deadlineDate
     if (inputDate.value.trim() !== '') {
@@ -50,37 +62,41 @@ const saveEdit = () => {
       deadlineDate = undefined
     }
     let timeExpenditure
-    if (inputDuration.value.trim() !== '') {
+    if (inputDuration.value) {
       timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
     } else {
       timeExpenditure = undefined
     }
 
-    store.addEntry({
-      title: inputTitle.value,
-      description: inputDescript.value,
-      color: '#ff3b30',
-      deadline: deadlineDate,
-      expenditure: timeExpenditure,
-      metadata: {
-        isVisible: true,
-        isExpanded: false
-      }
-    })
-
-    const dataObject = {
-      title: inputTitle.value,
-      date: inputDate.value,
-      duration: inputDuration.value,
-      unit: inputDurationUnit.value,
-      description: inputDescript.value,
-      tags: inputTags.value,
-      color: inputColor.value
-    }
-    console.log(dataObject)
-    clearInput()
-    emit('closeaction')
+    entry.title = inputTitle.value
+    entry.description = inputDescript.value
+    entry.color = '#ff3b30'
+    entry.deadline = deadlineDate
+    entry.expenditure = timeExpenditure
   }
+
+  // save or update
+  if (props.entry) {
+    console.log('Updating existing entry')
+    updateLS()
+  } else {
+    console.log('Adding existing entry')
+    addEntry(entry)
+  }
+
+  const dataObject = {
+    title: inputTitle.value,
+    date: inputDate.value,
+    duration: inputDuration.value,
+    unit: inputDurationUnit.value,
+    description: inputDescript.value,
+    tags: inputTags.value,
+    color: inputColor.value
+  }
+
+  console.log(dataObject)
+  clearInput()
+  emit('closeaction')
 }
 
 const cancelEdit = () => {
