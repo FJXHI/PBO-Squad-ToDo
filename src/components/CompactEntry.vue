@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { ToDoEntry, ToDoEntryMeta } from '@/stores/entry_store'
+import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import { useDeleteStore } from '@/stores/delete_done_store'
 import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
-import { ref, computed, reactive, defineComponent } from 'vue'
+import { ref, computed } from 'vue'
 import InputModal from './TheInputModal.vue'
 import { completeEntry } from '@/services/entryStorageService'
 
@@ -23,10 +23,8 @@ const boxWidth = 40
 
 const entryBox = ref(null)
 const entryBoxSize = useElementSize(entryBox)
-let isExpanded = ref(false)
 
 const title = ref(null)
-const titleSize = useElementSize(title)
 
 const content = ref(null)
 const initialContentSize = {
@@ -39,16 +37,6 @@ const emit = defineEmits(['collapse-others'])
 let showEntryInput = ref(false)
 
 let entry: ToDoEntry = props.entry
-let backgoundColor =
-  'rgba(' +
-  entry.color.r.toString() +
-  ',' +
-  entry.color.g.toString() +
-  ',' +
-  entry.color.b.toString() +
-  ',' +
-  (entry.color.a ? entry.color.a : 255) +
-  ')'
 
 function changeExpand() {
   if (!entry.metadata.isExpanded) {
@@ -151,7 +139,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
   <span
     ref="container"
     class="horizontal-box stretch-horizontally"
-    :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${backgoundColor}; `"
+    :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${entry.color}; `"
   >
     <!-- main entry box -->
     <!-- '--element-color: ' + backgoundColor -->

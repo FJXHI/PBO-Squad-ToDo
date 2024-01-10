@@ -17,7 +17,9 @@ export interface ToDoEntry {
 
   title: string
   description?: string
-  color: Color
+
+  // color is stored as string containing the hex code
+  color: string
 
   deadline?: Date
   expenditure?: { time: number; unit: string }

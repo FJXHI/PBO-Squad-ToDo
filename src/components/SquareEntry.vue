@@ -20,16 +20,6 @@ const entryBox = ref(null)
 let isExpanded = ref(false)
 
 let entry: ToDoEntry = props.entry
-let backgoundColor =
-  'rgba(' +
-  entry.color.r.toString() +
-  ',' +
-  entry.color.g.toString() +
-  ',' +
-  entry.color.b.toString() +
-  ',' +
-  (entry.color.a ? entry.color.a : 255) +
-  ')'
 
 function changeExpand() {
   isExpanded.value = !isExpanded.value
@@ -59,7 +49,7 @@ function doneClicked(entry: ToDoEntry) {
   <article
     ref="entryBox"
     :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
-    :style="'--element-color: ' + backgoundColor"
+    :style="'--element-color: ' + entry.color"
     @click="changeExpand()"
   >
     <div>
