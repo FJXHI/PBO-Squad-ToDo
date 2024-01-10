@@ -4,6 +4,7 @@ import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
+import { addEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -55,7 +56,7 @@ const saveEdit = () => {
       timeExpenditure = undefined
     }
 
-    store.addEntry({
+    const newEntry: ToDoEntry = {
       title: inputTitle.value,
       description: inputDescript.value,
       color: '#ff3b30',
@@ -65,7 +66,9 @@ const saveEdit = () => {
         isVisible: true,
         isExpanded: false
       }
-    })
+    }
+
+    addEntry(newEntry)
 
     const dataObject = {
       title: inputTitle.value,
