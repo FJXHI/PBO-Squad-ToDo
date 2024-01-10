@@ -97,15 +97,12 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
   },
   onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
     // check if swiped enough
-    if (containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
+    if (containerWidth.value && Math.abs(lengthX.value) / containerWidth.value >= 0.5) {
       // swiped to right -> delete
-      if (lengthX.value < 0)
-        completeEntry(entry, true)
+      if (lengthX.value < 0) completeEntry(entry, true)
       // swiped to left -> tick
-      else
-        completeEntry(entry, false)
-    }
-    else {
+      else completeEntry(entry, false)
+    } else {
       left.value = '0'
     }
   }
