@@ -9,7 +9,7 @@ const store = useToDoEntryStore()
 store.addEntry({
   title: 'Meeting with Client',
   description: 'Discuss project requirements and timeline',
-  color: { r: 255, g: 59, b: 48 },
+  color: '#ff3b30',
   deadline: new Date('2024-01-07'),
   expenditure: { time: 5, unit: 'h' },
   metadata: {
@@ -20,7 +20,7 @@ store.addEntry({
 store.addEntry({
   title: 'Prepare Presentation',
   description: 'Create slides for upcoming presentation',
-  color: { r: 50, g: 173, b: 230 },
+  color: '#32ade6',
   expenditure: { time: 30, unit: 'min' },
   metadata: {
     isVisible: true,
@@ -30,7 +30,7 @@ store.addEntry({
 store.addEntry({
   title: 'Research New Feature',
   description: 'Explore options for implementing a new feature',
-  color: { r: 162, g: 132, b: 94 },
+  color: '#a2845e',
   deadline: new Date('2027-09-29'),
   metadata: {
     isVisible: true,
@@ -41,7 +41,7 @@ store.addEntry({
 store.addEntry({
   title: 'Bug Fixing',
   description: 'Investigate and resolve reported bugs',
-  color: { r: 52, g: 199, b: 89 },
+  color: '#34c759',
   metadata: {
     isVisible: true,
     isExpanded: false
@@ -51,7 +51,7 @@ store.addEntry({
 store.addEntry({
   title: 'Code Refactoring',
   description: 'Improve code quality and maintainability',
-  color: { r: 255, g: 204, b: 0 },
+  color: '#ffcc00',
   metadata: {
     isVisible: true,
     isExpanded: false
@@ -61,7 +61,7 @@ store.addEntry({
 store.addEntry({
   title: 'Testing Phase',
   description: 'Perform comprehensive testing of the application',
-  color: { r: 255, g: 59, b: 48 },
+  color: '#ff3b30',
   metadata: {
     isVisible: true,
     isExpanded: false
@@ -71,7 +71,7 @@ store.addEntry({
 store.addEntry({
   title: 'UI Design Review',
   description: 'Evaluate and enhance user interface design',
-  color: { r: 50, g: 173, b: 230 },
+  color: '#32ade6',
   metadata: {
     isVisible: true,
     isExpanded: false
@@ -81,7 +81,7 @@ store.addEntry({
 store.addEntry({
   title: 'Documentation Fix',
   description: 'Update project documentation with recent changes',
-  color: { r: 162, g: 132, b: 94 },
+  color: '#a2855e',
   metadata: {
     isVisible: true,
     isExpanded: false
