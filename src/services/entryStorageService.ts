@@ -57,6 +57,20 @@ export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
 }
 
 /**
+ * Updates the local storage to the current entry and deleted storage
+ */
+export function updateLS() {
+  const store = useToDoEntryStore()
+  const delStore = useDeleteStore()
+
+  localStorage.removeItem(active)
+  localStorage.removeItem(archived)
+
+  localStorage.setItem(active, JSON.stringify(store.entries))
+  localStorage.setItem(archived, JSON.stringify(delStore.deletedEntries))
+}
+
+/**
  * Retrieves the deleted entries from local storage.
  * @returns An array of ToDoEntry objects representing the deleted entries.
  */
