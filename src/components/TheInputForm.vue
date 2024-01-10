@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 
 const store = useToDoEntryStore()
@@ -140,13 +141,7 @@ const clearInput = () => {
 
       <label for="id_tags">Tags:</label>
       <div>
-        <input
-          class="user-input duration"
-          type="text"
-          id="id_tags"
-          v-model="inputTags"
-          placeholder="Tags"
-        />
+        <TagDropdown />
         <input
           class="user-input short"
           type="color"
@@ -154,6 +149,7 @@ const clearInput = () => {
           v-model="inputColor"
         /><!-- Inputcolor field slightly too high up -->
       </div>
+
       <label for="id_descript">Description:</label>
       <textarea
         class="user-input input_descript"
