@@ -104,7 +104,7 @@ export function revertToDebugEntries(): void {
   debugEntries.push({
     title: 'Meeting with Client',
     description: 'Discuss project requirements and timeline',
-    color: '#ff3b30', 
+    color: '#ff3b30',
     deadline: new Date('2024-01-07'),
     expenditure: { time: 5, unit: 'h' },
     metadata: {
