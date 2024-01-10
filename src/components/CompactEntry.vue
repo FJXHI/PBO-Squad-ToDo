@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { useDeleteStore } from '@/stores/delete_done_store'
-import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
@@ -84,21 +82,6 @@ let deleteWidth = ref(0)
 let tickWidth = ref(0)
 let swipeDir = ref(0)
 const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
-  // dont change this to false -> prevent click event
-  // passive: true,
-  // onSwipe(e: TouchEvent){
-  //   if (swipeDir.value == 0)
-  //     swipeDir.value = lengthX.value > 0 ? 1 : -1;
-
-  //     // check for swipe in same direction
-  //     // -> only do things if swipe diretion for ongoing swipe hasnt changed
-  //     if (lengthX.value * swipeDir.value >= 0){
-  //       if (lengthX.value < 0)
-  //         deleteWidth.value = Math.abs(lengthX.value)
-  //       else
-  //         tickWidth.value = Math.abs(lengthX.value)
-  //     }
-  // },
   passive: true,
   onSwipe(e: TouchEvent) {
     if (containerWidth.value && Math.abs(lengthY.value) < 50) {
@@ -112,25 +95,19 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       opacity.value = 1
     }
   },
-  // onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
-  //   // check for "enough swipe" for tick/delete
-  //   // do stuff if critera is met
-
-  //   // reset swipe changes if not
-  //   deleteWidth.value = tickWidth.value = 0;
-  //   swipeDir.value = 0
-  // }
   onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
-    // if (lengthX.value < 0 && containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
-    //   left.value = '20%'
-    //   opacity.value = 0
-    // }
-    // else {
-    //   left.value = '0'
-    //   opacity.value = 1
-    // }
-
-    left.value = `0`
+    // check if swiped enough
+    if (containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
+      // swiped to right -> delete
+      if (lengthX.value < 0)
+        completeEntry(entry, true)
+      // swiped to left -> tick
+      else
+        completeEntry(entry, false)
+    }
+    else {
+      left.value = '0'
+    }
   }
 })
 </script>
