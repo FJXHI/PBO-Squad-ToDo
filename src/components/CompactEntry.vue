@@ -181,13 +181,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
             <EntryButton @click="delClicked(entry)" class="flex justify-center">
-              <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
+              <img alt="Delete" style="" src="/assets/icon_delete.svg" />
             </EntryButton>
             <EntryButton @click="editClicked(entry)" class="flex justify-center">
-              <img alt="Edit" src="@/assets/icon_edit.svg" />
+              <img alt="Edit" src="/assets/icon_edit.svg" />
             </EntryButton>
             <EntryButton @click="doneClicked(entry)" class="flex justify-center">
-              <img alt="Done" src="@/assets/icon_done.svg" />
+              <img alt="Done" src="/assets/icon_done.svg" />
             </EntryButton>
           </nav>
         </span>
