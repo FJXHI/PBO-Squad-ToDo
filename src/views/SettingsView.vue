@@ -1,8 +1,33 @@
+<script setup lang="ts">
+import {
+  clearEntries,
+  clearLocalStorage,
+  revertToDebugEntries
+} from '@/services/entryStorageService'
+import { ref } from 'vue'
+
+var inputColor = ref('#000000')
+
+function pickColor() {
+  var pickColorValue = inputColor.value
+  console.log('The Color is: ' + pickColorValue)
+  alert('The Color is: ' + pickColorValue)
+}
+</script>
+
 <template>
   <div class="settings">
     <div class="line">
-      <span class="text">Text</span>
-      <button class="btn">Test</button>
+      <span class="text">Remove all entries</span>
+      <button class="btn" @click="clearEntries">Clear</button>
+    </div>
+    <div class="line">
+      <span class="text">DEBUG: Revert to debug entries</span>
+      <button class="btn" @click="revertToDebugEntries">Revert</button>
+    </div>
+    <div class="line">
+      <span class="text">DEBUG: Clear Local Storage</span>
+      <button class="btn" @click="clearLocalStorage">Revert</button>
     </div>
     <div class="line">
       <span class="text">Text</span>
@@ -11,6 +36,8 @@
     </div>
     <div class="line">
       <span class="text">Tags</span>
+      <input class="btn" type="color" id="colorPicker" v-model="inputColor" />
+      <button @click="pickColor()" class="btn">Pick Color</button>
     </div>
     <div class="line">
       <span class="text">Switch</span>

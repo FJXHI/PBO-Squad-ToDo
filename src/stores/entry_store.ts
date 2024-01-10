@@ -12,10 +12,14 @@ export interface Tag {
   tagColor: Color
 }
 
-export interface ToDoEntryInfo {
+export interface ToDoEntry {
+  metadata: ToDoEntryMeta
+
   title: string
   description?: string
-  color: Color
+
+  // color is stored as string containing the hex code
+  color: string
 
   deadline?: Date
   expenditure?: { time: number; unit: string }
@@ -25,8 +29,7 @@ export interface ToDoEntryInfo {
   tags?: Tag[]
 }
 
-export interface ToDoEntry {
-  todoEntry: ToDoEntryInfo
+export interface ToDoEntryMeta {
   isVisible: boolean
   isExpanded: boolean
 }
@@ -45,5 +48,9 @@ export const useToDoEntryStore = defineStore('todoEntries', () => {
     }
   }
 
-  return { entries, addEntry, removeEntry }
+  function clearEntries(): void {
+    entries.value = []
+  }
+
+  return { entries, addEntry, removeEntry, clearEntries }
 })
