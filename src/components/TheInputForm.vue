@@ -58,7 +58,7 @@ const saveEdit = () => {
     store.addEntry({
       title: inputTitle.value,
       description: inputDescript.value,
-      color: "#ff3b30",
+      color: '#ff3b30',
       deadline: deadlineDate,
       expenditure: timeExpenditure,
       metadata: {
