@@ -22,7 +22,7 @@ export interface ToDoEntry {
   color: string
 
   deadline?: Date
-  expenditure?: { time: number; unit: string }
+  expenditure?: number
 
   flatPriority?: number
 

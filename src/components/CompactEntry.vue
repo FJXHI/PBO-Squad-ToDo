@@ -8,6 +8,13 @@ import { ref, computed } from 'vue'
 import InputModal from './TheInputModal.vue'
 import { completeEntry } from '@/services/entryStorageService'
 
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
+
 const store = useToDoEntryStore()
 
 const props = defineProps({
@@ -159,15 +166,15 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <!-- row for deadline and expenditure -->
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
-            <span class="entry-text">
+            <span class="text-lg">
               <img alt="Deadline" src="/assets/icon_deadline.png" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
-            <span class="entry-text">
+            <span class="text-lg">
               <img alt="Expenditure" src="/assets/icon_timespan.png" />
-              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+              {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
           </template>
         </section>

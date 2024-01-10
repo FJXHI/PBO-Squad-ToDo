@@ -29,12 +29,26 @@ onMounted(() => {
   if (props.entry) {
     inputTitle.value = props.entry.title || ''
     inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.expenditure?.time.toString() || ''
-    inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
+    inputDuration.value = props.entry.expenditure?.toString() || ''
     inputDescript.value = props.entry.description || ''
     //inputTags.value = props.entry.todoEntry.tags || ''
   }
 })
+
+const convertToSeconds = (value: number, unit: string) => {
+  switch (unit) {
+    case 'min':
+      return value * 60
+    case 'h':
+      return value * 3600
+    case 'days':
+      return value * 86400
+    case 'weeks':
+      return value * 604800
+    default:
+      return value
+  }
+}
 
 const saveEdit = () => {
   // take already existing entry if one was provided or create a new one
@@ -45,7 +59,7 @@ const saveEdit = () => {
         description: '',
         color: '',
         deadline: new Date(),
-        expenditure: { time: 0, unit: 'min' },
+        expenditure: 0,
         metadata: {
           isVisible: true,
           isExpanded: false
@@ -60,9 +74,10 @@ const saveEdit = () => {
     } else {
       deadlineDate = undefined
     }
-    let timeExpenditure
+    let timeExpenditure: number | undefined = 0
     if (inputDuration.value) {
-      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+      // timeExpenditure = parseInt(inputDuration.value)
+      timeExpenditure = convertToSeconds(timeExpenditure, inputDurationUnit.value)
     } else {
       timeExpenditure = undefined
     }
