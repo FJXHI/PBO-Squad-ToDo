@@ -33,7 +33,8 @@ onMounted(() => {
     inputDuration.value = props.entry.expenditure?.time.toString() || ''
     inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
     inputDescript.value = props.entry.description || ''
-    //inputTags.value = props.entry.todoEntry.tags || ''
+    inputColor.value = props.entry.color || '#ff3b30' //default color
+    //inputTags.value = props.entry.todoEntry.tag || ''
   }
 })
 
@@ -70,9 +71,10 @@ const saveEdit = () => {
 
     entry.title = inputTitle.value
     entry.description = inputDescript.value
-    entry.color = '#ff3b30'
+    entry.color = inputColor.value
     entry.deadline = deadlineDate
     entry.expenditure = timeExpenditure
+    //entry.tags = inputTags
   }
 
   // save or update
