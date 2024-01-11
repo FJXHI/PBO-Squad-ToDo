@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import SortSetting from './SortSetting.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 

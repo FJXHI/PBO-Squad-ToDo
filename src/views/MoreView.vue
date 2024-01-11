@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SquareEntry from '../components/SquareEntry.vue'
-// import Expenditure from '../classes/Expenditure'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()

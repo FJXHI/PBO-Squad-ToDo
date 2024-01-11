@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/search_store'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 const searchStore = useSearchStore()
 

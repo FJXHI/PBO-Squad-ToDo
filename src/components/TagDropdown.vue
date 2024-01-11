@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const inputTags = ref('')
-const tagData = ['Uni', 'Work', 'Test']
+const tagData = ['Uni', 'Work', 'Hobby']
 </script>
 
 <template>
