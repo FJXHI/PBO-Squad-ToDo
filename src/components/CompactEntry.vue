@@ -5,7 +5,7 @@ import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed } from 'vue'
-import InputModal from './TheInputModal.vue'
+import InputModal from './InputModal.vue'
 import EntryButton from './EntryButton.vue'
 import { completeEntry } from '@/services/entryStorageService'
 
