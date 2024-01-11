@@ -10,7 +10,7 @@
   </button>
 </template>
 
-<style>
+<style scoped>
 .navbtn {
   outline: none;
   border: none;
