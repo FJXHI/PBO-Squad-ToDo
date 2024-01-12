@@ -26,20 +26,20 @@ export default {
     <div class="nav-field">
       <span class="nav_bar">
         <NavigationButton class="btn_home" @click="homeClicked">
-          <img alt="Home" class="icon" src="@/assets/icon_density_small.svg" />
+          <img alt="Home" class="icon" src="/assets/icon_density_small.svg" />
         </NavigationButton>
         <NavigationButton class="btn_add" @click="addClicked">
-          <img alt="Add" class="icon" src="@/assets/icon_add.svg" />
+          <img alt="Add" class="icon" src="/assets/icon_add.svg" />
         </NavigationButton>
         <NavigationButton class="btn_overview" @click="moreClicked">
-          <img alt="More" class="icon" src="@/assets/icon_grid_view.svg" />
+          <img alt="More" class="icon" src="/assets/icon_grid_view.svg" />
         </NavigationButton>
       </span>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .nav_bar {
   display: flex;
   justify-content: space-around;

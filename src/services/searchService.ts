@@ -1,4 +1,4 @@
-import { useToDoEntryStore, type ToDoEntry, type ToDoEntryInfo } from '@/stores/entry_store'
+import { useToDoEntryStore, type ToDoEntry, type ToDoEntryMeta } from '@/stores/entry_store'
 import { useSearchStore } from '@/stores/search_store'
 
 export function search(query: string): void {
@@ -10,14 +10,14 @@ export function search(query: string): void {
   entries.forEach((entry) => {
     // const contains = entry.todoEntry.title.toLowerCase().includes(query.toLowerCase())
     const containsTitle = searchParams.some((param) =>
-      entry.todoEntry.title.toLowerCase().includes(param.toLowerCase())
+      entry.title.toLowerCase().includes(param.toLowerCase())
     ) // some vs every?
 
     const containsDescription = searchParams.some(
-      (param) => entry.todoEntry.description?.toLowerCase().includes(param.toLowerCase())
+      (param) => entry.description?.toLowerCase().includes(param.toLowerCase())
     )
 
-    entry.isVisible = containsTitle || containsDescription
+    entry.metadata.isVisible = containsTitle || containsDescription
   })
 }
 
@@ -29,22 +29,20 @@ export function sortEntries(): void {
   const sortOptions = searchStore.sortOptions
 
   if (sortOptions['Title'].isActive) {
-    entries.sort((entry1, entry2) =>
-      sortByTitle(entry1.todoEntry, entry2.todoEntry, sortOptions['Title'].isDescending)
-    )
+    entries.sort((entry1, entry2) => sortByTitle(entry1, entry2, sortOptions['Title'].isDescending))
   } else if (sortOptions['Deadline'].isActive) {
     entries.sort((entry1, entry2) =>
-      sortByDeadline(entry1.todoEntry, entry2.todoEntry, sortOptions['Deadline'].isDescending)
+      sortByDeadline(entry1, entry2, sortOptions['Deadline'].isDescending)
     )
   } else if (sortOptions['Expenditure'].isActive) {
     entries.sort((entry1, entry2) =>
-      sortByExp(entry1.todoEntry, entry2.todoEntry, sortOptions['Expenditure'].isDescending)
+      sortByExp(entry1, entry2, sortOptions['Expenditure'].isDescending)
     )
   } else if (sortOptions['Last Added'].isActive) {
     throw new Error('Not implemented yet')
 
     entries.sort((entry1, entry2) =>
-      sortByLastAdded(entry1.todoEntry, entry2.todoEntry, sortOptions['Last Added'].isDescending)
+      sortByLastAdded(entry1, entry2, sortOptions['Last Added'].isDescending)
     )
   } else {
     throw new Error('nothing to sort')
@@ -52,13 +50,13 @@ export function sortEntries(): void {
 }
 
 /**
- * Sorts two ToDoEntryInfo objects by their Title.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects by their Title.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */
-function sortByTitle(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: boolean): number {
+function sortByTitle(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
   const Title1 = entry1.title.toLowerCase()
   const Title2 = entry2.title.toLowerCase()
 
@@ -74,13 +72,13 @@ function sortByTitle(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: b
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their deadlines.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their deadlines.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether to sort in descending order.
  * @returns A number indicating the order of the two objects.
  */
-function sortByDeadline(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: boolean): number {
+function sortByDeadline(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
   const deadline1 = entry1.deadline
   const deadline2 = entry2.deadline
 
@@ -102,13 +100,13 @@ function sortByDeadline(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their expenditure property.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their expenditure property.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */
-function sortByExp(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: boolean): number {
+function sortByExp(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
   const expenditure1 = entry1.expenditure?.time
   const expenditure2 = entry2.expenditure?.time
 
@@ -130,17 +128,13 @@ function sortByExp(entry1: ToDoEntryInfo, entry2: ToDoEntryInfo, descending: boo
 }
 
 /**
- * Sorts two ToDoEntryInfo objects based on their last added expenditure.
- * @param entry1 - The first ToDoEntryInfo object to compare.
- * @param entry2 - The second ToDoEntryInfo object to compare.
+ * Sorts two ToDoEntry objects based on their last added expenditure.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
  * @param descending - Determines whether the sorting should be in descending order.
  * @returns A number indicating the order of the two objects.
  */
-function sortByLastAdded(
-  entry1: ToDoEntryInfo,
-  entry2: ToDoEntryInfo,
-  descending: boolean
-): number {
+function sortByLastAdded(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
   const lastAdded1 = entry1.expenditure
   const lastAdded2 = entry2.expenditure
 

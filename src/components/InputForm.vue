@@ -3,6 +3,9 @@ import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
+import TagDropdown from '@/components/TagDropdown.vue'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
+import { addEntry, updateLS } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -25,21 +28,33 @@ const props = defineProps({
 onMounted(() => {
   // logic for default values here
   if (props.entry) {
-    inputTitle.value = props.entry.todoEntry.title || ''
-    inputDate.value = props.entry.todoEntry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.todoEntry.expenditure?.time.toString() || ''
-    inputDurationUnit.value = props.entry.todoEntry.expenditure?.unit || 'min'
-    inputDescript.value = props.entry.todoEntry.description || ''
-    //inputTags.value = props.entry.todoEntry.tags || ''
+    inputTitle.value = props.entry.title || ''
+    inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
+    inputDuration.value = props.entry.expenditure?.time.toString() || ''
+    inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
+    inputDescript.value = props.entry.description || ''
+    inputColor.value = props.entry.color || '#ff3b30' //default color
+    //inputTags.value = props.entry.todoEntry.tag || ''
   }
 })
 
 const saveEdit = () => {
-  if (props.entry) {
-    //Alternative update function
-    console.log('Update Entry -> rm old & create new Entry' + props.entry)
-    store.removeEntry(props.entry)
-  }
+  // take already existing entry if one was provided or create a new one
+  let entry: ToDoEntry = props.entry
+    ? props.entry
+    : {
+        title: '',
+        description: '',
+        color: '',
+        deadline: new Date(),
+        expenditure: { time: 0, unit: 'min' },
+        metadata: {
+          isVisible: true,
+          isExpanded: false
+        }
+      }
+
+  // process inputs
   if (inputTitle.value.trim() !== '') {
     let deadlineDate
     if (inputDate.value.trim() !== '') {
@@ -48,37 +63,42 @@ const saveEdit = () => {
       deadlineDate = undefined
     }
     let timeExpenditure
-    if (inputDuration.value.trim() !== '') {
+    if (inputDuration.value) {
       timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
     } else {
       timeExpenditure = undefined
     }
 
-    store.addEntry({
-      todoEntry: {
-        title: inputTitle.value,
-        description: inputDescript.value,
-        color: { r: 255, g: 59, b: 48 },
-        deadline: deadlineDate,
-        expenditure: timeExpenditure
-      },
-      isVisible: true,
-      isExpanded: false
-    })
-
-    const dataObject = {
-      title: inputTitle.value,
-      date: inputDate.value,
-      duration: inputDuration.value,
-      unit: inputDurationUnit.value,
-      description: inputDescript.value,
-      tags: inputTags.value,
-      color: inputColor.value
-    }
-    console.log(dataObject)
-    clearInput()
-    emit('closeaction')
+    entry.title = inputTitle.value
+    entry.description = inputDescript.value
+    entry.color = inputColor.value
+    entry.deadline = deadlineDate
+    entry.expenditure = timeExpenditure
+    //entry.tags = inputTags
   }
+
+  // save or update
+  if (props.entry) {
+    console.log('Updating existing entry')
+    updateLS()
+  } else {
+    console.log('Adding existing entry')
+    addEntry(entry)
+  }
+
+  const dataObject = {
+    title: inputTitle.value,
+    date: inputDate.value,
+    duration: inputDuration.value,
+    unit: inputDurationUnit.value,
+    description: inputDescript.value,
+    tags: inputTags.value,
+    color: inputColor.value
+  }
+
+  console.log(dataObject)
+  clearInput()
+  emit('closeaction')
 }
 
 const cancelEdit = () => {
@@ -101,8 +121,10 @@ const clearInput = () => {
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
-        <button class="btn_save" type="submit">Save</button>
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
+          >Cancel</AcceptDeclineButton
+        >
+        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
       </span>
       <label for="id_title">Title:</label>
       <input
@@ -137,13 +159,7 @@ const clearInput = () => {
 
       <label for="id_tags">Tags:</label>
       <div>
-        <input
-          class="user-input duration"
-          type="text"
-          id="id_tags"
-          v-model="inputTags"
-          placeholder="Tags"
-        />
+        <TagDropdown />
         <input
           class="user-input short"
           type="color"
@@ -151,6 +167,7 @@ const clearInput = () => {
           v-model="inputColor"
         /><!-- Inputcolor field slightly too high up -->
       </div>
+
       <label for="id_descript">Description:</label>
       <textarea
         class="user-input input_descript"
@@ -226,19 +243,6 @@ label {
 .user-input:focus,
 .user-input:active {
   background-color: #2c2c2e;
-}
-
-.edit_btn button {
-  font-size: 18px;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
-  background: #1c1c1e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  margin-top: 32px;
 }
 
 .btn_save {

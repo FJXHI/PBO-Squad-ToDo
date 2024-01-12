@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type { ToDoEntry, ToDoEntryInfo } from '@/stores/entry_store'
+import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import { useDeleteStore } from '@/stores/delete_done_store'
-import { removeAndAddEntry } from '@/services/DeleteDoneService'
-import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
-import { ref, computed, reactive, defineComponent } from 'vue'
-import InputModal from './TheInputModal.vue'
+import { ref, computed } from 'vue'
+import InputModal from './InputModal.vue'
+import EntryButton from './EntryButton.vue'
+import { completeEntry } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
 
@@ -23,10 +22,8 @@ const boxWidth = 40
 
 const entryBox = ref(null)
 const entryBoxSize = useElementSize(entryBox)
-let isExpanded = ref(false)
 
 const title = ref(null)
-const titleSize = useElementSize(title)
 
 const content = ref(null)
 const initialContentSize = {
@@ -34,32 +31,20 @@ const initialContentSize = {
   height: useElementSize(content).height
 }
 
-const emit = defineEmits(['collapse-others'])
-
 let showEntryInput = ref(false)
 
 let entry: ToDoEntry = props.entry
-let backgoundColor =
-  'rgba(' +
-  entry.todoEntry.color.r.toString() +
-  ',' +
-  entry.todoEntry.color.g.toString() +
-  ',' +
-  entry.todoEntry.color.b.toString() +
-  ',' +
-  (entry.todoEntry.color.a ? entry.todoEntry.color.a : 255) +
-  ')'
 
 function changeExpand() {
-  if (!entry.isExpanded) {
-    collapseOthers()
+  if (!entry.metadata.isExpanded) {
+    collapseEntries()
   }
-  entry.isExpanded = !entry.isExpanded
+  entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
 
 function delClicked(entry: ToDoEntry): void {
   console.log('Clicked Delete')
-  removeAndAddEntry(entry, true)
+  completeEntry(entry, true)
 }
 
 function editClicked(entry: ToDoEntry) {
@@ -70,19 +55,18 @@ function editClicked(entry: ToDoEntry) {
 
 function doneClicked(entry: ToDoEntry) {
   console.log('Clicked Done')
-  removeAndAddEntry(entry, false)
+  completeEntry(entry, false)
 }
 
 function closeInputModal() {
   showEntryInput.value = false
 }
 
-function collapseOthers() {
+function collapseEntries() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.isExpanded)
-    if (entry.isExpanded) {
-      entry.isExpanded = false
+    if (entry.metadata.isExpanded) {
+      entry.metadata.isExpanded = false
     }
   }
 }
@@ -96,21 +80,6 @@ let deleteWidth = ref(0)
 let tickWidth = ref(0)
 let swipeDir = ref(0)
 const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
-  // dont change this to false -> prevent click event
-  // passive: true,
-  // onSwipe(e: TouchEvent){
-  //   if (swipeDir.value == 0)
-  //     swipeDir.value = lengthX.value > 0 ? 1 : -1;
-
-  //     // check for swipe in same direction
-  //     // -> only do things if swipe diretion for ongoing swipe hasnt changed
-  //     if (lengthX.value * swipeDir.value >= 0){
-  //       if (lengthX.value < 0)
-  //         deleteWidth.value = Math.abs(lengthX.value)
-  //       else
-  //         tickWidth.value = Math.abs(lengthX.value)
-  //     }
-  // },
   passive: true,
   onSwipe(e: TouchEvent) {
     if (containerWidth.value && Math.abs(lengthY.value) < 50) {
@@ -124,25 +93,16 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       opacity.value = 1
     }
   },
-  // onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection){
-  //   // check for "enough swipe" for tick/delete
-  //   // do stuff if critera is met
-
-  //   // reset swipe changes if not
-  //   deleteWidth.value = tickWidth.value = 0;
-  //   swipeDir.value = 0
-  // }
   onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
-    // if (lengthX.value < 0 && containerWidth.value && (Math.abs(lengthX.value) / containerWidth.value) >= 0.5) {
-    //   left.value = '20%'
-    //   opacity.value = 0
-    // }
-    // else {
-    //   left.value = '0'
-    //   opacity.value = 1
-    // }
-
-    left.value = `0`
+    // check if swiped enough
+    if (containerWidth.value && Math.abs(lengthX.value) / containerWidth.value >= 0.5) {
+      // swiped to right -> delete
+      if (lengthX.value < 0) completeEntry(entry, true)
+      // swiped to left -> tick
+      else completeEntry(entry, false)
+    } else {
+      left.value = '0'
+    }
   }
 })
 </script>
@@ -151,13 +111,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
   <span
     ref="container"
     class="horizontal-box stretch-horizontally"
-    :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${backgoundColor}; `"
+    :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${entry.color}; `"
   >
     <!-- main entry box -->
     <!-- '--element-color: ' + backgoundColor -->
     <article
       ref="entryBox"
-      :class="['entry-box', entry.isExpanded ? 'detail-height' : 'compact-height']"
+      :class="['entry-box', entry.metadata.isExpanded ? 'detail-height' : 'compact-height']"
       :style="`position: relative; width: 100%; left: ${left}; margin: 0; transition: all 200ms ease-out;`"
       @click="changeExpand()"
     >
@@ -169,7 +129,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_delete.svg"
+          src="/assets/icon_delete.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -182,7 +142,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <img
           alt=""
           class="icon no-padding center"
-          src="@/assets/icon_done.svg"
+          src="/assets/icon_done.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
       </aside>
@@ -191,44 +151,44 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       <div ref="content" :style="`width: ${initialContentSize.width}px; padding: 10px;`">
         <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
         <h1 ref="title" class="text-2xl font-medium">
-          {{ entry?.todoEntry.title ? entry?.todoEntry.title : '' }}
+          {{ entry?.title ? entry?.title : '' }}
         </h1>
 
         <!-- row for deadline and expenditure -->
         <section class="info-box-1d">
-          <template v-if="entry.todoEntry.deadline != undefined">
+          <template v-if="entry.deadline != undefined">
             <span class="entry-text">
-              <img alt="Deadline" src="@/assets/icon_deadline.png" />
-              {{ entry?.todoEntry.deadline.toLocaleDateString() }}
+              <img alt="Deadline" src="/assets/icon_deadline.png" />
+              {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
-          <template v-if="entry.todoEntry.expenditure != undefined">
+          <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
-              <img alt="Expenditure" src="@/assets/icon_timespan.png" />
-              {{ entry.todoEntry.expenditure.time + ' ' + entry.todoEntry.expenditure.unit }}
+              <img alt="Expenditure" src="/assets/icon_timespan.png" />
+              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
             </span>
           </template>
         </section>
 
-        <template v-if="entry.isExpanded && entry.todoEntry.description != undefined">
+        <template v-if="entry && entry.description != undefined">
           <p :style="`color: #000000; padding: 0 0 10px 0; position: relative;`" class="text-base">
-            {{ entry.todoEntry.description }}
+            {{ entry.description }}
           </p>
         </template>
 
         <!-- action buttons -->
         <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
-        <span v-if="entry.isExpanded">
+        <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
-            <button @click="delClicked(entry)" class="flex justify-center">
-              <img alt="Delete" style="" src="@/assets/icon_delete.svg" />
-            </button>
-            <button @click="editClicked(entry)" class="flex justify-center">
-              <img alt="Edit" src="@/assets/icon_edit.svg" />
-            </button>
-            <button @click="doneClicked(entry)" class="flex justify-center">
-              <img alt="Done" src="@/assets/icon_done.svg" />
-            </button>
+            <EntryButton @click="delClicked(entry)" class="flex justify-center">
+              <img alt="Delete" style="" src="/assets/icon_delete.svg" />
+            </EntryButton>
+            <EntryButton @click="editClicked(entry)" class="flex justify-center">
+              <img alt="Edit" src="/assets/icon_edit.svg" />
+            </EntryButton>
+            <EntryButton @click="doneClicked(entry)" class="flex justify-center">
+              <img alt="Done" src="/assets/icon_done.svg" />
+            </EntryButton>
           </nav>
         </span>
       </div>

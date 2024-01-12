@@ -1,8 +1,4 @@
-<script setup lang="ts">
-/*defineProps<{
-    btnType: string
-  }>()*/
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <button class="navbtn">
@@ -10,7 +6,7 @@
   </button>
 </template>
 
-<style>
+<style scoped>
 .navbtn {
   outline: none;
   border: none;
