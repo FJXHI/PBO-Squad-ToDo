@@ -167,13 +167,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
             <span class="text-lg">
-              <img alt="Deadline" src="/assets/icon_deadline.png" />
+              <img alt="Deadline" src="/assets/icon_deadline.svg" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
             <span class="text-lg">
-              <img alt="Expenditure" src="/assets/icon_timespan.png" />
+              <img alt="Expenditure" src="/assets/icon_timespan.svg" />
               {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
           </template>
