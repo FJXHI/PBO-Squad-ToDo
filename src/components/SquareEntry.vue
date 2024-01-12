@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { ToDoEntry } from '@/stores/entry_store'
-import type { assert } from '@vue/compiler-core'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
 import { useToDoEntryStore } from '@/stores/entry_store'
-//import { useDelDoneStore } from '@/stores/done_store'
 
 const store = useToDoEntryStore()
 //const deldoneStore = useDelDoneStore()

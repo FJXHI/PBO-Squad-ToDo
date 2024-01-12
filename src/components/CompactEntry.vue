@@ -5,7 +5,8 @@ import type { PropType, ComponentPublicInstance } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
 import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed } from 'vue'
-import InputModal from './TheInputModal.vue'
+import InputModal from './InputModal.vue'
+import EntryButton from './EntryButton.vue'
 import { completeEntry } from '@/services/entryStorageService'
 
 import dayjs from 'dayjs'
@@ -36,15 +37,13 @@ const initialContentSize = {
   height: useElementSize(content).height
 }
 
-const emit = defineEmits(['collapse-others'])
-
 let showEntryInput = ref(false)
 
 let entry: ToDoEntry = props.entry
 
 function changeExpand() {
   if (!entry.metadata.isExpanded) {
-    collapseOthers()
+    collapseEntries()
   }
   entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
@@ -69,10 +68,9 @@ function closeInputModal() {
   showEntryInput.value = false
 }
 
-function collapseOthers() {
+function collapseEntries() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.metadata.isExpanded)
     if (entry.metadata.isExpanded) {
       entry.metadata.isExpanded = false
     }
@@ -195,15 +193,15 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
         <span v-if="entry.metadata.isExpanded">
           <nav class="info-box-1d">
-            <button @click="delClicked(entry)" class="flex justify-center">
+            <EntryButton @click="delClicked(entry)" class="flex justify-center">
               <img alt="Delete" style="" src="/assets/icon_delete.svg" />
-            </button>
-            <button @click="editClicked(entry)" class="flex justify-center">
+            </EntryButton>
+            <EntryButton @click="editClicked(entry)" class="flex justify-center">
               <img alt="Edit" src="/assets/icon_edit.svg" />
-            </button>
-            <button @click="doneClicked(entry)" class="flex justify-center">
+            </EntryButton>
+            <EntryButton @click="doneClicked(entry)" class="flex justify-center">
               <img alt="Done" src="/assets/icon_done.svg" />
-            </button>
+            </EntryButton>
           </nav>
         </span>
       </div>

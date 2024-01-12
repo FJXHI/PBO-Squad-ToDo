@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
-import InputForm from './TheInputForm.vue'
+import InputForm from './InputForm.vue'
 
 const emit = defineEmits(['close'])
 

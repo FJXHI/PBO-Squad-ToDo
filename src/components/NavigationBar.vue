@@ -39,7 +39,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .nav_bar {
   display: flex;
   justify-content: space-around;

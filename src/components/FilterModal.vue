@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import SortSetting from './SortSetting.vue'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 
 const emit = defineEmits(['close'])
 
@@ -34,8 +34,12 @@ const props = defineProps({
             </div>
           </div>
           <div class="button-wrapper">
-            <button class="btn btn_cancel" type="button" @click="close()">Discard</button>
-            <button class="btn btn_save" type="button" @click="close()">Apply</button>
+            <AcceptDeclineButton class="btn btn_cancel" type="button" @click="close()"
+              >Discard</AcceptDeclineButton
+            >
+            <AcceptDeclineButton class="btn btn_save" type="button" @click="close()"
+              >Apply</AcceptDeclineButton
+            >
           </div>
         </div>
       </div>
@@ -83,15 +87,7 @@ const props = defineProps({
 }
 
 .btn {
-  font-size: 14pt;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
   background: #2c2c2e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
 }
 
 .btn_save {

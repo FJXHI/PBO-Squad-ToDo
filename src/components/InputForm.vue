@@ -4,6 +4,7 @@ import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
 
 const store = useToDoEntryStore()
@@ -31,7 +32,8 @@ onMounted(() => {
     inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
     inputDuration.value = props.entry.expenditure?.toString() || ''
     inputDescript.value = props.entry.description || ''
-    //inputTags.value = props.entry.todoEntry.tags || ''
+    inputColor.value = props.entry.color || '#ff3b30' //default color
+    //inputTags.value = props.entry.todoEntry.tag || ''
   }
 })
 
@@ -84,9 +86,10 @@ const saveEdit = () => {
 
     entry.title = inputTitle.value
     entry.description = inputDescript.value
-    entry.color = '#ff3b30'
+    entry.color = inputColor.value
     entry.deadline = deadlineDate
     entry.expenditure = timeExpenditure
+    //entry.tags = inputTags
   }
 
   // save or update
@@ -133,8 +136,10 @@ const clearInput = () => {
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
       <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
-        <button class="btn_save" type="submit">Save</button>
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
+          >Cancel</AcceptDeclineButton
+        >
+        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
       </span>
       <label for="id_title">Title:</label>
       <input
@@ -253,19 +258,6 @@ label {
 .user-input:focus,
 .user-input:active {
   background-color: #2c2c2e;
-}
-
-.edit_btn button {
-  font-size: 18px;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
-  background: #1c1c1e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  margin-top: 32px;
 }
 
 .btn_save {
