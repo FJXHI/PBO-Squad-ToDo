@@ -65,8 +65,6 @@ npm start --dev
 This document serves as a comprehensive guide to the application designed to streamline task management, particularly
 tailored for mobile devices.
 
-## Application Overview
-
 The ToDo manager app offers a robust platform for users to seamlessly add and customize entries, presenting them in
 various display formats for enhanced accessibility.
 
@@ -74,6 +72,8 @@ various display formats for enhanced accessibility.
 
 The application features two distinct views: the Focus Mode and the Overview Mode. The Overview Mode presents a
 grid-layout showcasing all todo-entries, while the Focus Mode prioritizes the display of the top 5 most crucial tasks.
+
+![focus_mode](PBO-Docs/static/img/focus_mode.png)
 
 ## Functionality
 
@@ -85,23 +85,35 @@ management experience.
 A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries.
 Clearing the search can be achieved by clicking the 'x'-button.
 
+![searching](PBO-Docs/static/img/searching.png)
+
 ### Sorting
 
 The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
 entries based on title, deadline, expenditure, or the timestamp of addition. Additionally, sorting can be configured in
 ascending or descending order.
 
+![sorting](PBO-Docs/static/img/sorting.png)
+
 ### Operations on Entries
 
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
-completed, while a right swipe deletes it. Alternatively, users can click on an entry to select the checkmark or garbage
+completed, while a right swipe deletes it. 
+
+![swipe_actions](PBO-Docs/static/img/swipe_actions.png)
+
+Alternatively, users can click on an entry to select the checkmark or garbage
 can icons for completion or deletion. Additionally, entries can be edited by selecting the pencil icon.
+
+![entry_expanded](PBO-Docs/static/img/entry_expanded.png)
 
 ### Adding and Editing Entries
 
 A todo-entry encompasses various attributes, with the title being the mandatory field. Other attributes, such as
 deadline, estimated duration, tags, and a description, are optional and can be added as needed. Users have the
 flexibility to edit all attributes by selecting the entry and clicking on the pencil icon.
+
+![add_view](PBO-Docs/static/img/add_view.png)
 
 # VUE
 
