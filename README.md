@@ -10,7 +10,6 @@ https://fjxhi.github.io/PBO-Squad-ToDo/
 Docs:
 https://fjxhi.github.io/PBO-Squad-ToDo/docs/
 
-
 # Instructions for the project:
 
 ## Installation
@@ -23,25 +22,29 @@ cd PBO-Squad-ToDo
 npm install
 ```
 
-
 Format is not necessary, but recommended:
+
 ```sh
 npm run format
 ```
 
 Start the development server locally:
+
 ```sh
 npm run dev
 ```
+
 Or open the server to the local network:
+
 ```sh
 npm run dev -- --host
 ```
 
 ## Documentation
 
-Documentation is written using Docosaurus. 
-Head to `PBO-Docs\docs` to find the documentation files. Add your own markdown files there and start writing. They will apperat in the sidebar automatically.
+Documentation is written using Docosaurus.
+Head to `PBO-Docs\docs` to find the documentation files. Add your own markdown files there and start writing. They will
+apperat in the sidebar automatically.
 See [Docusaurus Styling and Layout](https://docusaurus.io/docs/styling-layout) for more information.
 
 ```sh
@@ -50,49 +53,55 @@ npm install
 ```
 
 To start the documentation server locally:
+
 ```sh
 npm start --dev
 ```
 
-# User guide
+# User Guide
 
-## About the application
+## Introduction
 
-This app is a ToDo manager mainly developed for mobile devices.
-It allows the user to add and customize entries and displays them in multiple different ways.
+This document serves as a comprehensive guide to the application designed to streamline task management, particularly
+tailored for mobile devices.
+
+## Application Overview
+
+The ToDo manager app offers a robust platform for users to seamlessly add and customize entries, presenting them in
+various display formats for enhanced accessibility.
 
 ## Views
 
-The application consists of two different views: the focus mode and the overview mode.
-While the overview mode provides a way to see all todo-entries in a grid-layout, the main view is the focus mode where only 5 todo-entries are shown, which are the most important ones.
+The application features two distinct views: the Focus Mode and the Overview Mode. The Overview Mode presents a
+grid-layout showcasing all todo-entries, while the Focus Mode prioritizes the display of the top 5 most crucial tasks.
 
 ## Functionality
 
-The app provides multiple features which ensure a comprehensive and easy-to-use way to manage tasks.
+The application boasts a range of features aimed at providing users with a comprehensive and user-friendly task
+management experience.
 
 ### Searching
 
-The searchbar located at the top of the screen can be used to search all todo-entries for a specific term.
-To reset the search it is possible to clear the searchbar by clicking the 'x'-button. 
+A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries.
+Clearing the search can be achieved by clicking the 'x'-button.
 
 ### Sorting
 
-It is only possible to enable one sorting at a time.
-The app provides a sorting-functionality which allows to sort the entries by the title, its deadline, expenditure or the timestamp the entries were added.
-It is also possible to set the sorting to ascending or descending.
+The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
+entries based on title, deadline, expenditure, or the timestamp of addition. Additionally, sorting can be configured in
+ascending or descending order.
 
-### Operations on the entries
+### Operations on Entries
 
-The todo-entries can be deleted or marked as completed.
-It is possible to swipe the entry to the left to complete it or swipe to the right to delete it.
-Another way to complete and delete an entry is to click on it and select the checkmark or the garbage can.
-In addition, the selected entry can be edited to manipulate all its attributes by clicking on the pencil.
+Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
+completed, while a right swipe deletes it. Alternatively, users can click on an entry to select the checkmark or garbage
+can icons for completion or deletion. Additionally, entries can be edited by selecting the pencil icon.
 
-### Adding and editing an entry
+### Adding and Editing Entries
 
-A todo-entry has multiple different attributes.
-The one necessary attribute an entry has to have is the title, any other attributes can be added but are optional.
-It is possible to set a deadline, an estimated duration for the task, a number of tags and a description.
+A todo-entry encompasses various attributes, with the title being the mandatory field. Other attributes, such as
+deadline, estimated duration, tags, and a description, are optional and can be added as needed. Users have the
+flexibility to edit all attributes by selecting the entry and clicking on the pencil icon.
 
 # VUE
 
@@ -100,13 +109,20 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and
+disable
+Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 ## Type Support for `.vue` Imports in TS
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for
+type checking. In editors, we
+need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
+to make the TypeScript language service aware of `.vue` types.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented
+a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more
+performant. You can enable it by the following steps:
 
 1. Disable the built-in TypeScript Extension
     1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
