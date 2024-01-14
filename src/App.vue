@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import SearchBar from './components/SearchBar.vue'
-import { useToDoEntryStore, type ToDoEntry } from '@/stores/entry_store'
 import { loadEntries } from './services/entryStorageService'
 
 loadEntries()
@@ -26,11 +25,9 @@ loadEntries()
 
 <style scoped>
 main {
-  /*position: absolute;*/
   left: 0px;
   right: 0px;
-  margin-top: 3.2rem; /* Space for searchbar */
-  /* padding-bottom: 8vh; Space for navbar */
+  margin-top: 5.7vb; /* Space for searchbar */
 }
 
 header {
