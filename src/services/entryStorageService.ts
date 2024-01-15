@@ -46,6 +46,9 @@ export function clearEntries(): void {
  * @param isDelete - A boolean indicating whether the entry was deleted or completed.
  */
 export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
+
+  entry.metadata.deletedAt = new Date()
+
   const store = useToDoEntryStore()
   store.removeEntry(entry)
 
@@ -123,7 +126,9 @@ export function revertToDebugEntries(): void {
     expenditure: 5 * 60 * 60,
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
   debugEntries.push({
@@ -133,7 +138,9 @@ export function revertToDebugEntries(): void {
     expenditure: 30 * 60,
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -144,7 +151,9 @@ export function revertToDebugEntries(): void {
     deadline: new Date('2027-09-29'),
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -154,7 +163,9 @@ export function revertToDebugEntries(): void {
     color: '#34c759',
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -164,7 +175,9 @@ export function revertToDebugEntries(): void {
     color: '#ffcc00',
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -174,7 +187,9 @@ export function revertToDebugEntries(): void {
     color: '#ff3b30',
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -184,7 +199,9 @@ export function revertToDebugEntries(): void {
     color: '#32ade6',
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
@@ -194,7 +211,9 @@ export function revertToDebugEntries(): void {
     color: '#a2855e',
     metadata: {
       isVisible: true,
-      isExpanded: false
+      isExpanded: false,
+      addedAt: new Date(),
+      lastModifiedAt: new Date()
     }
   })
 
