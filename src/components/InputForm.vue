@@ -5,6 +5,7 @@ import type { ToDoEntry } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
+import { sortEntries } from '@/services/searchService'
 
 const inputTitle = ref('')
 const inputDeadline = ref('')
@@ -124,6 +125,7 @@ const saveEdit = () => {
     addEntry(entry)
   }
 
+  sortEntries()
   console.log(entry)
   clearInput()
   emit('closeaction')
