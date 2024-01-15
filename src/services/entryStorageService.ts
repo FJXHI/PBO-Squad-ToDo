@@ -46,7 +46,6 @@ export function clearEntries(): void {
  * @param isDelete - A boolean indicating whether the entry was deleted or completed.
  */
 export function completeEntry(entry: ToDoEntry, isDelete: boolean): void {
-
   entry.metadata.deletedAt = new Date()
 
   const store = useToDoEntryStore()
