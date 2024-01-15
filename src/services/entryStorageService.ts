@@ -82,8 +82,13 @@ export function getArchivedEntries(): ToDoEntry[] {
   if (entries) {
     const parsedEntries = JSON.parse(entries)
     return parsedEntries.map((entry: ToDoEntry) => {
+      entry.metadata.addedAt = new Date(entry.metadata.addedAt)
+      entry.metadata.lastModifiedAt = new Date(entry.metadata.lastModifiedAt)
       if (entry.deadline) {
         entry.deadline = new Date(entry.deadline)
+      }
+      if (entry.metadata.deletedAt) {
+        entry.metadata.deletedAt = new Date(entry.metadata.deletedAt)
       }
       return entry
     })
@@ -97,8 +102,13 @@ function getEntriesFromLS(): ToDoEntry[] {
   if (entries) {
     const parsedEntries = JSON.parse(entries)
     return parsedEntries.map((entry: ToDoEntry) => {
+      entry.metadata.addedAt = new Date(entry.metadata.addedAt)
+      entry.metadata.lastModifiedAt = new Date(entry.metadata.lastModifiedAt)
       if (entry.deadline) {
         entry.deadline = new Date(entry.deadline)
+      }
+      if (entry.metadata.deletedAt) {
+        entry.metadata.deletedAt = new Date(entry.metadata.deletedAt)
       }
       return entry
     })
