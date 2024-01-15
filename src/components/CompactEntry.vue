@@ -9,6 +9,12 @@ import InputModal from './InputModal.vue'
 import EntryButton from './EntryButton.vue'
 import { completeEntry } from '@/services/entryStorageService'
 
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
+
 const store = useToDoEntryStore()
 
 const props = defineProps({
@@ -91,6 +97,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
     } else {
       left.value = '0'
       opacity.value = 1
+      isSwiping.value = false
     }
   },
   onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
@@ -118,7 +125,13 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
     <article
       ref="entryBox"
       :class="['entry-box', entry.metadata.isExpanded ? 'detail-height' : 'compact-height']"
-      :style="`position: relative; width: 100%; left: ${left}; margin: 0; transition: all 200ms ease-out;`"
+      :style="{
+        position: 'relative',
+        width: '100%',
+        left: left,
+        margin: '0',
+        transition: isSwiping ? 'none' : 'all 200ms ease-out'
+      }"
       @click="changeExpand()"
     >
       <!-- delete box to the left of the main entry -->
@@ -157,15 +170,15 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         <!-- row for deadline and expenditure -->
         <section class="info-box-1d">
           <template v-if="entry.deadline != undefined">
-            <span class="entry-text">
-              <img alt="Deadline" src="/assets/icon_deadline.png" />
+            <span class="text-lg flex">
+              <img alt="Deadline" src="/assets/icon_deadline.svg" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
-            <span class="entry-text">
-              <img alt="Expenditure" src="/assets/icon_timespan.png" />
-              {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+            <span class="text-lg flex">
+              <img alt="Expenditure" src="/assets/icon_timespan.svg" />
+              {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
           </template>
         </section>

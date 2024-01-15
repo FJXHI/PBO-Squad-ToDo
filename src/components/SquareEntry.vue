@@ -66,7 +66,7 @@ function doneClicked(entry: ToDoEntry) {
         </span>
         <template v-if="entry.expenditure != undefined">
           <span class="entry-text">
-            {{ entry.expenditure.time + ' ' + entry.expenditure.unit }}
+            {{ new Date(entry.expenditure * 1000).toISOString().slice(11, 19) }}
           </span>
         </template>
       </section>

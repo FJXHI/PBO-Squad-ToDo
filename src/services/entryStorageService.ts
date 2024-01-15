@@ -120,7 +120,7 @@ export function revertToDebugEntries(): void {
     description: 'Discuss project requirements and timeline',
     color: '#ff3b30',
     deadline: new Date('2024-01-07'),
-    expenditure: { time: 5, unit: 'h' },
+    expenditure: 5 * 60 * 60,
     metadata: {
       isVisible: true,
       isExpanded: false
@@ -130,7 +130,7 @@ export function revertToDebugEntries(): void {
     title: 'Prepare Presentation',
     description: 'Create slides for upcoming presentation',
     color: '#32ade6',
-    expenditure: { time: 30, unit: 'min' },
+    expenditure: 30 * 60,
     metadata: {
       isVisible: true,
       isExpanded: false

@@ -107,8 +107,8 @@ function sortByDeadline(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolea
  * @returns A number indicating the order of the two objects.
  */
 function sortByExp(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
-  const expenditure1 = entry1.expenditure?.time
-  const expenditure2 = entry2.expenditure?.time
+  const expenditure1 = entry1.expenditure
+  const expenditure2 = entry2.expenditure
 
   if (expenditure1 === null || expenditure1 === undefined) {
     return 1
