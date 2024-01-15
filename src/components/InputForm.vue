@@ -145,6 +145,8 @@ const clearInput = () => {
         <input
           class="user-input duration"
           type="number"
+          pattern="[0-9]*"
+          inputmode="numeric"
           id="id_duration"
           v-model="inputDuration"
           placeholder="Estimated duration"
