@@ -15,7 +15,8 @@ export default defineConfig({
         'logo-512x512.png',
         'logo.svg',
         'assets/*.svg',
-        'assets/*.png'
+        'assets/*.png',
+        'docs/*'
       ],
       manifest: {
         name: 'PBO-ToDo',
