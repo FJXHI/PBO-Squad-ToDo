@@ -12,11 +12,10 @@
   height: 40px;
   width: calc(50% - 5px);
   min-width: 6em;
-  background: #1c1c1e;
+  background: #2c2c2e;
   letter-spacing: 1px;
   outline: none;
   border: none;
   border-radius: 5px;
-  margin-top: 32px;
 }
 </style>

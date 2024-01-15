@@ -94,8 +94,10 @@ const saveEdit = () => {
     } else {
       deadlineDate = undefined
     }
+
     let timeExpenditure: number | undefined = 0
-    if (inputExpenditure.value) {
+    const durationValue = inputExpenditure.value.trim().replace(/\D/g, '') // remove all non-numeric characters
+    if (durationValue !== '') {
       const sec = convertToSeconds(parseInt(inputExpenditure.value), inputDurationUnit.value)
 
       timeExpenditure = sec
@@ -144,12 +146,7 @@ const clearInput = () => {
   <div class="edit">
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
-      <span class="edit_btn">
-        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
-          >Cancel</AcceptDeclineButton
-        >
-        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
-      </span>
+
       <label for="id_title">Title:</label>
       <input
         class="user-input"
@@ -174,6 +171,8 @@ const clearInput = () => {
         <input
           class="user-input duration"
           type="number"
+          pattern="[0-9]*"
+          inputmode="numeric"
           id="id_duration"
           v-model="inputExpenditure"
           placeholder="Estimated duration"
@@ -207,6 +206,12 @@ const clearInput = () => {
         rows="4"
         style="resize: none"
       ></textarea>
+      <span class="edit_btn">
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
+          >Cancel</AcceptDeclineButton
+        >
+        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
+      </span>
     </form>
   </div>
 </template>
@@ -240,7 +245,7 @@ label {
   font-size: 14pt;
   height: 2.1em;
   width: 100%;
-  background: #1c1c1e;
+  background: #2c2c2e;
   color: #f8f8f8;
   outline: none;
   border: none;
@@ -272,7 +277,7 @@ label {
 .user-input:hover,
 .user-input:focus,
 .user-input:active {
-  background-color: #2c2c2e;
+  background-color: #3c3c3e;
 }
 
 .btn_save {
