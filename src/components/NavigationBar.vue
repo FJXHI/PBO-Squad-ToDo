@@ -48,6 +48,9 @@ export default {
 }
 
 .icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1vh;
   height: 70%;
   width: 70%;
