@@ -95,4 +95,10 @@ const props = defineProps({
   border: none;
   justify-content: center;
 }
+
+.line:hover,
+.line:focus,
+.line:active {
+  background-color: #3c3c3e;
+}
 </style>
