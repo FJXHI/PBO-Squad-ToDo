@@ -22,8 +22,8 @@ export default {
 </script>
 
 <template>
-  <div class="nav">
-    <div class="nav-field">
+  <div>
+    <div>
       <span class="nav_bar">
         <NavigationButton class="btn_home" @click="homeClicked">
           <img alt="Home" class="icon" src="/assets/icon_density_small.svg" />
