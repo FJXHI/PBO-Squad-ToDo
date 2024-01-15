@@ -2,18 +2,15 @@
 import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
-import { useToDoEntryStore } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
 
-const store = useToDoEntryStore()
-
 const inputTitle = ref('')
-const inputDate = ref('')
-const inputDuration = ref('')
+const inputDeadline = ref('')
+const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
-const inputDescript = ref('')
+const inputDescription = ref('')
 const inputTags = ref('')
 const inputColor = ref('#000000')
 
@@ -29,15 +26,22 @@ onMounted(() => {
   // logic for default values here
   if (props.entry) {
     inputTitle.value = props.entry.title || ''
-    inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.expenditure?.toString() || ''
-    inputDescript.value = props.entry.description || ''
+    inputDeadline.value = props.entry.deadline?.toISOString().split('T')[0] || ''
+
+    const timeUnit = props.entry.expenditure
+      ? getTimeAndUnitFromSec(props.entry.expenditure)
+      : [0, 'min']
+    inputExpenditure.value = timeUnit[0].toString()
+    inputDurationUnit.value = timeUnit[1].toString()
+
+    inputDescription.value = props.entry.description || ''
     inputColor.value = props.entry.color || '#ff3b30' //default color
-    //inputTags.value = props.entry.todoEntry.tag || ''
   }
 })
 
-const convertToSeconds = (value: number, unit: string) => {
+function convertToSeconds(value: number, unit: string): number {
+  console.log('convertToSeconds', value, unit)
+
   switch (unit) {
     case 'min':
       return value * 60
@@ -48,7 +52,21 @@ const convertToSeconds = (value: number, unit: string) => {
     case 'weeks':
       return value * 604800
     default:
-      return value
+      throw new Error('No fitting unit found')
+  }
+}
+
+function getTimeAndUnitFromSec(value: number): [number, string] {
+  if (value % 604800 === 0) {
+    return [value / 604800, 'weeks']
+  } else if (value % 86400 === 0) {
+    return [value / 86400, 'days']
+  } else if (value % 3600 === 0) {
+    return [value / 3600, 'h']
+  } else if (value % 60 === 0) {
+    return [value / 60, 'min']
+  } else {
+    throw new Error('No fitting unit found')
   }
 }
 
@@ -71,21 +89,22 @@ const saveEdit = () => {
   // process inputs
   if (inputTitle.value.trim() !== '') {
     let deadlineDate
-    if (inputDate.value.trim() !== '') {
-      deadlineDate = new Date(inputDate.value)
+    if (inputDeadline.value.trim() !== '') {
+      deadlineDate = new Date(inputDeadline.value)
     } else {
       deadlineDate = undefined
     }
     let timeExpenditure: number | undefined = 0
-    if (inputDuration.value) {
-      // timeExpenditure = parseInt(inputDuration.value)
-      timeExpenditure = convertToSeconds(timeExpenditure, inputDurationUnit.value)
+    if (inputExpenditure.value) {
+      const sec = convertToSeconds(parseInt(inputExpenditure.value), inputDurationUnit.value)
+
+      timeExpenditure = sec
     } else {
       timeExpenditure = undefined
     }
 
     entry.title = inputTitle.value
-    entry.description = inputDescript.value
+    entry.description = inputDescription.value
     entry.color = inputColor.value
     entry.deadline = deadlineDate
     entry.expenditure = timeExpenditure
@@ -101,17 +120,7 @@ const saveEdit = () => {
     addEntry(entry)
   }
 
-  const dataObject = {
-    title: inputTitle.value,
-    date: inputDate.value,
-    duration: inputDuration.value,
-    unit: inputDurationUnit.value,
-    description: inputDescript.value,
-    tags: inputTags.value,
-    color: inputColor.value
-  }
-
-  console.log(dataObject)
+  console.log(entry)
   clearInput()
   emit('closeaction')
 }
@@ -123,10 +132,10 @@ const cancelEdit = () => {
 
 const clearInput = () => {
   inputTitle.value = ''
-  inputDate.value = ''
-  inputDuration.value = ''
+  inputDeadline.value = ''
+  inputExpenditure.value = ''
   inputDurationUnit.value = 'min'
-  inputDescript.value = ''
+  inputDescription.value = ''
   inputTags.value = ''
 }
 </script>
@@ -152,7 +161,13 @@ const clearInput = () => {
       />
 
       <label for="id_date">Date:</label>
-      <input class="user-input" type="date" id="id_date" v-model="inputDate" placeholder="Date" />
+      <input
+        class="user-input"
+        type="date"
+        id="id_date"
+        v-model="inputDeadline"
+        placeholder="Date"
+      />
 
       <label for="id_duration">Estimated duration:</label>
       <div style="display: flex">
@@ -160,7 +175,7 @@ const clearInput = () => {
           class="user-input duration"
           type="number"
           id="id_duration"
-          v-model="inputDuration"
+          v-model="inputExpenditure"
           placeholder="Estimated duration"
           min="0"
         />
@@ -187,7 +202,7 @@ const clearInput = () => {
       <textarea
         class="user-input input_descript"
         id="id_descript"
-        v-model="inputDescript"
+        v-model="inputDescription"
         placeholder="Description"
         rows="4"
         style="resize: none"
