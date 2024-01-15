@@ -96,8 +96,7 @@ const saveEdit = () => {
     }
 
     let timeExpenditure: number | undefined = 0
-    const durationValue = inputExpenditure.value.trim().replace(/\D/g, '') // remove all non-numeric characters
-    if (durationValue !== '') {
+    if (inputExpenditure.value) {
       const sec = convertToSeconds(parseInt(inputExpenditure.value), inputDurationUnit.value)
 
       timeExpenditure = sec
