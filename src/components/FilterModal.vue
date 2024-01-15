@@ -8,9 +8,9 @@ function close() {
   emit('close')
 }
 
-const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'Last Added']
+const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'Last Added', 'Last Modified']
 
-const props = defineProps({
+defineProps({
   isOpen: {
     type: Boolean,
     required: true
