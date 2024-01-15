@@ -40,7 +40,7 @@ export default defineConfig({
         runtimeCaching: [
           {
             // Apply a network-first strategy for docs
-            urlPattern: /^\/docs\/.*$/,
+            urlPattern: /^\/PBO-Squad-ToDo\/docs\/.*$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'docs-cache',
