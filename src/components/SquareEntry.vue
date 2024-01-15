@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import type { ToDoEntry } from '@/stores/entry_store'
+import { useToDoEntryStore } from '@/stores/entry_store'
 import type { PropType, ComponentPublicInstance } from 'vue'
 import { ref, computed, reactive } from 'vue'
-import { useToDoEntryStore } from '@/stores/entry_store'
+import InputModal from './InputModal.vue'
+import EntryButton from './EntryButton.vue'
+import { completeEntry } from '@/services/entryStorageService'
+
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 const store = useToDoEntryStore()
-//const deldoneStore = useDelDoneStore()
 
 const props = defineProps({
   entry: {
@@ -15,77 +23,114 @@ const props = defineProps({
 })
 
 const entryBox = ref(null)
-let isExpanded = ref(false)
+
+const title = ref(null)
+
+const content = ref(null)
+
+let showEntryInput = ref(false)
 
 let entry: ToDoEntry = props.entry
 
 function changeExpand() {
-  isExpanded.value = !isExpanded.value
+  if (!entry.metadata.isExpanded) {
+    collapseEntries()
+  }
+  entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
 
 function delClicked(entry: ToDoEntry) {
-  console.log('delClicked')
-  console.log(entry)
-  //deldoneStore.addEntry(entry)
-  //isdeleted: true
-  store.removeEntry(entry)
+  console.log('Clicked Delete')
+  completeEntry(entry, true)
 }
 
 function editClicked() {
   console.log('editClicked')
+  showEntryInput.value = !showEntryInput.value
 }
 
 function doneClicked(entry: ToDoEntry) {
-  console.log('doneClicked')
-  console.log(entry)
-  //deldoneStore.addEntry(entry)
-  store.removeEntry(entry)
+  console.log('Clicked Done')
+  completeEntry(entry, false)
+}
+
+function closeInputModal() {
+  showEntryInput.value = false
+}
+
+function collapseEntries() {
+  // Iterate through all entries and collapse them
+  for (const entry of store.entries) {
+    if (entry.metadata.isExpanded) {
+      entry.metadata.isExpanded = false
+    }
+  }
 }
 </script>
 
 <template>
-  <article
-    ref="entryBox"
-    :class="['entry-box', 'stretch-horizontally', isExpanded ? 'detail-height' : 'compact-height']"
-    :style="'--element-color: ' + entry.color"
-    @click="changeExpand()"
-  >
-    <div>
-      <h1 class="entry-title">{{ entry?.title ? entry?.title : '' }}</h1>
-      <section class="info-box-1d">
-        <template v-if="entry.deadline != undefined">
-          <span class="entry-text">
-            {{ entry?.deadline.toLocaleDateString() }}
+  <span>
+    <article
+      ref="entryBox"
+      :class="[
+        'entry-box',
+        'stretch-horizontally',
+        entry.metadata.isExpanded ? 'detail-height' : 'entry-height'
+      ]"
+      :style="'--element-color: ' + entry.color"
+      @click="changeExpand()"
+    >
+      <div ref="content">
+        <h1 ref="title" class="entry-title">
+          <!--class="text-2xl font-medium"-->
+          {{ entry?.title ? entry?.title : '' }}
+        </h1>
+        <section>
+          <template v-if="entry.deadline != undefined">
+            <span class="entry-text">
+              {{ entry?.deadline.toLocaleDateString() }}
+            </span>
+          </template>
+          <span
+            class="entry-text"
+            v-if="entry.deadline != undefined && entry.expenditure != undefined"
+          >
+            -
           </span>
+          <template v-if="entry.expenditure != undefined">
+            <span class="entry-text">
+              <!-- text-lg flex -->
+              {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
+            </span>
+          </template>
+        </section>
+
+        <template v-if="entry.metadata.isExpanded && entry.description != undefined">
+          <p :style="`color: #000000; padding: 0 0 10px 0; position: relative;`" class="text-base">
+            {{ entry.description }}
+          </p>
         </template>
-        <span
-          class="entry-text"
-          v-if="entry.deadline != undefined && entry.expenditure != undefined"
-        >
-          -
+
+        <!-- action buttons -->
+        <span v-if="entry.metadata.isExpanded">
+          <nav class="info-btn">
+            <!-- info-box-1d -->
+            <EntryButton @click="delClicked(entry)">
+              <!-- class="flex justify-center" -->
+              <img alt="Delete" style="" src="/assets/icon_delete.svg" />
+            </EntryButton>
+            <EntryButton @click="editClicked()">
+              <img alt="Edit" src="/assets/icon_edit.svg" />
+            </EntryButton>
+            <EntryButton @click="doneClicked(entry)">
+              <img alt="Done" src="/assets/icon_done.svg" />
+            </EntryButton>
+          </nav>
         </span>
-        <template v-if="entry.expenditure != undefined">
-          <span class="entry-text">
-            {{ new Date(entry.expenditure * 1000).toISOString().slice(11, 19) }}
-          </span>
-        </template>
-      </section>
-      <template v-if="isExpanded && entry.description != undefined">
-        <p class="entry-text">{{ entry.description }}</p>
-      </template>
-      <span v-if="isExpanded">
-        <nav class="info-btn">
-          <button @click="delClicked(entry)">
-            <img alt="Delete" src="/assets/icon_delete.svg" />
-          </button>
-          <button @click="editClicked()"><img alt="Edit" src="/assets/icon_edit.svg" /></button>
-          <button @click="doneClicked(entry)">
-            <img alt="Done" src="/assets/icon_done.svg" />
-          </button>
-        </nav>
-      </span>
-    </div>
-  </article>
+      </div>
+    </article>
+    <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
+  </span>
 </template>
 
 <style scoped>
@@ -94,12 +139,12 @@ function doneClicked(entry: ToDoEntry) {
   font-weight: 600;
 }
 
-.entry-text {
-  font-size: 2.5vw;
+.entry-height {
+  min-height: 18vh;
 }
 
-.info-box-1d span {
-  flex: 0 0 50%;
+.entry-text {
+  font-size: 2.5vw;
 }
 
 .entry-box {
@@ -109,15 +154,14 @@ function doneClicked(entry: ToDoEntry) {
   height: 100%;
 }
 
-.info-btn button {
-  width: calc(100% / 3);
-  border: none;
-  background-color: transparent;
+.info-btn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 0;
 }
 
-.info-btn button:hover,
-button:focus,
-button:active {
-  background-color: grey;
+.info-btn img {
+  display: inline-block;
 }
 </style>
