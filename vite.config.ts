@@ -15,8 +15,7 @@ export default defineConfig({
         'logo-512x512.png',
         'logo.svg',
         'assets/*.svg',
-        'assets/*.png',
-        'docs/*'
+        'assets/*.png'
       ],
       manifest: {
         name: 'PBO-ToDo',
@@ -34,6 +33,18 @@ export default defineConfig({
             sizes: '512x512',
             type: 'image/png'
           }
+        ]
+      },
+      workbox: {
+        // Add additional configuration for caching specific routes
+        // For example:
+        runtimeCaching: [
+          {
+            // https://fjxhi.github.io/PBO-Squad-ToDo/
+            urlPattern: /^https:\/\/fjxhi.github.io\/PBO-Squad-ToDo\/docs/,
+            handler: 'CacheFirst'
+          }
+          // Add more patterns as needed
         ]
       }
     })
