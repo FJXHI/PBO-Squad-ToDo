@@ -25,9 +25,11 @@ loadEntries()
 
 <style scoped>
 main {
+  position: relative;
   left: 0px;
   right: 0px;
   margin-top: 5.7vb; /* Space for searchbar */
+  margin-bottom: 8vh;
 }
 
 header {
@@ -35,10 +37,6 @@ header {
   top: 0;
   width: 100%;
   z-index: 1;
-}
-
-.main {
-  position: relative;
 }
 
 footer {
