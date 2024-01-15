@@ -36,15 +36,33 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // Add additional configuration for caching specific routes
-        // For example:
+        // Define runtime caching rules
         runtimeCaching: [
           {
-            // https://fjxhi.github.io/PBO-Squad-ToDo/
-            urlPattern: /^https:\/\/fjxhi.github.io\/PBO-Squad-ToDo\/docs/,
-            handler: 'CacheFirst'
+            // Apply a network-first strategy for docs
+            urlPattern: /^\/docs\/.*$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'docs-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 24 * 60 * 60 // 1 day
+              },
+              networkTimeoutSeconds: 10 // fallback to cache if no response within 10 seconds
+            }
+          },
+          {
+            // Default caching strategy for other requests (e.g., images, static files)
+            urlPattern: /\/.*\.(?:png|jpg|jpeg|svg|gif)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+              }
+            }
           }
-          // Add more patterns as needed
         ]
       }
     })
