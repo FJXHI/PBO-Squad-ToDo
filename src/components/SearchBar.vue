@@ -46,7 +46,7 @@ function clearClick() {
           @input="handleInputChange()"
         />
         <template v-if="input.length != 0">
-          <button @click="clearClick()" class="button">
+          <button @click="clearClick()" class="button clearbtn">
             <img src="/assets/icon_close.svg" />
           </button>
         </template>
@@ -83,6 +83,15 @@ function clearClick() {
   background-color: #1c1c1e;
   border-radius: 10px;
 }
+
+/*
+.search:hover,
+.search:focus,
+.search:active,
+.clearbtn {
+  background-color: #2c2c2e;
+}
+*/
 
 .topbar {
   display: flex;
