@@ -63,8 +63,9 @@ const saveEdit = () => {
       deadlineDate = undefined
     }
     let timeExpenditure
-    if (inputDuration.value) {
-      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+    const durationValue = inputDuration.value.trim().replace(/\D/g, '') // remove all non-numeric characters
+    if (durationValue !== '') {
+      timeExpenditure = { time: parseInt(durationValue), unit: inputDurationUnit.value }
     } else {
       timeExpenditure = undefined
     }
@@ -144,6 +145,8 @@ const clearInput = () => {
         <input
           class="user-input duration"
           type="number"
+          pattern="[0-9]*"
+          inputmode="numeric"
           id="id_duration"
           v-model="inputDuration"
           placeholder="Estimated duration"
