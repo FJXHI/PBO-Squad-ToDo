@@ -30,8 +30,10 @@ completed, while a right swipe deletes it.
 
 ![swipe_actions](../../static/img/swipe_actions.png)
 
-Alternatively, users can click on an entry to select the checkmark or garbage
-can icons for completion or deletion. Additionally, entries can be edited by selecting the pencil icon.
+Users can also click on an entry, which expands the task and reveals additional information about it. And alternatively
+to the swipe actions, you can select the checkmark or garbage
+can icons, which appear on an expanded entry, for completion or deletion. Additionally, entries can be edited by
+selecting the pencil icon.
 
 ![entry_expanded](../../static/img/entry_expanded.png)
 

@@ -7,26 +7,27 @@ sidebar_position: 1
 
 - clone repo
 
-  - `git clone https://github.com/FJXHI/PBO-Squad-ToDo.git`
-  - `cd PBO-Squad-ToDo`
+    - `git clone https://github.com/FJXHI/PBO-Squad-ToDo.git`
+    - `cd PBO-Squad-ToDo`
 
 - install dependencies
 
-  - `npm install`
+    - `npm install`
 
 - start dev server
 
-  - `npm run start`
+    - `npm run start`
 
 - formatting:
 
-  - `npm run format` to check for formatting errors
-  - `npm run runformat` to format all files
+    - `npm run format` to check for formatting errors
+    - `npm run runformat` to format all files
 
 - linting:
 
-  - `npm run lint` to check for linting errors
+    - `npm run lint` to check for linting errors
 
-- To run and debug the PWA on your phone, you can use the following commands (as run dev does not allow a service worker):
-  - `npm run build`
-  - `npm run preview`
+- To run and debug the PWA on your phone, you can use the following commands (as run dev does not allow a service
+  worker):
+    - `npm run build`
+    - `npm run preview`
