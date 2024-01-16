@@ -11,11 +11,14 @@
   flex: 0 0 calc(100% / 3);
   border: none;
   background-color: transparent;
+  letter-spacing: 1px;
+  outline: none;
+  border-radius: 5px;
 }
 
 .btn:hover,
 button:focus,
 button:active {
-  background-color: grey;
+  background-color: #808080;
 }
 </style>

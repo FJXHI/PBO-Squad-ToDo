@@ -5,6 +5,7 @@ import type { ToDoEntry } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
+import { sortEntries } from '@/services/searchService'
 
 const inputTitle = ref('')
 const inputDeadline = ref('')
@@ -30,7 +31,7 @@ onMounted(() => {
 
     const timeUnit = props.entry.expenditure
       ? getTimeAndUnitFromSec(props.entry.expenditure)
-      : [0, 'min']
+      : ['', 'min']
     inputExpenditure.value = timeUnit[0].toString()
     inputDurationUnit.value = timeUnit[1].toString()
 
@@ -82,7 +83,10 @@ const saveEdit = () => {
         expenditure: 0,
         metadata: {
           isVisible: true,
-          isExpanded: false
+          isExpanded: false,
+          addedAt: new Date(),
+          lastModifiedAt: new Date(),
+          deletedAt: undefined
         }
       }
 
@@ -109,18 +113,19 @@ const saveEdit = () => {
     entry.color = inputColor.value
     entry.deadline = deadlineDate
     entry.expenditure = timeExpenditure
-    //entry.tags = inputTags
   }
 
   // save or update
   if (props.entry) {
     console.log('Updating existing entry')
+    entry.metadata.lastModifiedAt = new Date()
     updateLS()
   } else {
     console.log('Adding existing entry')
     addEntry(entry)
   }
 
+  sortEntries()
   console.log(entry)
   clearInput()
   emit('closeaction')

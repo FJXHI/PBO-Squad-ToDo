@@ -48,12 +48,12 @@ function changeExpand() {
   entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
 
-function delClicked(entry: ToDoEntry): void {
+function delClicked(entry: ToDoEntry) {
   console.log('Clicked Delete')
   completeEntry(entry, true)
 }
 
-function editClicked(entry: ToDoEntry) {
+function editClicked() {
   console.log('editClicked')
   //showEntryInput = ref(true);
   showEntryInput.value = !showEntryInput.value
@@ -196,7 +196,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
             <EntryButton @click="delClicked(entry)" class="flex justify-center">
               <img alt="Delete" style="" src="/assets/icon_delete.svg" />
             </EntryButton>
-            <EntryButton @click="editClicked(entry)" class="flex justify-center">
+            <EntryButton @click="editClicked()" class="flex justify-center">
               <img alt="Edit" src="/assets/icon_edit.svg" />
             </EntryButton>
             <EntryButton @click="doneClicked(entry)" class="flex justify-center">

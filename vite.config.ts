@@ -34,6 +34,36 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+      workbox: {
+        // Define runtime caching rules
+        runtimeCaching: [
+          {
+            // Apply a network-first strategy for docs
+            urlPattern: /^\/PBO-Squad-ToDo\/docs\/.*$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'docs-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 24 * 60 * 60 // 1 day
+              },
+              networkTimeoutSeconds: 10 // fallback to cache if no response within 10 seconds
+            }
+          },
+          {
+            // Default caching strategy for other requests (e.g., images, static files)
+            urlPattern: /\/.*\.(?:png|jpg|jpeg|svg|gif)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+              }
+            }
+          }
+        ]
       }
     })
   ],

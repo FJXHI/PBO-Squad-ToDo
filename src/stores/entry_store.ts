@@ -1,15 +1,9 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export interface Color {
-  r: number
-  g: number
-  b: number
-  a?: number
-}
 export interface Tag {
   tag: string
-  tagColor: Color
+  tagColor: string
 }
 
 export interface ToDoEntry {
@@ -32,6 +26,10 @@ export interface ToDoEntry {
 export interface ToDoEntryMeta {
   isVisible: boolean
   isExpanded: boolean
+
+  addedAt: Date
+  lastModifiedAt: Date
+  deletedAt?: Date
 }
 
 export const useToDoEntryStore = defineStore('todoEntries', () => {
