@@ -94,12 +94,6 @@ const config = {
         links: [
           {
             title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/intro',
-              },
-            ],
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} PBO-Squad-ToDo, Inc. Built with Docusaurus.`,
