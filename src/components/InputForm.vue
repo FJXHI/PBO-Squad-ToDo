@@ -2,17 +2,16 @@
 import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
-import { useToDoEntryStore } from '@/stores/entry_store'
 import TagDropdown from '@/components/TagDropdown.vue'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
-
-const store = useToDoEntryStore()
+import { sortEntries } from '@/services/searchService'
 
 const inputTitle = ref('')
-const inputDate = ref('')
-const inputDuration = ref('')
+const inputDeadline = ref('')
+const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
-const inputDescript = ref('')
+const inputDescription = ref('')
 const inputTags = ref('')
 const inputColor = ref('#000000')
 
@@ -28,13 +27,49 @@ onMounted(() => {
   // logic for default values here
   if (props.entry) {
     inputTitle.value = props.entry.title || ''
-    inputDate.value = props.entry.deadline?.toISOString().split('T')[0] || ''
-    inputDuration.value = props.entry.expenditure?.time.toString() || ''
-    inputDurationUnit.value = props.entry.expenditure?.unit || 'min'
-    inputDescript.value = props.entry.description || ''
-    //inputTags.value = props.entry.todoEntry.tags || ''
+    inputDeadline.value = props.entry.deadline?.toISOString().split('T')[0] || ''
+
+    const timeUnit = props.entry.expenditure
+      ? getTimeAndUnitFromSec(props.entry.expenditure)
+      : ['', 'min']
+    inputExpenditure.value = timeUnit[0].toString()
+    inputDurationUnit.value = timeUnit[1].toString()
+
+    inputDescription.value = props.entry.description || ''
+    inputColor.value = props.entry.color || '#ff3b30' //default color
   }
 })
+
+function convertToSeconds(value: number, unit: string): number {
+  console.log('convertToSeconds', value, unit)
+
+  switch (unit) {
+    case 'min':
+      return value * 60
+    case 'h':
+      return value * 3600
+    case 'days':
+      return value * 86400
+    case 'weeks':
+      return value * 604800
+    default:
+      throw new Error('No fitting unit found')
+  }
+}
+
+function getTimeAndUnitFromSec(value: number): [number, string] {
+  if (value % 604800 === 0) {
+    return [value / 604800, 'weeks']
+  } else if (value % 86400 === 0) {
+    return [value / 86400, 'days']
+  } else if (value % 3600 === 0) {
+    return [value / 3600, 'h']
+  } else if (value % 60 === 0) {
+    return [value / 60, 'min']
+  } else {
+    throw new Error('No fitting unit found')
+  }
+}
 
 const saveEdit = () => {
   // take already existing entry if one was provided or create a new one
@@ -45,31 +80,37 @@ const saveEdit = () => {
         description: '',
         color: '',
         deadline: new Date(),
-        expenditure: { time: 0, unit: 'min' },
+        expenditure: 0,
         metadata: {
           isVisible: true,
-          isExpanded: false
+          isExpanded: false,
+          addedAt: new Date(),
+          lastModifiedAt: new Date(),
+          deletedAt: undefined
         }
       }
 
   // process inputs
   if (inputTitle.value.trim() !== '') {
     let deadlineDate
-    if (inputDate.value.trim() !== '') {
-      deadlineDate = new Date(inputDate.value)
+    if (inputDeadline.value.trim() !== '') {
+      deadlineDate = new Date(inputDeadline.value)
     } else {
       deadlineDate = undefined
     }
-    let timeExpenditure
-    if (inputDuration.value) {
-      timeExpenditure = { time: parseInt(inputDuration.value), unit: inputDurationUnit.value }
+
+    let timeExpenditure: number | undefined = 0
+    if (inputExpenditure.value) {
+      const sec = convertToSeconds(parseInt(inputExpenditure.value), inputDurationUnit.value)
+
+      timeExpenditure = sec
     } else {
       timeExpenditure = undefined
     }
 
     entry.title = inputTitle.value
-    entry.description = inputDescript.value
-    entry.color = '#ff3b30'
+    entry.description = inputDescription.value
+    entry.color = inputColor.value
     entry.deadline = deadlineDate
     entry.expenditure = timeExpenditure
   }
@@ -77,23 +118,15 @@ const saveEdit = () => {
   // save or update
   if (props.entry) {
     console.log('Updating existing entry')
+    entry.metadata.lastModifiedAt = new Date()
     updateLS()
   } else {
     console.log('Adding existing entry')
     addEntry(entry)
   }
 
-  const dataObject = {
-    title: inputTitle.value,
-    date: inputDate.value,
-    duration: inputDuration.value,
-    unit: inputDurationUnit.value,
-    description: inputDescript.value,
-    tags: inputTags.value,
-    color: inputColor.value
-  }
-
-  console.log(dataObject)
+  sortEntries()
+  console.log(entry)
   clearInput()
   emit('closeaction')
 }
@@ -105,10 +138,10 @@ const cancelEdit = () => {
 
 const clearInput = () => {
   inputTitle.value = ''
-  inputDate.value = ''
-  inputDuration.value = ''
+  inputDeadline.value = ''
+  inputExpenditure.value = ''
   inputDurationUnit.value = 'min'
-  inputDescript.value = ''
+  inputDescription.value = ''
   inputTags.value = ''
 }
 </script>
@@ -117,10 +150,7 @@ const clearInput = () => {
   <div class="edit">
     <form class="input-field" @submit.prevent="saveEdit">
       <!-- @submit.prevent Called on submit + prevents Reload -->
-      <span class="edit_btn">
-        <button class="btn_cancel" type="button" @click="cancelEdit">Cancel</button>
-        <button class="btn_save" type="submit">Save</button>
-      </span>
+
       <label for="id_title">Title:</label>
       <input
         class="user-input"
@@ -132,15 +162,23 @@ const clearInput = () => {
       />
 
       <label for="id_date">Date:</label>
-      <input class="user-input" type="date" id="id_date" v-model="inputDate" placeholder="Date" />
+      <input
+        class="user-input"
+        type="date"
+        id="id_date"
+        v-model="inputDeadline"
+        placeholder="Date"
+      />
 
       <label for="id_duration">Estimated duration:</label>
       <div style="display: flex">
         <input
           class="user-input duration"
           type="number"
+          pattern="[0-9]*"
+          inputmode="numeric"
           id="id_duration"
-          v-model="inputDuration"
+          v-model="inputExpenditure"
           placeholder="Estimated duration"
           min="0"
         />
@@ -167,11 +205,17 @@ const clearInput = () => {
       <textarea
         class="user-input input_descript"
         id="id_descript"
-        v-model="inputDescript"
+        v-model="inputDescription"
         placeholder="Description"
         rows="4"
         style="resize: none"
       ></textarea>
+      <span class="edit_btn">
+        <AcceptDeclineButton class="btn_cancel" type="button" @click="cancelEdit"
+          >Cancel</AcceptDeclineButton
+        >
+        <AcceptDeclineButton class="btn_save" type="submit">Save</AcceptDeclineButton>
+      </span>
     </form>
   </div>
 </template>
@@ -205,7 +249,7 @@ label {
   font-size: 14pt;
   height: 2.1em;
   width: 100%;
-  background: #1c1c1e;
+  background: #2c2c2e;
   color: #f8f8f8;
   outline: none;
   border: none;
@@ -237,20 +281,7 @@ label {
 .user-input:hover,
 .user-input:focus,
 .user-input:active {
-  background-color: #2c2c2e;
-}
-
-.edit_btn button {
-  font-size: 18px;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
-  background: #1c1c1e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  margin-top: 32px;
+  background-color: #3c3c3e;
 }
 
 .btn_save {

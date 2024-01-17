@@ -1,4 +1,4 @@
-import { useToDoEntryStore, type ToDoEntry, type ToDoEntryMeta } from '@/stores/entry_store'
+import { useToDoEntryStore, type ToDoEntry } from '@/stores/entry_store'
 import { useSearchStore } from '@/stores/search_store'
 
 export function search(query: string): void {
@@ -39,10 +39,12 @@ export function sortEntries(): void {
       sortByExp(entry1, entry2, sortOptions['Expenditure'].isDescending)
     )
   } else if (sortOptions['Last Added'].isActive) {
-    throw new Error('Not implemented yet')
-
     entries.sort((entry1, entry2) =>
       sortByLastAdded(entry1, entry2, sortOptions['Last Added'].isDescending)
+    )
+  } else if (sortOptions['Last Modified'].isActive) {
+    entries.sort((entry1, entry2) =>
+      sortByLastModified(entry1, entry2, sortOptions['Last Modified'].isDescending)
     )
   } else {
     throw new Error('nothing to sort')
@@ -107,8 +109,8 @@ function sortByDeadline(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolea
  * @returns A number indicating the order of the two objects.
  */
 function sortByExp(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
-  const expenditure1 = entry1.expenditure?.time
-  const expenditure2 = entry2.expenditure?.time
+  const expenditure1 = entry1.expenditure
+  const expenditure2 = entry2.expenditure
 
   if (expenditure1 === null || expenditure1 === undefined) {
     return 1
@@ -135,8 +137,8 @@ function sortByExp(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): n
  * @returns A number indicating the order of the two objects.
  */
 function sortByLastAdded(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
-  const lastAdded1 = entry1.expenditure
-  const lastAdded2 = entry2.expenditure
+  const lastAdded1 = entry1.metadata.addedAt
+  const lastAdded2 = entry2.metadata.addedAt
 
   if (lastAdded1 === null || lastAdded1 === undefined) {
     return 1
@@ -146,10 +148,38 @@ function sortByLastAdded(entry1: ToDoEntry, entry2: ToDoEntry, descending: boole
   }
 
   if (lastAdded1 < lastAdded2) {
-    return descending ? -1 : 1
+    return descending ? 1 : -1
   }
   if (lastAdded1 > lastAdded2) {
+    return descending ? -1 : 1
+  }
+
+  return 0
+}
+
+/**
+ * Sorts two ToDoEntry objects based on their last modified date.
+ * @param entry1 - The first ToDoEntry object to compare.
+ * @param entry2 - The second ToDoEntry object to compare.
+ * @param descending - A boolean value indicating whether to sort in descending order.
+ * @returns A number indicating the order of the two objects.
+ */
+function sortByLastModified(entry1: ToDoEntry, entry2: ToDoEntry, descending: boolean): number {
+  const lastModified1 = entry1.metadata.lastModifiedAt
+  const lastModified2 = entry2.metadata.lastModifiedAt
+
+  if (lastModified1 === null || lastModified1 === undefined) {
+    return 1
+  }
+  if (lastModified2 === null || lastModified2 === undefined) {
+    return -1
+  }
+
+  if (lastModified1 < lastModified2) {
     return descending ? 1 : -1
+  }
+  if (lastModified1 > lastModified2) {
+    return descending ? -1 : 1
   }
 
   return 0

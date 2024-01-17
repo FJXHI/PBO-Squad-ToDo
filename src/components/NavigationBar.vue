@@ -22,24 +22,20 @@ export default {
 </script>
 
 <template>
-  <div class="nav">
-    <div class="nav-field">
-      <span class="nav_bar">
-        <NavigationButton class="btn_home" @click="homeClicked">
-          <img alt="Home" class="icon" src="/assets/icon_density_small.svg" />
-        </NavigationButton>
-        <NavigationButton class="btn_add" @click="addClicked">
-          <img alt="Add" class="icon" src="/assets/icon_add.svg" />
-        </NavigationButton>
-        <NavigationButton class="btn_overview" @click="moreClicked">
-          <img alt="More" class="icon" src="/assets/icon_grid_view.svg" />
-        </NavigationButton>
-      </span>
-    </div>
-  </div>
+  <span class="nav_bar">
+    <NavigationButton class="btn_home" @click="homeClicked">
+      <img alt="Home" class="icon" src="/assets/icon_density_small.svg" />
+    </NavigationButton>
+    <NavigationButton class="btn_add" @click="addClicked">
+      <img alt="Add" class="icon" src="/assets/icon_add.svg" />
+    </NavigationButton>
+    <NavigationButton class="btn_overview" @click="moreClicked">
+      <img alt="More" class="icon" src="/assets/icon_grid_view.svg" />
+    </NavigationButton>
+  </span>
 </template>
 
-<style>
+<style scoped>
 .nav_bar {
   display: flex;
   justify-content: space-around;
@@ -48,6 +44,9 @@ export default {
 }
 
 .icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1vh;
   height: 70%;
   width: 70%;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/search_store'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 const searchStore = useSearchStore()
 
@@ -94,5 +94,11 @@ const props = defineProps({
   background: none;
   border: none;
   justify-content: center;
+}
+
+.line:hover,
+.line:focus,
+.line:active {
+  background-color: #3c3c3e;
 }
 </style>
