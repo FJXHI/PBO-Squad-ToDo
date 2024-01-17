@@ -1,1 +1,0 @@
-import{_ as o,o as s,c as _,p as c,b as t,e as a}from"./index-2aff290b.js";const d={},n=e=>(c("data-v-d0776b03"),e=e(),t(),e),r={class:"more"},p=n(()=>a("h1",null,"This is an more page",-1)),i=[p];function l(e,h){return s(),_("div",r,i)}const f=o(d,[["render",l],["__scopeId","data-v-d0776b03"]]);export{f as default};
