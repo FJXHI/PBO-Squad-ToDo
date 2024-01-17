@@ -20,13 +20,13 @@ function moreClicked() {
     <div class="nav-field">
       <span class="flex">
         <NavigationButton class="flex justify-center items-center" @click="homeClicked">
-          <img alt="Home" class="h-[50%]" src="@/assets/icon_density_small.svg" />
+          <img alt="Home" class="h-[45%]" src="/assets/icon_density_small.svg" />
         </NavigationButton>
         <NavigationButton class="flex justify-center items-center" @click="addClicked">
-          <img alt="Add" class="h-[50%]" src="@/assets/icon_add.svg" />
+          <img alt="Add" class="h-[45%]" src="/assets/icon_add.svg" />
         </NavigationButton>
         <NavigationButton class="flex justify-center items-center" @click="moreClicked">
-          <img alt="More" class="h-[50%]" src="@/assets/icon_grid_view.svg" />
+          <img alt="More" class="h-[45%]" src="/assets/icon_grid_view.svg" />
         </NavigationButton>
       </span>
     </div>
