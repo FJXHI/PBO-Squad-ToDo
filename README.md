@@ -5,10 +5,10 @@
 ToDo Manager build with VUE
 
 App:
-https://fjxhi.github.io/PBO-Squad-ToDo/
+https://fjxhi.github.io/PBO-Squad-ToDo/app
 
 Docs:
-https://fjxhi.github.io/PBO-Squad-ToDo/docs/
+https://fjxhi.github.io/PBO-Squad-ToDo/docs
 
 # Instructions for the project:
 
