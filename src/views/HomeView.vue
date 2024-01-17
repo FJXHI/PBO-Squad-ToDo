@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CompactEntry from '../components/CompactEntry.vue'
-// import Expenditure from '../classes/Expenditure'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()
@@ -8,9 +7,9 @@ const store = useToDoEntryStore()
 function collapseOthers() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.isExpanded)
-    if (entry.isExpanded) {
-      entry.isExpanded = false
+    console.log(entry.metadata.isExpanded)
+    if (entry.metadata.isExpanded) {
+      entry.metadata.isExpanded = false
     }
   }
 }
@@ -19,8 +18,8 @@ function collapseOthers() {
 <template>
   <div :style="`position: relative;`">
     <div
-      v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 5)"
-      :key="entry.todoEntry.title"
+      v-for="entry in store.entries.filter((entry) => entry.metadata.isVisible == true).slice(0, 5)"
+      :key="entry.title"
     >
       <CompactEntry
         :entry="entry"

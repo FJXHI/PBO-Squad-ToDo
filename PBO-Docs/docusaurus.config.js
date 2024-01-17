@@ -78,7 +78,7 @@ const config = {
             label: 'Dokumentation',
           },
           {
-            href: 'https://fjxhi.github.io/PBO-Squad-ToDo/',
+            href: 'https://fjxhi.github.io/PBO-Squad-ToDo/app/',
             position: 'left',
             label: 'Todo-App',
           },
@@ -94,12 +94,6 @@ const config = {
         links: [
           {
             title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/intro',
-              },
-            ],
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} PBO-Squad-ToDo, Inc. Built with Docusaurus.`,

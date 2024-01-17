@@ -1,34 +1,35 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export interface Color {
-  r: number
-  g: number
-  b: number
-  a?: number
-}
 export interface Tag {
   tag: string
-  tagColor: Color
+  tagColor: string
 }
 
-export interface ToDoEntryInfo {
+export interface ToDoEntry {
+  metadata: ToDoEntryMeta
+
   title: string
   description?: string
-  color: Color
+
+  // color is stored as string containing the hex code
+  color: string
 
   deadline?: Date
-  expenditure?: { time: number; unit: string }
+  expenditure?: number
 
   flatPriority?: number
 
   tags?: Tag[]
 }
 
-export interface ToDoEntry {
-  todoEntry: ToDoEntryInfo
+export interface ToDoEntryMeta {
   isVisible: boolean
   isExpanded: boolean
+
+  addedAt: Date
+  lastModifiedAt: Date
+  deletedAt?: Date
 }
 
 export const useToDoEntryStore = defineStore('todoEntries', () => {
@@ -45,5 +46,9 @@ export const useToDoEntryStore = defineStore('todoEntries', () => {
     }
   }
 
-  return { entries, addEntry, removeEntry }
+  function clearEntries(): void {
+    entries.value = []
+  }
+
+  return { entries, addEntry, removeEntry, clearEntries }
 })

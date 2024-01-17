@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
 import SortSetting from './SortSetting.vue'
+import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 
 const emit = defineEmits(['close'])
 
@@ -8,7 +8,9 @@ function close() {
   emit('close')
 }
 
-const props = defineProps({
+const sortSettingTitles = ['Title', 'Deadline', 'Expenditure', 'Last Added', 'Last Modified']
+
+defineProps({
   isOpen: {
     type: Boolean,
     required: true
@@ -27,14 +29,17 @@ const props = defineProps({
           <div class="modal-body">
             <!--Sort input fields-->
             <h2>Sort by</h2>
-            <SortSetting title="Title"></SortSetting>
-            <SortSetting title="Deadline"></SortSetting>
-            <SortSetting title="Expenditure"></SortSetting>
-            <SortSetting title="LastAdded"></SortSetting>
+            <div v-for="title in sortSettingTitles" :key="title">
+              <SortSetting :title="title"></SortSetting>
+            </div>
           </div>
           <div class="button-wrapper">
-            <button class="btn btn_cancel" type="button" @click="close()">Discard</button>
-            <button class="btn btn_save" type="button" @click="close()">Apply</button>
+            <AcceptDeclineButton class="btn btn_cancel" type="button" @click="close()"
+              >Discard</AcceptDeclineButton
+            >
+            <AcceptDeclineButton class="btn btn_save" type="button" @click="close()"
+              >Apply</AcceptDeclineButton
+            >
           </div>
         </div>
       </div>
@@ -82,15 +87,7 @@ const props = defineProps({
 }
 
 .btn {
-  font-size: 14pt;
-  height: 40px;
-  width: calc(50% - 5px);
-  min-width: 6em;
   background: #2c2c2e;
-  letter-spacing: 1px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
 }
 
 .btn_save {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import InputForm from '@/components/TheInputForm.vue'
+import InputForm from '@/components/InputForm.vue'
 const router = useRouter()
 
 function closeView() {

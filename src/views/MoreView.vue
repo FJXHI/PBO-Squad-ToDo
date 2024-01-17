@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SquareEntry from '../components/SquareEntry.vue'
-// import Expenditure from '../classes/Expenditure'
 import { useToDoEntryStore } from '@/stores/entry_store'
 
 const store = useToDoEntryStore()
@@ -9,8 +8,10 @@ const store = useToDoEntryStore()
 <template>
   <main class="more">
     <div
-      v-for="entry in store.entries.filter((entry) => entry.isVisible == true).slice(0, 30)"
-      :key="entry.todoEntry.title"
+      v-for="entry in store.entries
+        .filter((entry) => entry.metadata.isVisible == true)
+        .slice(0, 30)"
+      :key="entry.title"
     >
       <SquareEntry :entry="entry" :style="'margin-bottom: 5px'"></SquareEntry>
     </div>
