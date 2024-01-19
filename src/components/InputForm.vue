@@ -190,15 +190,8 @@ const clearInput = () => {
         </select>
       </div>
 
-      <label for="id_tags">Tags:</label>
       <div>
         <TagDropdown />
-        <input
-          class="user-input short"
-          type="color"
-          id="colorPicker"
-          v-model="inputColor"
-        /><!-- Inputcolor field slightly too high up -->
       </div>
 
       <label for="id_descript">Description:</label>
