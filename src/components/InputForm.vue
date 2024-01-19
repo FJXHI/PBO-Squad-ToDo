@@ -41,7 +41,6 @@ onMounted(() => {
 })
 
 function convertToSeconds(value: number, unit: string): number {
-  console.log('convertToSeconds', value, unit)
 
   switch (unit) {
     case 'min':
@@ -117,16 +116,14 @@ const saveEdit = () => {
 
   // save or update
   if (props.entry) {
-    console.log('Updating existing entry')
     entry.metadata.lastModifiedAt = new Date()
     updateLS()
   } else {
-    console.log('Adding existing entry')
     addEntry(entry)
   }
 
   sortEntries()
-  console.log(entry)
+  
   clearInput()
   emit('closeaction')
 }
