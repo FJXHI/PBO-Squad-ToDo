@@ -28,7 +28,7 @@ defineProps({
         <div class="modal-container">
           <div class="modal-body">
             <!--Sort input fields-->
-            <h2>Sort by</h2>
+            <h2 class="text-base">Sort by</h2>
             <div v-for="title in sortSettingTitles" :key="title">
               <SortSetting :title="title"></SortSetting>
             </div>

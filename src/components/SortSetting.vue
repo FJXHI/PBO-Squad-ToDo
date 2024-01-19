@@ -35,7 +35,6 @@ function handleSortActiveChange() {
   })
 
   searchStore.sortOptions[props.title].isActive = !currentStatus
-  console.log(searchStore.sortOptions)
 }
 
 function handleSortOrderChange() {
@@ -63,9 +62,9 @@ const props = defineProps({
         <input type="checkbox" :checked="isTicked" @input="handleSortActiveChange" />
         <span class="slider round"></span>
       </label>
-      <button class="sort-order" @click="handleSortOrderChange">
-        <img v-show="isDescending" src="/assets/icon_sort_descending.svg" alt="" />
-        <img v-show="!isDescending" src="/assets/icon_sort_ascending.svg" alt="" />
+      <button @click="handleSortOrderChange">
+        <img class="pl-[6px]" v-show="isDescending" src="/assets/icon_sort_descending.svg" alt="" />
+        <img class="pl-[6px]" v-show="!isDescending" src="/assets/icon_sort_ascending.svg" alt="" />
       </button>
     </div>
   </div>
@@ -88,17 +87,5 @@ const props = defineProps({
 .controls {
   display: flex;
   align-items: center;
-}
-.sort-order {
-  height: 34px;
-  background: none;
-  border: none;
-  justify-content: center;
-}
-
-.line:hover,
-.line:focus,
-.line:active {
-  background-color: #3c3c3e;
 }
 </style>

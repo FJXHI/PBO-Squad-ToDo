@@ -7,7 +7,6 @@ const store = useToDoEntryStore()
 function collapseOthers() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
-    console.log(entry.metadata.isExpanded)
     if (entry.metadata.isExpanded) {
       entry.metadata.isExpanded = false
     }

@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
-import TagDropdown from '@/components/TagDropdown.vue'
+//import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
 import { sortEntries } from '@/services/searchService'
@@ -12,8 +12,8 @@ const inputDeadline = ref('')
 const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
 const inputDescription = ref('')
-const inputTags = ref('')
-const inputColor = ref('#000000')
+//const inputTags = ref('')
+const inputColor = ref('#ff3b30')
 
 const emit = defineEmits(['closeaction'])
 
@@ -41,8 +41,6 @@ onMounted(() => {
 })
 
 function convertToSeconds(value: number, unit: string): number {
-  console.log('convertToSeconds', value, unit)
-
   switch (unit) {
     case 'min':
       return value * 60
@@ -117,16 +115,14 @@ const saveEdit = () => {
 
   // save or update
   if (props.entry) {
-    console.log('Updating existing entry')
     entry.metadata.lastModifiedAt = new Date()
     updateLS()
   } else {
-    console.log('Adding existing entry')
     addEntry(entry)
   }
 
   sortEntries()
-  console.log(entry)
+
   clearInput()
   emit('closeaction')
 }
@@ -142,7 +138,7 @@ const clearInput = () => {
   inputExpenditure.value = ''
   inputDurationUnit.value = 'min'
   inputDescription.value = ''
-  inputTags.value = ''
+  //inputTags.value = ''
 }
 </script>
 
@@ -168,6 +164,7 @@ const clearInput = () => {
         id="id_date"
         v-model="inputDeadline"
         placeholder="Date"
+        style="-webkit-appearance: initial"
       />
 
       <label for="id_duration">Estimated duration:</label>
@@ -190,15 +187,9 @@ const clearInput = () => {
         </select>
       </div>
 
-      <label for="id_tags">Tags:</label>
       <div>
-        <TagDropdown />
-        <input
-          class="user-input short"
-          type="color"
-          id="colorPicker"
-          v-model="inputColor"
-        /><!-- Inputcolor field slightly too high up -->
+        <label for="id_color">Color:</label>
+        <input class="user-input" type="color" id="id_color" v-model="inputColor" />
       </div>
 
       <label for="id_descript">Description:</label>

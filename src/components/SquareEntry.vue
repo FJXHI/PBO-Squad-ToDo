@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { completeEntry } from '@/services/entryStorageService'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import type { PropType, ComponentPublicInstance } from 'vue'
-import { ref, computed, reactive } from 'vue'
-import InputModal from './InputModal.vue'
+import type { PropType } from 'vue'
+import { ref } from 'vue'
 import EntryButton from './EntryButton.vue'
-import { completeEntry } from '@/services/entryStorageService'
+import InputModal from './InputModal.vue'
 
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -40,17 +40,14 @@ function changeExpand() {
 }
 
 function delClicked(entry: ToDoEntry) {
-  console.log('Clicked Delete')
   completeEntry(entry, true)
 }
 
 function editClicked() {
-  console.log('editClicked')
   showEntryInput.value = !showEntryInput.value
 }
 
 function doneClicked(entry: ToDoEntry) {
-  console.log('Clicked Done')
   completeEntry(entry, false)
 }
 
@@ -99,7 +96,6 @@ function collapseEntries() {
           </span>
           <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
-              <!-- text-lg flex -->
               {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
           </template>

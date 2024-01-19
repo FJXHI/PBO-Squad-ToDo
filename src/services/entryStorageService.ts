@@ -238,3 +238,25 @@ export function revertToDebugEntries(): void {
 export function clearLocalStorage(): void {
   localStorage.clear()
 }
+
+/**
+ * Restore last delted/done Entry.
+ */
+export function restoreLastEntry(): void {
+  const store = useToDoEntryStore()
+  const archivedStore = useDeleteStore()
+
+  const lastDeletedEntry = archivedStore.getLastDeletedEntry()
+  if (lastDeletedEntry) {
+    //console.log('Restore last deleted Entry: ', lastDeletedEntry.entry) //LOG
+    lastDeletedEntry.entry.metadata.deletedAt = undefined
+    store.addEntry(lastDeletedEntry.entry)
+
+    archivedStore.removeLastDeletedEntry()
+
+    localStorage.setItem(active, JSON.stringify(store.entries))
+    localStorage.setItem(archived, JSON.stringify(archivedStore.deletedEntries))
+  } else {
+    console.log('No Entry to restore found') //LOG
+  }
+}

@@ -78,7 +78,7 @@ const config = {
             label: 'Dokumentation',
           },
           {
-            href: 'https://fjxhi.github.io/PBO-Squad-ToDo/',
+            href: 'https://fjxhi.github.io/PBO-Squad-ToDo/app/',
             position: 'left',
             label: 'Todo-App',
           },

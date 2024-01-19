@@ -8,12 +8,11 @@ export function search(query: string): void {
   const searchParams = query.trim().split(' ')
 
   entries.forEach((entry) => {
-    // const contains = entry.todoEntry.title.toLowerCase().includes(query.toLowerCase())
-    const containsTitle = searchParams.some((param) =>
+    const containsTitle = searchParams.every((param) =>
       entry.title.toLowerCase().includes(param.toLowerCase())
-    ) // some vs every?
+    )
 
-    const containsDescription = searchParams.some(
+    const containsDescription = searchParams.every(
       (param) => entry.description?.toLowerCase().includes(param.toLowerCase())
     )
 
