@@ -13,7 +13,7 @@ const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
 const inputDescription = ref('')
 const inputTags = ref('')
-const inputColor = ref('')
+const inputColor = ref('#ff3b30')
 
 const emit = defineEmits(['closeaction'])
 
@@ -191,7 +191,8 @@ const clearInput = () => {
       </div>
 
       <div>
-        <TagDropdown />
+        <label for="id_tags">Color:</label>
+        <input class="user-input" type="color" id="colorPicker" v-model="inputColor" />
       </div>
 
       <label for="id_descript">Description:</label>
