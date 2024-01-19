@@ -35,7 +35,6 @@ function handleSortActiveChange() {
   })
 
   searchStore.sortOptions[props.title].isActive = !currentStatus
-  console.log(searchStore.sortOptions)
 }
 
 function handleSortOrderChange() {

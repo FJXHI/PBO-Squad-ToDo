@@ -40,17 +40,14 @@ function changeExpand() {
 }
 
 function delClicked(entry: ToDoEntry) {
-  console.log('Clicked Delete')
   completeEntry(entry, true)
 }
 
 function editClicked() {
-  console.log('editClicked')
   showEntryInput.value = !showEntryInput.value
 }
 
 function doneClicked(entry: ToDoEntry) {
-  console.log('Clicked Done')
   completeEntry(entry, false)
 }
 
