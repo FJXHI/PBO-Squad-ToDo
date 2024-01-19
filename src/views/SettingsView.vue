@@ -2,7 +2,8 @@
 import {
   clearEntries,
   clearLocalStorage,
-  revertToDebugEntries
+  revertToDebugEntries,
+  restoreLastEntry
 } from '@/services/entryStorageService'
 </script>
 
@@ -19,6 +20,10 @@ import {
     <div class="line">
       <span class="text">DEBUG: Clear Local Storage</span>
       <button class="btn" @click="clearLocalStorage">Revert</button>
+    </div>
+    <div class="line">
+      <span class="text">Restore last deleted Entry</span>
+      <button class="btn" @click="restoreLastEntry">Restore</button>
     </div>
   </div>
 </template>
