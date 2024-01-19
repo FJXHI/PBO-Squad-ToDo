@@ -9,7 +9,7 @@ function close() {
   emit('close')
 }
 
-const props = defineProps({
+defineProps({
   isOpen: {
     type: Boolean,
     required: true
