@@ -1,4 +1,3 @@
-// deleteStore.ts
 import { defineStore } from 'pinia'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { ref } from 'vue'

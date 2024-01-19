@@ -84,15 +84,6 @@ function clearClick() {
   border-radius: 10px;
 }
 
-/*
-.search:hover,
-.search:focus,
-.search:active,
-.clearbtn {
-  background-color: #2c2c2e;
-}
-*/
-
 .topbar {
   display: flex;
   height: 5.5vb;

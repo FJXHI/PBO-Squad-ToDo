@@ -99,7 +99,6 @@ function collapseEntries() {
           </span>
           <template v-if="entry.expenditure != undefined">
             <span class="entry-text">
-              <!-- text-lg flex -->
               {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
           </template>

@@ -4,15 +4,6 @@ import {
   clearLocalStorage,
   revertToDebugEntries
 } from '@/services/entryStorageService'
-import { ref } from 'vue'
-
-var inputColor = ref('#000000')
-
-function pickColor() {
-  var pickColorValue = inputColor.value
-  console.log('The Color is: ' + pickColorValue)
-  alert('The Color is: ' + pickColorValue)
-}
 </script>
 
 <template>
@@ -29,23 +20,6 @@ function pickColor() {
       <span class="text">DEBUG: Clear Local Storage</span>
       <button class="btn" @click="clearLocalStorage">Revert</button>
     </div>
-    <!--<div class="line">
-      <span class="text">Text</span>
-      <button class="btn">Test</button>
-      <button class="btn">Test</button>
-    </div>
-    <div class="line">
-      <span class="text">Color</span>
-      <input class="btn" type="color" id="colorPicker" v-model="inputColor" />
-      <button @click="pickColor()" class="btn">Pick Color</button>
-    </div>
-    <div class="line">
-      <span class="text">Switch</span>
-      <label class="switch">
-        <input type="checkbox" />
-        <span class="slider round"></span>
-      </label>
-    </div>-->
   </div>
 </template>
 

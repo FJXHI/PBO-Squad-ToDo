@@ -27,7 +27,6 @@ defineProps({
         <div class="modal-container">
           <div class="modal-body">
             <!--Sort input fields-->
-            <!-- <InputForm @closeaction="close()"></InputForm> -->
             <InputForm @closeaction="close()" :entry="entry"></InputForm>
           </div>
         </div>
