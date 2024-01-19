@@ -168,6 +168,7 @@ const clearInput = () => {
         id="id_date"
         v-model="inputDeadline"
         placeholder="Date"
+        style="-webkit-appearance: initial"
       />
 
       <label for="id_duration">Estimated duration:</label>
