@@ -13,7 +13,7 @@ const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
 const inputDescription = ref('')
 const inputTags = ref('')
-const inputColor = ref('#000000')
+const inputColor = ref('#ff3b30')
 
 const emit = defineEmits(['closeaction'])
 
