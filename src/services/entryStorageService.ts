@@ -248,7 +248,7 @@ export function restoreLastEntry(): void {
 
   const lastDeletedEntry = archivedStore.getLastDeletedEntry()
   if (lastDeletedEntry) {
-    console.log('Restore last deleted Entry: ', lastDeletedEntry.entry) //Log
+    //console.log('Restore last deleted Entry: ', lastDeletedEntry.entry) //LOG
     lastDeletedEntry.entry.metadata.deletedAt = undefined
     store.addEntry(lastDeletedEntry.entry)
 
@@ -257,6 +257,6 @@ export function restoreLastEntry(): void {
     localStorage.setItem(active, JSON.stringify(store.entries))
     localStorage.setItem(archived, JSON.stringify(archivedStore.deletedEntries))
   } else {
-    console.log('No Entry to restore found') //Log
+    console.log('No Entry to restore found') //LOG
   }
 }
