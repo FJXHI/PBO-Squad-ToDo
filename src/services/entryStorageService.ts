@@ -240,22 +240,23 @@ export function clearLocalStorage(): void {
 }
 
 /**
- * Restore last Entry.
+ * Restore last delted/done Entry.
  */
-export function restoreEntry(): void {
-  console.log('restore')
-
-  //function completeEntry(entry: ToDoEntry, isDelete: boolean)
-  /*
-  entry.metadata.deletedAt = new Date()
-
+export function restoreLastEntry(): void {
   const store = useToDoEntryStore()
-  store.addEntry(entry)
-
   const archivedStore = useDeleteStore()
-  archivedStore.addDeletedEntry(entry, isDelete)
 
-  localStorage.setItem(active, JSON.stringify(store.entries))
-  localStorage.setItem(archived, JSON.stringify(archivedStore.deletedEntries))  
-  */
+  const lastDeletedEntry = archivedStore.getLastDeletedEntry()
+  if (lastDeletedEntry) {
+    console.log('Restore last deleted Entry: ', lastDeletedEntry.entry) //Log
+    lastDeletedEntry.entry.metadata.deletedAt = undefined
+    store.addEntry(lastDeletedEntry.entry)
+
+    archivedStore.removeLastDeletedEntry()
+
+    localStorage.setItem(active, JSON.stringify(store.entries))
+    localStorage.setItem(archived, JSON.stringify(archivedStore.deletedEntries))
+  } else {
+    console.log('No Entry to restore found') //Log
+  }
 }
