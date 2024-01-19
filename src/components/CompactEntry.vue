@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import type { PropType, ComponentPublicInstance } from 'vue'
+import type { PropType } from 'vue'
 import { useElementSize, useSwipe } from '@vueuse/core'
-import type { UseSwipeDirection } from '@vueuse/core'
 import { ref, computed } from 'vue'
 import InputModal from './InputModal.vue'
 import EntryButton from './EntryButton.vue'
@@ -82,12 +81,9 @@ const containerWidth = computed(() => container.value?.offsetWidth)
 const left = ref('0')
 const opacity = ref(1)
 
-let deleteWidth = ref(0)
-let tickWidth = ref(0)
-let swipeDir = ref(0)
-const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
+const { isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
   passive: true,
-  onSwipe(e: TouchEvent) {
+  onSwipe() {
     if (containerWidth.value && Math.abs(lengthY.value) < 50) {
       const length = Math.abs(lengthX.value)
       const percentage = length / containerWidth.value
@@ -100,7 +96,7 @@ const { direction, isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
       isSwiping.value = false
     }
   },
-  onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
+  onSwipeEnd() {
     // check if swiped enough
     if (containerWidth.value && Math.abs(lengthX.value) / containerWidth.value >= 0.5) {
       // swiped to right -> delete
