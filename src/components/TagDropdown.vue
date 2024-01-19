@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 //const inputTags = ref('')
-const inputColor = ref('')
+const inputColor = ref('#ff3b30')
 const tagData = ['Uni', 'Work', 'Other']
 </script>
 
