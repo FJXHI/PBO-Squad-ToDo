@@ -192,12 +192,7 @@ const clearInput = () => {
 
       <div>
         <label for="id_tags">Color:</label>
-        <input
-          class="user-input"
-          type="color"
-          id="colorPicker"
-          v-model="inputColor"
-        />
+        <input class="user-input" type="color" id="colorPicker" v-model="inputColor" />
       </div>
 
       <label for="id_descript">Description:</label>
