@@ -47,26 +47,6 @@ function changeExpand() {
   entry.metadata.isExpanded = !entry.metadata.isExpanded
 }
 
-function delClicked(entry: ToDoEntry) {
-  console.log('Clicked Delete')
-  completeEntry(entry, true)
-}
-
-function editClicked() {
-  console.log('editClicked')
-  //showEntryInput = ref(true);
-  showEntryInput.value = !showEntryInput.value
-}
-
-function doneClicked(entry: ToDoEntry) {
-  console.log('Clicked Done')
-  completeEntry(entry, false)
-}
-
-function closeInputModal() {
-  showEntryInput.value = false
-}
-
 function collapseEntries() {
   // Iterate through all entries and collapse them
   for (const entry of store.entries) {
@@ -113,31 +93,31 @@ const { isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
 <template>
   <span
     ref="container"
-    class="horizontal-box stretch-horizontally"
-    :style="`position: relative; min-height: 16vh; overflow: hidden; background-color: ${entry.color}; `"
+    class="flex flex-row relative w-full overflow-hidden"
+    :style="{ minHeight: '16vh', backgroundColor: entry.color }"
   >
     <!-- main entry box -->
-    <!-- '--element-color: ' + backgoundColor -->
+    <!-- '--element-color: ' + backgroundColor -->
     <article
       ref="entryBox"
-      :class="['entry-box', entry.metadata.isExpanded ? 'detail-height' : 'compact-height']"
-      :style="{
-        position: 'relative',
-        width: '100%',
-        left: left,
-        margin: '0',
-        transition: isSwiping ? 'none' : 'all 200ms ease-out'
+      class="relative w-full m-0 text-black"
+      :class="{
+        'min-h-[16vh]': entry.metadata.isExpanded,
+        'h-[16vh]': !entry.metadata.isExpanded,
+        'transition-none': isSwiping,
+        'transition-all duration-200 ease-out': !isSwiping
       }"
+      :style="{ left: left }"
       @click="changeExpand()"
     >
       <!-- delete box to the left of the main entry -->
       <aside
-        class="delete-box restrict-size"
-        :style="`position: absolute; display: flex; width: ${boxWidth}%; height: 100%; left: 0; transform: translateX(-100%)`"
+        class="absolute bg-red-500 flex flex-grow-0 max-w-[40vw] h-full left-0 -translate-x-full"
+        :style="`width: ${boxWidth}%;`"
       >
         <img
           alt=""
-          class="icon no-padding center"
+          class="p-0 w-full mx-auto block"
           src="/assets/icon_delete.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
@@ -145,12 +125,12 @@ const { isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
 
       <!-- tick box to the right of the main entry  -->
       <aside
-        class="tick-box restrict-size"
-        :style="`position: absolute; display: flex; width: ${boxWidth}%; height: 100%; right: 0; transform: translateX(100%)`"
+        class="absolute flex bg-green-500 flex-grow-0 max-w-[40vw] h-full right-0 translate-x-full"
+        :style="`width: ${boxWidth}%;`"
       >
         <img
           alt=""
-          class="icon no-padding center"
+          class="p-0 w-full mx-auto block"
           src="/assets/icon_done.svg"
           :style="`max-width: ${entryBoxSize.height.value / 2}px`"
         />
@@ -158,21 +138,20 @@ const { isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
 
       <!-- div holding the content -->
       <div ref="content" :style="`width: ${initialContentSize.width}px; padding: 10px;`">
-        <!-- transform: translateX(${deleteWidth-tickWidth}px); -->
         <h1 ref="title" class="text-2xl font-medium">
           {{ entry?.title ? entry?.title : '' }}
         </h1>
 
         <!-- row for deadline and expenditure -->
-        <section class="info-box-1d">
+        <section class="flex flex-row flex-wrap pl-0">
           <template v-if="entry.deadline != undefined">
-            <span class="text-lg flex">
+            <span class="text-lg flex flex-grow-0 flex-shrink-0 basis-1/2">
               <img alt="Deadline" src="/assets/icon_deadline.svg" />
               {{ entry?.deadline.toLocaleDateString() }}
             </span>
           </template>
           <template v-if="entry.expenditure != undefined">
-            <span class="text-lg flex">
+            <span class="text-lg flex flex-grow-0 flex-shrink-0 basis-1/2">
               <img alt="Expenditure" src="/assets/icon_timespan.svg" />
               {{ dayjs.duration({ seconds: entry.expenditure }).humanize() }}
             </span>
@@ -180,129 +159,31 @@ const { isSwiping, lengthX, lengthY } = useSwipe(entryBox, {
         </section>
 
         <template v-if="entry.metadata.isExpanded && entry.description != undefined">
-          <p :style="`color: #000000; padding: 0 0 10px 0; position: relative;`" class="text-base">
+          <p class="text-base relative pb-[10px]">
             {{ entry.description }}
           </p>
         </template>
 
         <!-- action buttons -->
-        <!-- <span class="info-box-1d" v-if="entry.isExpanded"> -->
         <span v-if="entry.metadata.isExpanded">
-          <nav class="info-box-1d">
-            <EntryButton @click="delClicked(entry)" class="flex justify-center">
+          <nav class="flex flex-row flex-wrap pl-0">
+            <EntryButton @click="completeEntry(entry, true)" class="flex justify-center">
               <img alt="Delete" style="" src="/assets/icon_delete.svg" />
             </EntryButton>
-            <EntryButton @click="editClicked()" class="flex justify-center">
+            <EntryButton @click="showEntryInput = !showEntryInput" class="flex justify-center">
               <img alt="Edit" src="/assets/icon_edit.svg" />
             </EntryButton>
-            <EntryButton @click="doneClicked(entry)" class="flex justify-center">
+            <EntryButton @click="completeEntry(entry, false)" class="flex justify-center">
               <img alt="Done" src="/assets/icon_done.svg" />
             </EntryButton>
           </nav>
         </span>
       </div>
     </article>
-    <InputModal :is-open="showEntryInput" @close="closeInputModal()" :entry="entry"></InputModal>
+    <InputModal
+      :is-open="showEntryInput"
+      @close="showEntryInput = false"
+      :entry="entry"
+    ></InputModal>
   </span>
 </template>
-
-<style scoped>
-.entry-title {
-  font-size: 27pt;
-  font-weight: 600;
-}
-
-.center {
-  width: 100%;
-  margin: auto;
-  display: block;
-}
-
-.tick-box {
-  background-color: green;
-}
-
-.delete-box {
-  background-color: red;
-}
-
-.restrict-size {
-  flex-grow: 0;
-  max-width: 40vw;
-}
-
-.info-box-1d {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding-left: 0;
-}
-
-.info-box-1d span {
-  flex: 0 0 50%;
-}
-
-.info-box-1d button {
-  flex: 0 0 calc(100% / 3);
-  border: none;
-  background-color: transparent;
-}
-
-.horizontal-box {
-  display: flex;
-  position: relative;
-}
-
-.info-box-1d button:hover,
-button:focus,
-button:active {
-  background-color: grey;
-}
-
-.entry-text {
-  font-size: 16pt;
-}
-
-.entry-box {
-  /* border-radius: 5px; */
-
-  background-color: var(--element-color);
-  /* min-width: 100vh; */
-
-  /* padding: 10px; */
-  flex-grow: 1;
-
-  color: #000000;
-  position: relative;
-}
-
-.stretch-horizontally {
-  position: inherit;
-  left: 0px;
-  right: 0px;
-}
-
-.compact-height {
-  /* height in [10, 20] */
-  height: 16vh;
-}
-
-.detail-height {
-  min-height: 16vh;
-}
-
-.no-padding {
-  padding: 0;
-}
-
-.center-vertically {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.gorg {
-  /* <what is animatied> <length> <timing-function> */
-  transition: all 200ms ease-out;
-}
-</style>
