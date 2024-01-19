@@ -65,7 +65,7 @@ const props = defineProps({
       </label>
       <button @click="handleSortOrderChange">
         <img class="pl-[6px]" v-show="isDescending" src="/assets/icon_sort_descending.svg" alt="" />
-        <img v-show="!isDescending" src="/assets/icon_sort_ascending.svg" alt="" />
+        <img class="pl-[6px]" v-show="!isDescending" src="/assets/icon_sort_ascending.svg" alt="" />
       </button>
     </div>
   </div>
