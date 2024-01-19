@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import type { PropType } from 'vue'
 import type { ToDoEntry } from '@/stores/entry_store'
-import TagDropdown from '@/components/TagDropdown.vue'
+//import TagDropdown from '@/components/TagDropdown.vue'
 import AcceptDeclineButton from '@/components/AcceptDeclineButton.vue'
 import { addEntry, updateLS } from '@/services/entryStorageService'
 import { sortEntries } from '@/services/searchService'

@@ -1,24 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-//const inputTags = ref('')
+const inputTags = ref('')
 const inputColor = ref('#ff3b30')
 const tagData = ['Uni', 'Work', 'Other']
 </script>
 
 <template>
-  <!--<label for="id_tags">Tags:</label>-->
-  <label for="id_tags">Color:</label>
+  <label for="id_tags">Tags:</label>
   <div>
-    <!--<input
+    <input
       list="tag-list"
       id="id_tags"
       class="user-input duration"
       placeholder="Tags"
       v-model="inputTags"
-    />-->
+    />
     <input
-      class="user-input"
+      class="user-input short"
       type="color"
       id="colorPicker"
       v-model="inputColor"
