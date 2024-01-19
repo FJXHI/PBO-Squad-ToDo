@@ -29,13 +29,13 @@ function pickColor() {
       <span class="text">DEBUG: Clear Local Storage</span>
       <button class="btn" @click="clearLocalStorage">Revert</button>
     </div>
-    <div class="line">
+    <!--<div class="line">
       <span class="text">Text</span>
       <button class="btn">Test</button>
       <button class="btn">Test</button>
     </div>
     <div class="line">
-      <span class="text">Tags</span>
+      <span class="text">Color</span>
       <input class="btn" type="color" id="colorPicker" v-model="inputColor" />
       <button @click="pickColor()" class="btn">Pick Color</button>
     </div>
@@ -45,7 +45,7 @@ function pickColor() {
         <input type="checkbox" />
         <span class="slider round"></span>
       </label>
-    </div>
+    </div>-->
   </div>
 </template>
 
