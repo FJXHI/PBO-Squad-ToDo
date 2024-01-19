@@ -1,1 +1,0 @@
-import{e as n,z as t,h as r,A as a}from"./index-14b8f219.js";import{_ as c}from"./InputForm.vue_vue_type_style_index_0_lang-f804b755.js";const m=n({__name:"AddView",setup(i){const o=t();function s(){console.log("CloseAddView"),o.push("/")}return(p,e)=>(r(),a(c,{onCloseaction:e[0]||(e[0]=u=>s())}))}});export{m as default};
