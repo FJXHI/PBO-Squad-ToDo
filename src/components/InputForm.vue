@@ -12,7 +12,7 @@ const inputDeadline = ref('')
 const inputExpenditure = ref('')
 const inputDurationUnit = ref('min')
 const inputDescription = ref('')
-const inputTags = ref('')
+//const inputTags = ref('')
 const inputColor = ref('#ff3b30')
 
 const emit = defineEmits(['closeaction'])
@@ -138,7 +138,7 @@ const clearInput = () => {
   inputExpenditure.value = ''
   inputDurationUnit.value = 'min'
   inputDescription.value = ''
-  inputTags.value = ''
+  //inputTags.value = ''
 }
 </script>
 
@@ -188,8 +188,8 @@ const clearInput = () => {
       </div>
 
       <div>
-        <label for="id_tags">Color:</label>
-        <input class="user-input" type="color" id="colorPicker" v-model="inputColor" />
+        <label for="id_color">Color:</label>
+        <input class="user-input" type="color" id="id_color" v-model="inputColor" />
       </div>
 
       <label for="id_descript">Description:</label>
