@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { completeEntry } from '@/services/entryStorageService'
 import type { ToDoEntry } from '@/stores/entry_store'
 import { useToDoEntryStore } from '@/stores/entry_store'
-import type { PropType, ComponentPublicInstance } from 'vue'
-import { ref, computed, reactive } from 'vue'
-import InputModal from './InputModal.vue'
+import type { PropType } from 'vue'
+import { ref } from 'vue'
 import EntryButton from './EntryButton.vue'
-import { completeEntry } from '@/services/entryStorageService'
+import InputModal from './InputModal.vue'
 
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
