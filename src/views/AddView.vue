@@ -4,7 +4,6 @@ import InputForm from '@/components/InputForm.vue'
 const router = useRouter()
 
 function closeView() {
-  console.log('CloseAddView')
   router.push('/')
 }
 </script>
