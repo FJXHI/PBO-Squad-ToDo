@@ -41,7 +41,6 @@ onMounted(() => {
 })
 
 function convertToSeconds(value: number, unit: string): number {
-
   switch (unit) {
     case 'min':
       return value * 60
@@ -123,7 +122,7 @@ const saveEdit = () => {
   }
 
   sortEntries()
-  
+
   clearInput()
   emit('closeaction')
 }
