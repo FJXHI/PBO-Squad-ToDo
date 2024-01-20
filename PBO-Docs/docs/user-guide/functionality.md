@@ -37,17 +37,20 @@ is planned but not implemented yet. Additionally, entries can be edited by selec
 ### Searching
 
 A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That
-way
-even in the Focus Mode, you will be able to find other entries that aren't normally displayed.
-Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In case
-of the Focus Mode, the top 5 most crucial tasks will be displayed again.
+way, even in the Focus Mode, you will be able to find other entries that aren't normally displayed.
+Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In the
+case of the Focus Mode, the top 5 most crucial tasks will be displayed again.
 
 ![searching](../../static/img/searching.png)
 
 ### Sorting
 
 The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
-entries based on title, deadline, expenditure, or the timestamp of addition. Additionally, sorting can be configured in
-ascending or descending order.
+entries based on title, deadline, expenditure, or the timestamp of addition / editing. Additionally, sorting can be
+configured in
+ascending or descending order by clicking the corresponding
+symbol: ![symbol](../../../public/assets/icon_sort_descending.svg). Per default the entries are sorted by the timestamp
+of addition. When sorting by deadline and expenditure entries without any information in these fields will be arranged
+last.
 
 ![sorting](../../static/img/sorting.png)
