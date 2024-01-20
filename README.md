@@ -96,29 +96,34 @@ deleting the entry and creating a new one.
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
 completed, while a right swipe deletes it.
 
-<img src="./PBO-Docs/static/img/swipe_actions.gif" alt="swipe_actions" width="300" height="auto">
+<img src={SwipeActions} alt="swipe_actions" style={{width: 300}}></img>
 
 Users can also click on an entry, which expands the task and reveals additional information about it. Alternatively
-to the swipe actions, you can select the checkmark or garbage
-can icons, which appear on an expanded entry, for completion or deletion. Additionally, entries can be edited by
-selecting the pencil icon.
+to the swipe actions, you can select the checkmark or garbage can icons, which appear on an expanded entry, for
+completion or deletion. Note that right now a deleted or completed entry is gone forever and cannot be restored.
+To bring back these entries, you have to recreate them. A new feature for restoring tasks is planned but not implemented
+yet (details documentation). Additionally, entries can be edited by selecting the pencil icon.
 
 ![entry_expanded](PBO-Docs/static/img/entry_expanded.png)
 
 ### Searching
 
-A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That way
-even in the Focus Mode you will be able to find other entries, that aren't normally displayed.
-Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In case
-of the Focus Mode the top 5 most crucial tasks will be displayed again.
+A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That
+way, even in the Focus Mode, you will be able to find other entries that aren't normally displayed.
+Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In the
+case of the Focus Mode, the top 5 most crucial tasks will be displayed again.
 
 ![searching](PBO-Docs/static/img/searching.png)
 
 ### Sorting
 
 The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
-entries based on title, deadline, expenditure, or the timestamp of addition. Additionally, sorting can be configured in
-ascending or descending order.
+entries based on title, deadline, expenditure, or the timestamp of addition / editing. Additionally, sorting can be
+configured in
+ascending or descending order by clicking the corresponding
+symbol: ![symbol](/public/assets/icon_sort_descending.svg). Per default the entries are sorted by the timestamp
+of addition. When sorting by deadline and expenditure entries without any information in these fields will be arranged
+last.
 
 ![sorting](PBO-Docs/static/img/sorting.png)
 
