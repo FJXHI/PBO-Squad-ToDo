@@ -12,7 +12,7 @@ The Overview Mode is currently under construction, and although it is possible t
 provide any advantages or special features compared to the focus mode despite showing all created entries.
 At the moment, it shows all tasks in a three-column grid format, where scrolling is possible, but it should have special
 functionalities.
-Also, the [issues](./dev-notes/known_issues) regarding this mode are meant to be fixed in the future.
+Also, the [issues](./dev-notes/known_issues#overview-mode) regarding this mode are meant to be fixed in the future.
 
 ## Tags
 
@@ -33,3 +33,8 @@ Right now this functionality is not implemented.
 As another way to only view specific entries, a filter functionality is planned.
 It would provide a way to show tasks with a specific deadline or expenditure.
 This feature is not implemented yet.
+
+## Restore-button
+
+When an entry is deleted or ticked, right now it is gone and cannot be recovered.
+A button should appear right after removing an entry to provide a way to undo this action.

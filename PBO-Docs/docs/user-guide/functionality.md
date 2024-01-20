@@ -2,6 +2,7 @@
 title: Functionality
 sidebar_position: 2
 ---
+
 import SwipeActions from '../../static/img/swipe_actions.gif';
 
 The application boasts a range of features aimed at providing users with a comprehensive and user-friendly task
@@ -26,18 +27,20 @@ completed, while a right swipe deletes it.
 <img src={SwipeActions} alt="swipe_actions" style={{width: 300}}></img>
 
 Users can also click on an entry, which expands the task and reveals additional information about it. Alternatively
-to the swipe actions, you can select the checkmark or garbage
-can icons, which appear on an expanded entry, for completion or deletion. Additionally, entries can be edited by
-selecting the pencil icon.
+to the swipe actions, you can select the checkmark or garbage can icons, which appear on an expanded entry, for
+completion or deletion. Note that right now a deleted or completed entry is gone forever and cannot be restored.
+To bring back these entries, you have to recreate them. A new feature for [restoring tasks](../outlook#restore-button)
+is planned but not implemented yet. Additionally, entries can be edited by selecting the pencil icon.
 
 ![entry_expanded](../../static/img/entry_expanded.png)
 
 ### Searching
 
-A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That way
-even in the Focus Mode you will be able to find other entries, that aren't normally displayed.
+A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That
+way
+even in the Focus Mode, you will be able to find other entries that aren't normally displayed.
 Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In case
-of the Focus Mode the top 5 most crucial tasks will be displayed again.
+of the Focus Mode, the top 5 most crucial tasks will be displayed again.
 
 ![searching](../../static/img/searching.png)
 
