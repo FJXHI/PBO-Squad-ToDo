@@ -4,8 +4,6 @@ sidebar_position: 0
 slug: /
 ---
 
-# Overview
-
 See [setup guide](install) for installation instructions & [user guide](category/user-guide) for a detailed description
 of the app.
 

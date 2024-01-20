@@ -1,8 +1,7 @@
 ---
 sidebar_position: 1
+title: Conventions
 ---
-
-# Conventions
 
 - "The..." for all components that only occur once
 - Don't necessarily use `<div>`, prefer more specific tags
