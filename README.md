@@ -73,54 +73,59 @@ various display formats for enhanced accessibility.
 The application features two distinct views: the Focus Mode and the Overview Mode. The Overview Mode presents a
 grid-layout showcasing all todo-entries, while the Focus Mode prioritizes the display of the top 5 most crucial tasks.
 
-![focus_mode](PBO-Docs/static/img/focus_mode.png)
+![views](PBO-Docs/static/img/views.png)
 
 ## Functionality
 
 The application boasts a range of features aimed at providing users with a comprehensive and user-friendly task
 management experience.
 
-### Searching
+### Adding and Editing Entries
 
-A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. So that
-even in the Focus Mode you will be able to find other entries, that aren't normally displayed.
-Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In case
-of the Focus Mode the top 5 most crucial tasks will be displayed again.
+A todo-entry encompasses various attributes, with the title being the mandatory field. Other attributes, such as
+deadline, estimated duration, and a description, are optional and can be added as needed. The color of an entry
+can also be customized. To do this, you can use the dialog that appears when clicking on the color box located above the
+description-input, and then select the desired color. Users have the flexibility to edit all attributes
+by selecting the entry and clicking on the pencil icon. This way it is easily possible to correct any attributes without
+deleting the entry and creating a new one.
 
-![searching](PBO-Docs/static/img/searching.png)
-
-### Sorting
-
-The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
-entries based on title, deadline, expenditure, or the timestamp of addition. Additionally, sorting can be configured in
-ascending or descending order.
-
-![sorting](PBO-Docs/static/img/sorting.png)
+![add_view](PBO-Docs/static/img/add_view.png)
 
 ### Operations on Entries
 
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
 completed, while a right swipe deletes it.
 
-![swipe_actions](PBO-Docs/static/img/swipe_actions.png)
+<img src={SwipeActions} alt="swipe_actions" style={{width: 300}}></img>
 
-Users can also click on an entry, which expands the task and reveals additional information about it. And alternatively
-to the swipe actions, you can select the checkmark or garbage
-can icons, which appear on an expanded entry, for completion or deletion. Additionally, entries can be edited by
-selecting the pencil icon.
+Users can also click on an entry, which expands the task and reveals additional information about it. Alternatively
+to the swipe actions, you can select the checkmark or garbage can icons, which appear on an expanded entry, for
+completion or deletion. Note that right now a deleted or completed entry is gone forever and cannot be restored.
+To bring back these entries, you have to recreate them. A new feature for restoring tasks is planned but not implemented
+yet (details documentation). Additionally, entries can be edited by selecting the pencil icon.
 
 ![entry_expanded](PBO-Docs/static/img/entry_expanded.png)
 
-### Adding and Editing Entries
+### Searching
 
-A todo-entry encompasses various attributes, with the title being the mandatory field. Other attributes, such as
-deadline, estimated duration, tags, and a description, are optional and can be added as needed. The color of an entry
-can also be customized. To do this, you can use the dialog that appears when clicking on the color box located to the
-right of the input field for tags, and then select the desired color. Users have the flexibility to edit all attributes
-by selecting the entry and clicking on the pencil icon. This way it is easily possible to correct any attributes without
-deleting the entry and creating a new one.
+A search bar located at the top of the screen facilitates the search for specific terms within all todo-entries. That
+way, even in the Focus Mode, you will be able to find other entries that aren't normally displayed.
+Clearing the search can be achieved by clicking the 'x'-button. This will reset the current view back to normal. In the
+case of the Focus Mode, the top 5 most crucial tasks will be displayed again.
 
-![add_view](PBO-Docs/static/img/add_view.png)
+![searching](PBO-Docs/static/img/searching.png)
+
+### Sorting
+
+The app enables users to apply a single sorting criterion at a time. Sorting functionality is available to arrange
+entries based on title, deadline, expenditure, or the timestamp of addition / editing. Additionally, sorting can be
+configured in
+ascending or descending order by clicking the corresponding
+symbol: ![symbol](/public/assets/icon_sort_descending.svg). Per default the entries are sorted by the timestamp
+of addition. When sorting by deadline and expenditure entries without any information in these fields will be arranged
+last.
+
+![sorting](PBO-Docs/static/img/sorting.png)
 
 # VUE
 
