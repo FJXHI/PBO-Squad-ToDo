@@ -11,9 +11,9 @@ management experience.
 ### Adding and Editing Entries
 
 A todo-entry encompasses various attributes, with the title being the mandatory field. Other attributes, such as
-deadline, estimated duration, tags, and a description, are optional and can be added as needed. The color of an entry
-can also be customized. To do this, you can use the dialog that appears when clicking on the color box located to the
-right of the input field for tags, and then select the desired color. Users have the flexibility to edit all attributes
+deadline, estimated duration, and a description, are optional and can be added as needed. The color of an entry
+can also be customized. To do this, you can use the dialog that appears when clicking on the color box located above the
+description-input, and then select the desired color. Users have the flexibility to edit all attributes
 by selecting the entry and clicking on the pencil icon. This way it is easily possible to correct any attributes without
 deleting the entry and creating a new one.
 
