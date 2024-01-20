@@ -32,7 +32,7 @@ sidebar_position: 1
     - `npm run build`
     - `npm run preview`
 
-# Docusaurus Documentation
+## Docusaurus Documentation
 
 The documantation can be found in the `PBO-Docs` folder. To start the documentation server, run the following commands:
 
