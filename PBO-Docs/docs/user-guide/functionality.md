@@ -2,6 +2,7 @@
 title: Functionality
 sidebar_position: 2
 ---
+import SwipeActions from '../../static/img/swipe_actions.gif';
 
 The application boasts a range of features aimed at providing users with a comprehensive and user-friendly task
 management experience.
@@ -28,7 +29,7 @@ ascending or descending order.
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
 completed, while a right swipe deletes it.
 
-![swipe_actions](../../static/img/swipe_actions.png)
+<img src={SwipeActions} alt="swipe_actions" style={{width: 300}}></img>
 
 Users can also click on an entry, which expands the task and reveals additional information about it. And alternatively
 to the swipe actions, you can select the checkmark or garbage

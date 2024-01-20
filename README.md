@@ -73,7 +73,7 @@ various display formats for enhanced accessibility.
 The application features two distinct views: the Focus Mode and the Overview Mode. The Overview Mode presents a
 grid-layout showcasing all todo-entries, while the Focus Mode prioritizes the display of the top 5 most crucial tasks.
 
-![focus_mode](PBO-Docs/static/img/focus_mode.png)
+![views](PBO-Docs/static/img/views.png)
 
 ## Functionality
 
@@ -102,7 +102,7 @@ ascending or descending order.
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
 completed, while a right swipe deletes it.
 
-![swipe_actions](PBO-Docs/static/img/swipe_actions.png)
+<img src="./PBO-Docs/static/img/swipe_actions.gif" alt="swipe_actions" width="300" height="auto">
 
 Users can also click on an entry, which expands the task and reveals additional information about it. And alternatively
 to the swipe actions, you can select the checkmark or garbage
