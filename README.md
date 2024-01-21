@@ -100,9 +100,7 @@ completed, while a right swipe deletes it.
 
 Users can also click on an entry, which expands the task and reveals additional information about it. Alternatively
 to the swipe actions, you can select the checkmark or garbage can icons, which appear on an expanded entry, for
-completion or deletion. Note that right now a deleted or completed entry is gone forever and cannot be restored.
-To bring back these entries, you have to recreate them. A new feature for restoring tasks is planned but not implemented
-yet (details documentation). Additionally, entries can be edited by selecting the pencil icon.
+completion or deletion. You can restore the last deleted or completed entry by using the restore button in the settings menu. A new feature to display a Restore Button directly in the entry view after clicking on delete or complete is planned but not implemented yet (details documentation). Additionally, entries can be edited by selecting the pencil icon.
 
 ![entry_expanded](PBO-Docs/static/img/entry_expanded.png)
 
