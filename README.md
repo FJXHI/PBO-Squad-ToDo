@@ -96,7 +96,7 @@ deleting the entry and creating a new one.
 Users can efficiently manage todo-entries through deletion or completion actions. Swiping an entry left marks it as
 completed, while a right swipe deletes it.
 
-<img src={SwipeActions} alt="swipe_actions" style={{width: 300}}></img>
+<img src="./PBO-Docs/static/img/swipe_actions.gif" alt="swipe_actions" width="300" height="auto">
 
 Users can also click on an entry, which expands the task and reveals additional information about it. Alternatively
 to the swipe actions, you can select the checkmark or garbage can icons, which appear on an expanded entry, for
