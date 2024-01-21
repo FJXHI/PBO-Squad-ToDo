@@ -144,6 +144,7 @@ export function revertToDebugEntries(): void {
     title: 'Prepare Presentation',
     description: 'Create slides for upcoming presentation',
     color: '#32ade6',
+    deadline: new Date('2024-01-21'),
     expenditure: 30 * 60,
     metadata: {
       isVisible: true,
@@ -170,6 +171,7 @@ export function revertToDebugEntries(): void {
     title: 'Bug Fixing',
     description: 'Investigate and resolve reported bugs',
     color: '#34c759',
+    expenditure: 42 * 60,
     metadata: {
       isVisible: true,
       isExpanded: false,
@@ -218,6 +220,7 @@ export function revertToDebugEntries(): void {
     title: 'Documentation Fix',
     description: 'Update project documentation with recent changes',
     color: '#a2855e',
+    expenditure: 5 * 24 * 60 * 60,
     metadata: {
       isVisible: true,
       isExpanded: false,

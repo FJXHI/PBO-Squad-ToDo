@@ -14,9 +14,9 @@ sidebar_position: 1
 
     - `npm install`
 
-- start dev server
+- start vue.js dev server
 
-    - `npm run start`
+    - `npm run dev`
 
 - formatting:
 
@@ -31,3 +31,11 @@ sidebar_position: 1
   worker):
     - `npm run build`
     - `npm run preview`
+
+## Docusaurus Documentation
+
+The documantation can be found in the `PBO-Docs` folder. To start the documentation server, run the following commands:
+
+- `cd PBO-Docs`
+- `npm install`
+- `npm run start`
