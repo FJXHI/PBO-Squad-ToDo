@@ -58,5 +58,13 @@ import {
   border-radius: 5px;
   cursor: pointer;
   margin-right: 5px;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+.settings .btn:hover,
+.btn:active,
+.btn:focus {
+  background-color: #d05050;
 }
 </style>
